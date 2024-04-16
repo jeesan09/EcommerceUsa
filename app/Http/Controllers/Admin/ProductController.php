@@ -48,6 +48,12 @@ class ProductController extends Controller
       $image_url5="";
       $image_url6="";
  
+if($request->file('product_img_one')!=""){
+  $image_one = $request->file('product_img_one');
+  $name_gena1 = hexdec(uniqid()).".".$image_one->getClientOriginalExtension();
+  \Image::make($image_one)->resize(2070,2070)->save('frotend/img/product/upload/'.$name_gena1);
+  $image_url = 'frotend/img/product/upload/'.$name_gena1;
+}
 if($request->file('product_img_two')!=""){
   $image_two = $request->file('product_img_two');
   $name_gena2 = hexdec(uniqid()).".".$image_two->getClientOriginalExtension();

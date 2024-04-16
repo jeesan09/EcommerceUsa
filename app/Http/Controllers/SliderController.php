@@ -43,7 +43,7 @@ class SliderController extends Controller
             'long_description' => 'required',
             'product_img_one' => 'required|mimes:jpg,jpeg,gif,png',
             'product_img_two' => 'required|mimes:jpg,jpeg,gif,png',
-            'product_img_three' => 'required|mimes:jpg,jpeg,gif,png',
+        /*     'product_img_three' => 'required', */
         ]);
 
         $image_one = $request->file('product_img_one');
@@ -56,11 +56,11 @@ class SliderController extends Controller
         \Image::make($image_two)->resize(470, 265)->save('frotend/img/product/upload/' . $name_gena2);
         $image_url2 = 'frotend/img/product/upload/' . $name_gena2;
 
-        $image_three = $request->file('product_img_three');
+     /*    $image_three = $request->file('product_img_three');
         $name_gena3 = hexdec(uniqid()) . "." . $image_three->getClientOriginalExtension();
         \Image::make($image_three)->resize(470, 470)->save('frotend/img/product/upload/' . $name_gena3);
         $image_url3 = 'frotend/img/product/upload/' . $name_gena3;
-
+ */
         SliderModel::insert([
             'product_name' => $request->product_name,
             'product_slug' => strtolower(str_replace(' ', '-', $request->product_name)),
@@ -75,7 +75,7 @@ class SliderController extends Controller
             'long_description' => $request->long_description,
             'product_img_one' => $image_url,
             'product_img_two' => $image_url2,
-            'product_img_three' => $image_url3,
+            'product_img_three' => $image_url2,
             'created_at' => Carbon::now(),
         ]);
 

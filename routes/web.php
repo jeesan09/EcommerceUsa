@@ -40,59 +40,7 @@ Route::post('admin',[LoginController::class,'login']);
 // Route::get('admin/logout','AdminController@logut')->name('admin.logout');
 Route::get('admin/logout',[AdminController::class,'logut'])->name('admin.logout');
 
- // CMS Frontend page
-Route::middleware(['auth'])->group(function () {
 
-    // home page
-    Route::get('/', 'FrontendController@index');
-
-
-    // all product show
-    Route::get('all-product/', [AllproductController::class,'product_show'])->name('all.product');
-    Route::get('product/details/{prod_id}', [AllproductController::class,'product_detail'])->name('product.details');
-    Route::get('shopping/cart/list',[CartController::class,'cart_list_page']);
-    Route::get('about/page', [FrontendController::class,'about_page'])->name('about.page');
-    Route::get('contact/page', [FrontendController::class,'contact_page'])->name('contact.page');
-    Route::get('all-product/search', [FrontendController::class,'search_all_product'])->name('search.product');
-
-
-
-    // fontend contorller
-    Route::get('addToCart/{cart_id}',[CartController::class,'cartadd']);
-    Route::get('cart/',[CartController::class,'cart_page']);
-    Route::get('cart/remove/{cart_id}',[CartController::class,'cart_remove']);
-
-    // buy now page
-    Route::post('/buy-now',[CartController::class,'buy_now_add'])->name('buynow.product');
-
-    Route::get('check/out/buy',[CartController::class,'checkout_buy_page']);
-    Route::post('/procces/order/buy',[OrderController::class,'proccessTo_check_buyNow'])->name('procces.order.buy');
-    Route::get('/buynow/order-complate', [FrontendController::class,'orderSuccesfullyCompalte']);
-
-
-
-    //category wish product show
-    Route::get('/product/category/{cat_id}', [AllproductController::class,'category_product']);
-
-    //brand wish product show
-    Route::get('/product/brand/{brand_id}', [AllproductController::class,'brand_product']);
-
-
-    // all product details ajax show
-    Route::get('/product/detail/ajax/',[FrontendController::class,'product_details']);
-    Route::get('/product/add-to-cart/{product_id}',[CartController::class,'add_to_cart']);
-
-    //pagenation for ajax
-    Route::get('/pagenation/paginate-data',[AllproductController::class,'pagenation']);
-
-    //category wise search product Ajax
-    Route::get('/product/category/search',[AllproductController::class,'category_product_search']);
-    Route::get('/product/brand/search',[AllproductController::class,'brand_product_search']);
-    Route::get('/product/price/search',[AllproductController::class,'price_product_search']);
-    Route::get('/product/soft/by',[AllproductController::class,'soft_by_product']);
-
-
-});
 
 // Backend Category page
 Route::get('category/',[CategoryController::class, 'index'])->name('addcatehory');
@@ -207,6 +155,63 @@ Route::post('update/user', [OrderController::class,'user_update'])->name('update
 Route::get('wishlist/page',[WishListController::class,'index']);
 Route::get('add/wishlist/',[WishListController::class,'add_wisshlist']);
 Route::get('wishlist/remove/{prod_id}',[WishListController::class,'product_remove']);
+
+
+ // CMS Frontend page
+Route::middleware(['auth:web'])->group(function () {
+
+     // home page
+    Route::get('/', 'FrontendController@index');
+
+
+    // all product show
+    Route::get('all-product/', [AllproductController::class,'product_show'])->name('all.product');
+    Route::get('product/details/{prod_id}', [AllproductController::class,'product_detail'])->name('product.details');
+    Route::get('shopping/cart/list',[CartController::class,'cart_list_page']);
+    Route::get('about/page', [FrontendController::class,'about_page'])->name('about.page');
+    Route::get('contact/page', [FrontendController::class,'contact_page'])->name('contact.page');
+    Route::get('all-product/search', [FrontendController::class,'search_all_product'])->name('search.product');
+
+
+
+    // fontend contorller
+    Route::get('addToCart/{cart_id}',[CartController::class,'cartadd']);
+    Route::get('cart/',[CartController::class,'cart_page']);
+    Route::get('cart/remove/{cart_id}',[CartController::class,'cart_remove']);
+
+    // buy now page
+    Route::post('/buy-now',[CartController::class,'buy_now_add'])->name('buynow.product');
+
+    Route::get('check/out/buy',[CartController::class,'checkout_buy_page']);
+    Route::post('/procces/order/buy',[OrderController::class,'proccessTo_check_buyNow'])->name('procces.order.buy');
+    Route::get('/buynow/order-complate', [FrontendController::class,'orderSuccesfullyCompalte']);
+
+
+
+    //category wish product show
+    Route::get('/product/category/{cat_id}', [AllproductController::class,'category_product']);
+
+    //brand wish product show
+    Route::get('/product/brand/{brand_id}', [AllproductController::class,'brand_product']);
+
+
+    // all product details ajax show
+    Route::get('/product/detail/ajax/',[FrontendController::class,'product_details']);
+    Route::get('/product/add-to-cart/{product_id}',[CartController::class,'add_to_cart']);
+
+    //pagenation for ajax
+    Route::get('/pagenation/paginate-data',[AllproductController::class,'pagenation']);
+
+    //category wise search product Ajax
+    Route::get('/product/category/search',[AllproductController::class,'category_product_search']);
+    Route::get('/product/brand/search',[AllproductController::class,'brand_product_search']);
+    Route::get('/product/price/search',[AllproductController::class,'price_product_search']);
+    Route::get('/product/soft/by',[AllproductController::class,'soft_by_product']);
+
+
+});
+
+
 
 Route::get('/clear_cache', function () {
 

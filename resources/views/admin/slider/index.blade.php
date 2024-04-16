@@ -276,7 +276,7 @@
                                             <div class="form-group mg-b-10-force">
                                                 <label class="form-control-label">Product Image 3: <span
                                                         class="tx-danger">*</span></label>
-                                                <input class="form-control" type="file" name="product_img_three"
+                                                        <input class="form-control" type="file" name="product_img_three"
                                                     id="file-ip-3" accept="image/*" onchange="showPreview3(event);">
                                                 @error('product_img_three')
                                                     <strong class="text-danger">{{ $message }}</strong>
