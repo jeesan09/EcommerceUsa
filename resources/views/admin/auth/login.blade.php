@@ -6,7 +6,7 @@
 
     <div class="login-wrapper wd-300 wd-xs-350 pd-25 pd-xs-40 bg-white">
       <div class="signin-logo tx-center tx-24 tx-bold tx-inverse"><span class="tx-info tx-normal">  Admin Panel</span></div>
-      <div class="tx-center mg-b-20">Sellspoints.com </div>
+   <!--    <div class="tx-center mg-b-20">Sellspoints.com </div> -->
       <form method="POST" action="{{ route('admin.login') }}">
         @csrf
       <div class="form-group">

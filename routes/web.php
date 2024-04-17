@@ -34,8 +34,8 @@ Auth::routes();
 
 Route::get('/home',  [HomeController::class,'index'])->name('home');
 Route::get('/admin/home', [AdminController::class,'index']);
-Route::get('admin', [LoginController::class,'showLoginForm'])->name('admin.login');
-Route::post('admin',[LoginController::class,'login']);
+Route::get('admin/login', [LoginController::class,'showLoginForm'])->name('admin.login');
+Route::post('admin/login',[LoginController::class,'loginAdmin']);
 
 // Route::get('admin/logout','AdminController@logut')->name('admin.logout');
 Route::get('admin/logout',[AdminController::class,'logut'])->name('admin.logout');
@@ -158,8 +158,8 @@ Route::get('wishlist/remove/{prod_id}',[WishListController::class,'product_remov
 
 
  // CMS Frontend page
-Route::middleware(['auth:web'])->group(function () {
 
+ Route::middleware('auth.user_or_admin')->group(function () {
      // home page
     Route::get('/', 'FrontendController@index');
 
@@ -207,7 +207,6 @@ Route::middleware(['auth:web'])->group(function () {
     Route::get('/product/brand/search',[AllproductController::class,'brand_product_search']);
     Route::get('/product/price/search',[AllproductController::class,'price_product_search']);
     Route::get('/product/soft/by',[AllproductController::class,'soft_by_product']);
-
 
 });
 

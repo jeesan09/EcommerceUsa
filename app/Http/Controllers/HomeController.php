@@ -33,8 +33,8 @@ class HomeController extends Controller
         $products_se = Product::where('id',0)->latest()->get();
        // only for ajax end
         $products = Product::where('product_status',1)->latest()->get();
-        $sliders = SliderModel::where('product_status',1)->latest()->offset(0)->limit(8)->get();
-        $side_sliders = SliderModel::where('product_status',1)->latest()->offset(0)->limit(2)->get();
+        $sliders = SliderModel::where('status',1)->latest()->offset(0)->limit(8)->get();
+        $side_sliders = SliderModel::where('status',1)->latest()->offset(0)->limit(2)->get();
         $categoris = Category::where('status', 1)->latest()->get();
         $brands = Brand::where('status', 1)->latest()->get();
         $products_brand = Product::where('product_status',1)->latest()->get();

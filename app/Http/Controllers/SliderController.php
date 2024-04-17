@@ -31,51 +31,18 @@ class SliderController extends Controller
     {
 
         $request->validate([
-            'product_name' => 'required|max:255',
-            'product_code' => 'required|max:255',
-            'product_price' => 'required|max:255',
-            'product_quantity' => 'required|max:255',
-            'brand_name' => 'required|max:255',
-            'category_name' => 'required|max:255',
-            'product_size' => 'required',
-            'product_color' => 'required',
-            'sort_description' => 'required',
-            'long_description' => 'required',
-            'product_img_one' => 'required|mimes:jpg,jpeg,gif,png',
-            'product_img_two' => 'required|mimes:jpg,jpeg,gif,png',
-        /*     'product_img_three' => 'required', */
+            'slider_title' => 'required|max:255',
+            'slider_image' => 'required|mimes:jpg,jpeg,gif,png',
         ]);
 
-        $image_one = $request->file('product_img_one');
+        $image_one = $request->file('slider_image');
         $name_gena = hexdec(uniqid()) . "." . $image_one->getClientOriginalExtension();
-        \Image::make($image_one)->resize(2070, 2070)->save('frotend/img/product/upload/' . $name_gena);
+        \Image::make($image_one)->resize(2070, 1000)->save('frotend/img/product/upload/' . $name_gena);
         $image_url = 'frotend/img/product/upload/' . $name_gena;
 
-        $image_two = $request->file('product_img_two');
-        $name_gena2 = hexdec(uniqid()) . "." . $image_two->getClientOriginalExtension();
-        \Image::make($image_two)->resize(470, 265)->save('frotend/img/product/upload/' . $name_gena2);
-        $image_url2 = 'frotend/img/product/upload/' . $name_gena2;
-
-     /*    $image_three = $request->file('product_img_three');
-        $name_gena3 = hexdec(uniqid()) . "." . $image_three->getClientOriginalExtension();
-        \Image::make($image_three)->resize(470, 470)->save('frotend/img/product/upload/' . $name_gena3);
-        $image_url3 = 'frotend/img/product/upload/' . $name_gena3;
- */
         SliderModel::insert([
-            'product_name' => $request->product_name,
-            'product_slug' => strtolower(str_replace(' ', '-', $request->product_name)),
-            'product_code' => $request->product_code,
-            'product_price' => $request->product_price,
-            'product_quantity' => $request->product_quantity,
-            'brand_name' => $request->brand_name,
-            'category_name' => $request->category_name,
-            'product_size' => json_encode($request->product_size),
-            'product_color' => json_encode($request->product_color),
-            'sort_description' => $request->sort_description,
-            'long_description' => $request->long_description,
-            'product_img_one' => $image_url,
-            'product_img_two' => $image_url2,
-            'product_img_three' => $image_url2,
+            'slider_title' => $request->slider_title,
+            'slider_image' => $image_url,
             'created_at' => Carbon::now(),
         ]);
 
@@ -90,32 +57,30 @@ class SliderController extends Controller
     public function s_deactive_prod($id)
     {
         SliderModel::findOrfail($id)->update([
-            'product_status' => '0',
+            'status' => 0,
             'updated_at' => Carbon::now(),
         ]);
-        return back()->with('success_delete', 'Product successfully deactived');
+        return back()->with('success_delete', 'Slider successfully deactived');
     }
 
 
     public function s_active_prod($id)
     {
         SliderModel::findOrfail($id)->update([
-            'product_status' => '1',
+            'status' => 1,
             'updated_at' => Carbon::now()
         ]);
-        return back()->with('success', 'Product successfully actived');
+        return back()->with('success', 'Slider successfully actived');
     }
 
     public function s_product_delete($id)
     {
         $pro_image =  SliderModel::where('id', $id)->get();
         foreach ($pro_image as $pro_img) {
-            unlink($pro_img->product_img_one);
-            unlink($pro_img->product_img_two);
-            unlink($pro_img->product_img_three);
+            unlink($pro_img->slider_image);
         }
         SliderModel::where('id', $id)->delete();
-        return redirect()->back()->with('success_delete', 'Product Deleted Success ');
+        return redirect()->back()->with('success_delete', 'slider Deleted Success ');
     }
 
     public function s_productedit($id)
