@@ -64,4 +64,13 @@ class LoginController extends Controller
         return $request->only($this->username(), 'password');
     }
 
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        return redirect('/login'); // Redirect to the login page after logout
+    }
+
 }
