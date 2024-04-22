@@ -1,0 +1,86 @@
+version: "3.7"
+services:
+  #PHP Service
+  ecom:
+    build:
+      args:
+        user: ahrasel
+        uid: 1000
+      context: .
+      dockerfile: .docker/Dockerfile
+    image: ecom
+    container_name: ecom
+    restart: unless-stopped
+    working_dir: /var/www/
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    volumes:
+      - ./:/var/www
+      - ./.docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - ecom_network
+
+  #MySQL Service
+  ecom_db:
+    image: mysql:5.7
+    container_name: ecom_db
+    restart: unless-stopped
+    ports:
+      - "${DOCKER_DB_PORT}:3306"
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ecom_mysql_data:/var/lib/mysql
+    networks:
+      - ecom_network
+
+  #Nginx Service
+  ecom_nginx:
+    image: nginx:alpine
+    container_name: ecom_nginx
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "${DOCKER_APP_PORT}:80"
+      - "${DOCKER_APP_SSL_PORT}:443"
+    volumes:
+      - ./:/var/www
+      - ./.docker/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - ecom_network
+  # phpmyadmin service
+  ecom_phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: unless-stopped
+    container_name: ecom_phpmyadmin
+    depends_on:
+      - ecom_db
+    ports:
+      - "${DOCKER_PHPMYADMIN_PORT}:80"
+    environment:
+      PMA_HOST: ecom_db
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      UPLOAD_LIMIT: 800M
+    networks:
+      - ecom_network
+
+#Docker Networks
+networks:
+  ecom_network:
+    driver: bridge
+    name: ecom_network
+    # ipam:
+    #     config:
+    #       - subnet: 192.168.0.0/26
+
+#Volumes
+volumes:
+  ecom_mysql_data:
+  ecom_cache:
