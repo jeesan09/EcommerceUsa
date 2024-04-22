@@ -3,6 +3,14 @@
 @section('user-sub') active @endsection
 @section('admin_content')
 
+@if(Session::has('success'))
+    <div class="alert alert-success" role="alert">
+        {{ Session::get('success') }}
+    </div>
+@endif
+
+
+
     <!-- ########## START: MAIN PANEL ########## -->
     <div class="sl-mainpanel">
         <nav class="breadcrumb sl-breadcrumb">
@@ -22,7 +30,8 @@
                                 <th class="wd-15p">User name</th>
                                 <th class="wd-20p">User e-mail</th>
                                 <th class="wd-20p">User Phone</th>
-                                <th class="wd-20p">Order Details</th>
+                                <th class="wd-20p">Status</th>
+                                
                                 <th class="wd-20p">Action</th>
                               </tr>
                             </thead>
@@ -36,7 +45,16 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->phone }}</td>
-                                <td><a class="btn btn-outline-primary">Order Detail</a></td>
+                                <td>
+                                  <form method="post" action="{{ route('changeStatus', $user->id) }}">
+                                      @csrf
+                                      <input type="radio" name="status" value=1 {{ $user->status == 1 ? 'checked' : '' }}> Active
+                                      <input type="radio" name="status" value=0 {{ $user->status == 0 ? 'checked' : '' }}> Inactive
+                                      <button type="submit" class="btn btn-primary btn-sm">Update Status</button>
+                                  </form>
+                                </td>
+                              
+                              
                                 <td>
                                   <a href="" class="btn btn-success btn-sm"><i class="icon ion-edit"></i></a>
                                   <a href=""onclick="return confirm('Are you sure to delete this User..?');"   class="btn btn-danger  btn-sm"><i class="icon ion-trash-b"></i></a>

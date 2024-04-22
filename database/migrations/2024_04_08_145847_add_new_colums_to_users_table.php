@@ -17,7 +17,7 @@ class AddNewColumsToUsersTable extends Migration
             //
             $table->string('reseller_ID')->nullable()->after('phone');
             $table->string('company_name')->nullable()->after('reseller_ID');
-            $table->boolean('status')->nullable()->after('company_name')->default(true);
+            $table->boolean('status')->nullable()->after('company_name')->default(false);
 
         });
     }

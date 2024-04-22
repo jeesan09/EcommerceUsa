@@ -64,6 +64,12 @@
                                 </div><!-- End .form-footer -->
                             </form>
 
+                            @if (session('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
+
                         </div><!-- .End .tab-pane -->
                         <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
 

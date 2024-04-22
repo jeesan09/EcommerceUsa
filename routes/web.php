@@ -210,7 +210,7 @@ Route::get('wishlist/remove/{prod_id}',[WishListController::class,'product_remov
 
 });
 
-
+Route::post('/user/{id}/change-status', [UserController::class, 'changeStatus'])->name('changeStatus');
 
 Route::get('/clear_cache', function () {
 

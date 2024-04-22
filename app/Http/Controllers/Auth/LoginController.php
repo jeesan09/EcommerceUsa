@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -38,6 +39,21 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+
+    protected function authenticated(Request $request, $user)
+    {
+        // Check if the user status is 1 (active)
+        if ($user->status !== 1) {
+            // If user status is not 1, log out the user and redirect back to the login page
+            Auth::logout();
+            return redirect()->route('login')->with('error', 'Your account is not active yet');
+        }
+
+        // If user status is 1, proceed with the default authenticated logic
+        return redirect()->intended($this->redirectPath());
+    }
+
 
     protected function credentials(Request $request)
     {
