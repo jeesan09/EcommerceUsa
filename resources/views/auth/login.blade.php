@@ -70,6 +70,12 @@
                                 </div>
                             @endif
 
+                            @if(session('warning'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('warning') }}
+                                </div>
+                            @endif                            
+
                         </div><!-- .End .tab-pane -->
                         <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
 
