@@ -29,7 +29,7 @@
                                 <th class="wd-10p">Sl.</th>
                                 <th class="wd-15p">User name</th>
                                 <th class="wd-20p">User e-mail</th>
-                                <th class="wd-20p">User Phone</th>
+                                {{-- <th class="wd-20p">User Phone</th> --}}
                                 <th class="wd-20p">Status</th>
                                 
                                 <th class="wd-20p">Action</th>
@@ -44,7 +44,7 @@
                                 <td>{{ $count++ }}</td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td>{{ $user->phone }}</td>
+                                {{-- <td>{{ $user->phone }}</td> --}}
                                 <td>
                                   <form method="post" action="{{ route('changeStatus', $user->id) }}">
                                       @csrf
