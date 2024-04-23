@@ -45,16 +45,14 @@
                                         <span>LOG IN</span> <i class="icon-long-arrow-right"></i>
                                     </button>
 
-                                    <div class="custom-control custom-checkbox">
-                                        {{-- <input type="checkbox" class="custom-control-input" >
-                                        <label class="custom-control-label" for="signin-remember">Remember Me</label> --}}
-
+                                    {{-- <div class="custom-control custom-checkbox">
+                                     
                                         <input class="custom-control-input" type="checkbox" name="remember" id="signin-remember" {{ old('remember') ? 'checked' : '' }}>
 
                                         <label class="custom-control-label" for="signin-remember">
                                             {{ __('Remember Me') }}
                                         </label>
-                                    </div><!-- End .custom-checkbox -->
+                                    </div> --}}
 
                                     @if (Route::has('password.request'))
                                     <a class="forgot-link" href="{{ route('password.request') }}">
