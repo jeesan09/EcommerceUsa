@@ -1,10 +1,20 @@
 @extends('admin.admin_layouts')
-@section('products') active show-sub @endsection
-@section('product-sub') active @endsection
+@section('products')
+    active show-sub
+@endsection
+@section('product-sub')
+    active
+@endsection
+<style>
+    .d-sm-none_custom{
+        display: none;
+        visibility: hidden;
+    }
+</style>
 @section('admin_content')
     <!-- ########## START: MAIN PANEL ########## -->
 
-  
+
     <div class="sl-mainpanel">
         <nav class="breadcrumb sl-breadcrumb">
             <a class="breadcrumb-item" href="{{ url('/admin/home') }}">Home</a>
@@ -100,213 +110,39 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <style>
-                                    .checkbox_valye{
-                                       display: flex;
-                                      
-                                    }
-                                    .input_chack .inpou{
-                                        width: 20px;
-                                        height: 20px;
-                                        margin-right:5px;
-                                        margin-left: 20px;
-                                    }
-                                    
-                                </style>
-                                <div class="col-lg-5">
-                                    <label class="">Product Size: <span class="tx-danger">*</span></label>
-                                    <div class="checkbox_valye">
-                                        <div class="input_chack">
-                                            <input class="inpou" type="checkbox" name="product_size[]" value="S">
-                                        </div>
-                                        <div class="name_value">
-                                           <h6> Small(S)</h6>
-                                        </div>
-                                        <div class="input_chack">
-                                            <input class="inpou" type="checkbox" name="product_size[]" value="M">
-                                        </div>
-                                        <div class="name_value">
-                                           <h6> Meddium(M)</h6>
-                                        </div>
 
-                                        <div class="input_chack">
-                                            <input class="inpou" type="checkbox" name="product_size[]" value="L">
+                                <div class="col-lg-12 ">
+                                    <div class="row border ml-0 mr-0 pb-3 form-row">
+                                        <div class="col-sm-3">
+                                            <label for="condition">Condition</label>
+                                            <input type="text" class="form-control" name="condition[]">
                                         </div>
-                                        <div class="name_value">
-                                           <h6> Large(L)</h6>
+                                        <div class="col-sm-3">
+                                            <label for="color">Color</label>
+                                            <select name="color[]" class="form-control">
+                                                <option value="" selected hidden>Select color</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label for="storage">Storage</label>
+                                            <input type="text" class="form-control" name="storage[]">
+                                        </div>
+                                        <div class="col-sm-3">
+                                                <label for="image">Image</label>
+                                                <input type="file" class="form-control" name="image[]">
                                         </div>
                                     </div>
-                                                                                            
-                                    <div class="checkbox_valye mt-3">
-                                        <div class="input_chack">
-                                            <input class="inpou" type="checkbox" name="product_size[]" value="XS">
-                                        </div>
-                                        <div class="name_value">
-                                           <h6> (XS)</h6>
-                                        </div>
-                                        <div class="input_chack">
-                                            <input class="inpou" type="checkbox" name="product_size[]" value="XL">
-                                        </div>
-                                        <div class="name_value">
-                                           <h6>(XL)</h6>
-                                        </div>
-
-                                        <div class="input_chack">
-                                            <input class="inpou" type="checkbox" name="product_size[]" value="XXL">
-                                        </div>
-                                        <div class="name_value">
-                                           <h6> XXL(XXL)</h6>
-                                        </div>
+                                    <div id="form-container"></div>
+                                    <div class="col-12 text-right mt-1">
+                                        <button type="button" id="add-row" class="btn btn-primary btn-sm">Add More</button>
                                     </div>
-                                    @error('product_size')
-                                    <strong class="text-danger">{{ $message }}</strong>
-                                @enderror
-                                </div>
-                            
-                                <div class="col-lg-7 mb-2">
-                                    <label class="">Product Color: <span class="tx-danger">*</span></label>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="checkbox_valye">
-                                                <div class="input_chack">
-                                                    <input class="inpou" type="checkbox" name="product_color[]" value="Default">
-                                                </div>
-                                                <div class="name_value text-danger">
-                                                   <h6> Default</h6>
-                                                </div>
-                                                <div class="input_chack">
-                                                    <input class="inpou" type="checkbox" name="product_color[]" value="Aqua">
-                                                </div>
-                                                <div class="name_value">
-                                                   <h6> Aqua</h6>
-                                                </div>
-                                                <div class="input_chack">
-                                                    <input class="inpou" type="checkbox" name="product_color[]" value="Ash">
-                                                </div>
-                                                <div class="name_value">
-                                                   <h6> Ash</h6>
-                                                </div>
-                                            </div>
-                                            <div class="checkbox_valye">
-                                                <div class="input_chack">
-                                                    <input class="inpou" type="checkbox" name="product_color[]" value="Brown">
-                                                </div>
-                                                <div class="name_value">
-                                                   <h6> Brown</h6>
-                                                </div>
-                                                <div class="input_chack">
-                                                    <input class="inpou" type="checkbox" name="product_color[]" value="Coffee">
-                                                </div>
-                                                <div class="name_value">
-                                                   <h6> Coffee</h6>
-                                                </div>
-                                            </div>
-                                                <div class="checkbox_valye ">
-                                                    <div class="input_chack">
-                                                        <input class="inpou" type="checkbox" name="product_color[]" value="Purple ">
-                                                    </div>
-                                                    <div class="name_value">
-                                                    <h6> Purple </h6>
-                                                    </div>
-                                                    <div class="input_chack">
-                                                        <input class="inpou" type="checkbox" name="product_color[]" value="Pink">
-                                                    </div>
-                                                    <div class="name_value">
-                                                    <h6> Pink</h6>
-                                                    </div>
-                                            </div>  
-                                            <div class="checkbox_valye">
-                                                <div class="input_chack">
-                                                    <input class="inpou" type="checkbox" name="product_color[]" value="Goldenrod">
-                                                </div>
-                                                <div class="name_value">
-                                                   <h6> Goldenrod </h6>
-                                                </div>
-                                                <div class="input_chack">
-                                                    <input class="inpou" type="checkbox" name="product_color[]" value="Green">
-                                                </div>
-                                                <div class="name_value">
-                                                    <h6>Green</h6>
-                                                 </div>
-                                            </div>        
-                                        </div>
-                                        <div class="col-6">
-                                         <div class="checkbox_valye ">
-                                                <div class="input_chack">
-                                                    <input class="inpou" type="checkbox" name="product_color[]" value="Maroon">
-                                                </div>
-                                                <div class="name_value">
-                                                   <h6> Maroon </h6>
-                                                </div>
-
-                                                <div class="input_chack">
-                                                    <input class="inpou" type="checkbox" name="product_color[]" value="White">
-                                                </div>
-                                                <div class="name_value">
-                                                   <h6> White  </h6>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="checkbox_valye ">
-                                                <div class="input_chack">
-                                                    <input class="inpou" type="checkbox" name="product_color[]" value="Navy Blue ">
-                                                </div>
-                                                <div class="name_value">
-                                                   <h6> Navy Blue  </h6>
-                                                </div>
-
-                                                <div class="input_chack">
-                                                    <input class="inpou" type="checkbox" name="product_color[]" value="Black">
-                                                </div>
-                                                <div class="name_value">
-                                                   <h6> Black</h6>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="checkbox_valye ">
-                                                <div class="input_chack">
-                                                    <input class="inpou" type="checkbox" name="product_color[]" value="Olive  ">
-                                                </div>
-                                                <div class="name_value">
-                                                   <h6> Olive   </h6>
-                                                </div>
-                                                <div class="input_chack">
-                                                    <input class="inpou" type="checkbox" name="product_color[]" value="Sky blue  ">
-                                                </div>
-                                                <div class="name_value">
-                                                   <h6> Sky blue   </h6>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="checkbox_valye ">
-                                                <div class="input_chack">
-                                                    <input class="inpou" type="checkbox" name="product_color[]" value="Spring Green  ">
-                                                </div>
-                                                <div class="name_value">
-                                                   <h6> Spring Green   </h6>
-                                                </div>
-                                                <div class="input_chack">
-                                                    <input class="inpou" type="checkbox" name="product_color[]" value="Teal">
-                                                </div>
-                                                <div class="name_value">
-                                                    <h6>Teal  </h6>
-                                                 </div>
-                                            </div>
-                                           
-                                        </div>
-                                    </div>
-                                  
-                                    @error('product_color')
-                                    <strong class="text-danger">{{ $message }}</strong>
-                                @enderror
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group mg-b-10-force">
                                         <label class="form-control-label"> Short Description: <span
                                                 class="tx-danger">*</span></label>
-                                                <br>
-                                              
+                                        <br>
+
                                         <textarea id="summernote" name="sort_description" style="width: 100%; "></textarea>
                                         @error('sort_description')
                                             <strong class="text-danger">{{ $message }}</strong>
@@ -317,7 +153,7 @@
                                     <div class="form-group mg-b-10-force">
                                         <label class="form-control-label"> Long Description: <span
                                                 class="tx-danger">*</span></label>
-                                                <br>
+                                        <br>
                                         <textarea id="summernote2" name="long_description" style="width: 100%;"></textarea>
                                         @error('long_description')
                                             <strong class="text-danger">{{ $message }}</strong>
@@ -455,7 +291,48 @@
             </form>
         </div><!-- sl-pagebody -->
     </div><!-- sl-mainpanel -->
-
+    <script>
+        $(document).ready(function() {
+            // Add row
+            $('#add-row').click(function() {
+                var newRow = `<div class="row border  ml-0 mr-0 pb-3 form-row">
+                                <div class="col-sm-3">
+                                    <label class="d-sm-block"> </label>
+                                    <label for="condition " class="d-sm-none ">Condition</label>
+                                    <input type="text" class="form-control" name="condition[]">
+                                </div>
+                                <div class="col-sm-3">
+                                    <label class="d-sm-block"> </label>
+                                    <label for="color " class="d-sm-none">Color</label>
+                                    <select name="color[]" class="form-control">
+                                        <option value="" selected hidden>Select color</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label class="d-sm-block"> </label>
+                                    <label for="storage " class="d-sm-none">Storage</label>
+                                    <input type="text" class="form-control" name="storage[]">
+                                </div>
+                                <div class="col-sm-3 d-flex align-items-end">
+                                    <div>
+                                        <label class="d-sm-block"> </label>
+                                        <label for="image " class="d-sm-none">Image</label>
+                                        <input type="file" class="form-control" name="image[]">
+                                    </div>
+                                    <div class="ml-2">
+                                        <button type="button" class="btn btn-danger remove-row">Remove</button>
+                                    </div>
+                                </div>
+                            </div>`;
+                $('#form-container').append(newRow);
+            });
+        
+            // Remove row
+            $(document).on('click', '.remove-row', function() {
+                $(this).closest('.form-row').remove();
+            });
+        });
+        </script>
 
     <script>
         function showPreview(event) {
@@ -484,6 +361,7 @@
                 preview.style.display = "block";
             }
         }
+
         function showPreview4(event) {
             if (event.target.files.length > 0) {
                 var src = URL.createObjectURL(event.target.files[0]);
@@ -501,6 +379,7 @@
                 preview.style.display = "block";
             }
         }
+
         function showPreview6(event) {
             if (event.target.files.length > 0) {
                 var src = URL.createObjectURL(event.target.files[0]);
@@ -509,7 +388,5 @@
                 preview.style.display = "block";
             }
         }
-     
     </script>
-
 @endsection
