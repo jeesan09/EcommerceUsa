@@ -16,7 +16,7 @@
         <nav class="breadcrumb sl-breadcrumb">
             <a class="breadcrumb-item" href="{{ url('/admin/home') }}">Home</a>
             <span class="breadcrumb-item active">User Page</span>
-          </nav>
+        </nav>
         <div class="sl-pagebody">
             <div class="row">
                 <div class="col-12">
@@ -29,7 +29,7 @@
                                 <th class="wd-10p">Sl.</th>
                                 <th class="wd-15p">User name</th>
                                 <th class="wd-20p">User e-mail</th>
-                                <th class="wd-20p">User Phone</th>
+                                {{-- <th class="wd-20p">User Phone</th> --}}
                                 <th class="wd-20p">Status</th>
                                 
                                 <th class="wd-20p">Action</th>
@@ -44,21 +44,27 @@
                                 <td>{{ $count++ }}</td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td>{{ $user->phone }}</td>
+                                {{-- <td>{{ $user->phone }}</td> --}}
                                 <td>
                                   <form method="post" action="{{ route('changeStatus', $user->id) }}">
                                       @csrf
                                       <input type="radio" name="status" value=1 {{ $user->status == 1 ? 'checked' : '' }}> Active
                                       <input type="radio" name="status" value=0 {{ $user->status == 0 ? 'checked' : '' }}> Inactive
-                                      <button type="submit" class="btn btn-primary btn-sm">Update Status</button>
+                                      <button type="submit" class="btn btn-primary btn-sm">Submit</button>
                                   </form>
                                 </td>
                               
                               
-                                <td>
-                                  <a href="" class="btn btn-success btn-sm"><i class="icon ion-edit"></i></a>
-                                  <a href=""onclick="return confirm('Are you sure to delete this User..?');"   class="btn btn-danger  btn-sm"><i class="icon ion-trash-b"></i></a>
-                                </td>
+                                <td class="d-flex">
+                                  <a href="{{ route('user.details', ['id' => $user->id]) }}" class="btn btn-info btn-sm mr-2"><i class="bi bi-eye-fill"></i> Details</a>
+                                  <form method="post" action="{{ route('user.delete', ['id' => $user->id]) }}" onsubmit="return confirm('Are you sure to delete this User..?');">
+                                      @csrf
+                                      @method('DELETE')
+                                      <button type="submit" class="btn btn-danger btn-sm"><i class="icon ion-trash-b"></i></button>
+                                  </form>
+                              </td>
+                              
+                              
                               </tr>
                               @endforeach
                             </tbody>

@@ -122,8 +122,15 @@ Route::post('/logo-add', [SliderController::class,'logo_add'])->name('add.logo')
 
 //admin backend end
 
+
+Route::delete('/admin/user/{id}', 'UserController@destroy')->name('user.delete');
+
 // User Control  page
 Route::get('user-list/', [UserController::class,'user_list'])->name('all-user.list');
+Route::get('/user/{id}/details', 'UserController@show')->name('user.details');
+
+
+
 
 
 

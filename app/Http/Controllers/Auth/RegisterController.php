@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Mail\NewUserNotification;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Auth\Events\Registered;
+use App\Providers\RouteServiceProvider;
+
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Http\Requests\RegistrationRequest;
 
 class RegisterController extends Controller
 {
@@ -29,7 +36,9 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    //protected $redirectTo = RouteServiceProvider::HOME;
+
+      protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -67,17 +76,59 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+      // not needed anymore
+       dd( $data['company_name']);
 
-      //  dd( $data['reseller_ID']);
-        // return $data;
 
-        return User::create([
-            'name' => $data['name'],
-            'reseller_ID' => $data['reseller_ID'],
-            'company_name' => $data['company_name'],
-            'email' => $data['email'],
-            'phone' => $data['phone'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $user = new User();
+        $user->name = $data['name'];
+        $user->reseller_ID = $data['reseller_ID'];
+        $user->company_name = $data['company_name'];
+        $user->email = $data['email'];
+        $user->phone = $data['phone'];
+        $user->password = Hash::make($data['password']);
+        $user->save();
+        
+        // Send email notification to admin
+        $this->sendAdminNotification($user);   
+
+        return $user;
+
     }
+
+
+    public function register(RegistrationRequest $request)
+    {
+      //  dd($request->all());
+
+        $user = new User();
+        $user->name = $request->name;
+        $user->reseller_ID = $request->reseller_ID;
+        $user->company_name = $request->company_name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+
+        $this->sendAdminNotification($user); 
+
+        return redirect('/login')->with('warning', 'Your account will be activated by the admin soon.');
+
+    }    
+   
+
+    protected function sendAdminNotification(User $user)
+    {
+        // Generate activation link
+        $activationLink = route('admin.login');
+
+        // Send email notification to admin
+        Mail::to('admin@example.com')->send(new NewUserNotification($user, $activationLink));
+
+        return redirect('/login');
+    
+    }
+
+
 }
