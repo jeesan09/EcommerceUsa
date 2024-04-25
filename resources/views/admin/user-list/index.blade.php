@@ -50,7 +50,7 @@
                                       @csrf
                                       <input type="radio" name="status" value=1 {{ $user->status == 1 ? 'checked' : '' }}> Active
                                       <input type="radio" name="status" value=0 {{ $user->status == 0 ? 'checked' : '' }}> Inactive
-                                      <button type="submit" class="btn btn-primary btn-sm">Update Status</button>
+                                      <button type="submit" class="btn btn-primary btn-sm">Submit</button>
                                   </form>
                                 </td>
                               
