@@ -7,6 +7,7 @@
     <li>Reseller ID: {{ $user->reseller_ID }}</li>
     <li>Company Name: {{ $user->company_name }}</li>
     <li>Email: {{ $user->email }}</li>
+    <li>Shippping Address: {{ $user->shipping_address }}</li>
     <li>Phone: {{ $user->phone }}</li>
 </ul>
 

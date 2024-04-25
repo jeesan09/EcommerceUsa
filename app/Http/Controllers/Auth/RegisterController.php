@@ -99,13 +99,14 @@ class RegisterController extends Controller
 
     public function register(RegistrationRequest $request)
     {
-      //  dd($request->all());
+       // dd($request->all());
 
         $user = new User();
         $user->name = $request->name;
         $user->reseller_ID = $request->reseller_ID;
         $user->company_name = $request->company_name;
         $user->email = $request->email;
+        $user->shipping_address = $request->shipping_address;
         $user->phone = $request->phone;
         $user->password = Hash::make($request->password);
         $user->save();

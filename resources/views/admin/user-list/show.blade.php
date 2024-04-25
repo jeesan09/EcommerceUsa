@@ -16,12 +16,13 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <p><strong>Name:</strong> {{ $user->name }}</p>
                                     <p><strong>Email:</strong> {{ $user->email }}</p>
                                     <p><strong>Phone:</strong> {{ $user->phone }}</p>
                                     <p><strong>Reseller ID:</strong> {{ $user->reseller_ID }}</p>
                                     <p><strong>Company Name:</strong> {{ $user->company_name }}</p>
+                                    <p><strong>Shipping Address:</strong> {{ $user->shipping_address }}</p>
                                 </div>
                                 <div class="col-md-6">
                                     <!-- Add additional user details here -->
