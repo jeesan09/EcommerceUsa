@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
 use App\Notifications\UserActivationNotification;
 
 
@@ -22,6 +23,7 @@ class UserController extends Controller
       return view('admin.user-list.index', compact('users'));
     }
 
+
     public function changeStatus(Request $request, $id)
     {
         //return $request;
@@ -36,14 +38,42 @@ class UserController extends Controller
 
         }
 
+        return Redirect::route('all-user.list')->with('success', 'User status updated successfully.');
 
-        $users = User::latest()->get();
-        Session::flash('success', 'User status updated successfully.');
-        return view('admin.user-list.index', compact('users'));
+
+        // $users = User::latest()->get();
+        // Session::flash('success', 'User status updated successfully.');
+        // return view('admin.user-list.index', compact('users'));
         // Redirect back or return response as needed
 
 
     }
+
+    public function show($id)
+    {
+        // Fetch the user details based on the provided ID
+        $user = User::findOrFail($id);
+        
+       // return $user;
+        // Pass the user details to the view
+        return view('admin.user-list.show', ['user' => $user]);
+    }
+
+
+
+    public function destroy($id)
+    {
+        // Find the user by ID
+        $user = User::findOrFail($id);
+
+        // Delete the user
+        $user->delete();
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'User deleted successfully.');
+    }
+
+
 
     protected function sendActivationEmail(User $user)
     {
