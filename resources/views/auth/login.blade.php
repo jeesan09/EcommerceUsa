@@ -40,12 +40,12 @@
 
                                 </div><!-- End .form-group -->
 
-                                <div class="form-footer">
+                                <div class="form-footer  d-flex justify-content-between">
                                     <button type="submit" class="btn btn-outline-primary-2">
                                         <span>LOG IN</span> <i class="icon-long-arrow-right"></i>
                                     </button>
 
-                                    <div class="text-center">
+                                    <div class="text-center ">
                                         <a href="/register" class="btn btn-primary">Register</a>
                                     </div>                                   
 
@@ -58,12 +58,20 @@
                                         </label>
                                     </div> --}}
 
+                                    {{-- @if (Route::has('password.request'))
+                                    <a class="forgot-link" href="{{ route('password.request') }}">
+                                        {{ __('Forgot Your Password?') }}
+                                    </a>
+                                    @endif --}}
+                                </div><!-- End .form-footer -->
+
+                                 <div class="row">
                                     @if (Route::has('password.request'))
                                     <a class="forgot-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                     @endif
-                                </div><!-- End .form-footer -->
+                                 </div>
                             </form>
 
                             @if (session('error'))
