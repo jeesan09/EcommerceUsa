@@ -16,7 +16,7 @@
         <nav class="breadcrumb sl-breadcrumb">
             <a class="breadcrumb-item" href="{{ url('/admin/home') }}">Home</a>
             <span class="breadcrumb-item active">User Page</span>
-          </nav>
+        </nav>
         <div class="sl-pagebody">
             <div class="row">
                 <div class="col-12">
@@ -55,10 +55,16 @@
                                 </td>
                               
                               
-                                <td>
-                                  <a href="" class="btn btn-success btn-sm"><i class="icon ion-edit"></i></a>
-                                  <a href=""onclick="return confirm('Are you sure to delete this User..?');"   class="btn btn-danger  btn-sm"><i class="icon ion-trash-b"></i></a>
-                                </td>
+                                <td class="d-flex">
+                                  <a href="{{ route('user.details', ['id' => $user->id]) }}" class="btn btn-info btn-sm mr-2"><i class="bi bi-eye-fill"></i> Details</a>
+                                  <form method="post" action="{{ route('user.delete', ['id' => $user->id]) }}" onsubmit="return confirm('Are you sure to delete this User..?');">
+                                      @csrf
+                                      @method('DELETE')
+                                      <button type="submit" class="btn btn-danger btn-sm"><i class="icon ion-trash-b"></i></button>
+                                  </form>
+                              </td>
+                              
+                              
                               </tr>
                               @endforeach
                             </tbody>

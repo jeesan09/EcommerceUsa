@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title> @yield('product_list')</title>
@@ -27,11 +29,14 @@
     <link rel="stylesheet" href="{{asset('frotend') }}/assets/css/plugins/magnific-popup/magnific-popup.css">
     <!-- Main CSS File -->
     <link rel="stylesheet" href="{{asset('frotend') }}/assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-1ToqyuMm2I01yQNv5RKTg+ahAxkFESXr40mGgWAtN3rPBo+ZlsEVYVS0RN4AihB5" crossorigin="anonymous">
 
     <!-- alertify alert er jonno  -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
     <!-- alertify alert er jonno  -->
+
+    
 </head>
 
 <body>
