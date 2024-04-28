@@ -14,4 +14,4 @@
 <p>Click <a href="{{ $activationLink }}">here</a> to view the user list.</p>
 
 <p>Thank you,</p>
-<p>Your Application</p>
+<p>MPW Wholesale</p>
