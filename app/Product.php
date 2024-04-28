@@ -2,8 +2,9 @@
 
 namespace App;
 
+use App\Admin\ProductVarient;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Admin\color as Color;
 
 class Product extends Model
 {
@@ -19,5 +20,11 @@ class Product extends Model
         return $this->belongsTo(Brand::class,'brand_name');
     }
 
-   
+    public function product_varient()
+    {
+        return $this->hasMany(ProductVarient::class,'product_id', 'id');
+    }
+
+
+
 }

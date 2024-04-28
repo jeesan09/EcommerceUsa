@@ -18,12 +18,14 @@ class FrontendController extends Controller
         // only for ajax
         $products_se = Product::where('id',0)->latest()->get();
        // only for ajax end
-        $products = Product::where('product_status',1)->latest()->offset(0)->limit(16)->get();
+        $products = Product::with('product_varient')->where('product_status',1)->latest()->offset(0)->limit(16)->get();
         $sliders = SliderModel::where('status',1)->latest()->offset(0)->limit(8)->get();
         $side_sliders = SliderModel::where('status',1)->latest()->offset(0)->limit(2)->get();
         $categoris = Category::where('status', 1)->latest()->offset(0)->limit(8)->get();
         $brands = Brand::where('status', 1)->latest()->offset(0)->limit(8)->get();
-        $products_brand = Product::where('product_status',1)->latest()->offset(0)->limit(16)->get();
+        $products_brand = Product::with('product_varient')->where('product_status',1)->latest()->offset(0)->limit(16)->get();
+
+      //  dd($products_brand, $products);
 
         return view('pages.index', compact('products','categoris','brands','products_brand','products_se','sliders','side_sliders'));
 
