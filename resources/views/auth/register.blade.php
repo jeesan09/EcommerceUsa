@@ -67,6 +67,19 @@
 
 
 
+                        <div class="form-group">
+                            <label for="billing_address">Billing Address *</label>
+                            <textarea id="billing_address" class="form-control @error('billing_address') is-invalid @enderror" name="billing_address" rows="4" required>{{ old('billing_address') }}</textarea>
+                            @error('billing_address')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div><!-- End .form-group -->
+
+
+
+
                         <div class="d-flex">
                             <div class=" ">
                                 <label for="phone">Phone No *</label>

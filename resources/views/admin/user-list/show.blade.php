@@ -12,7 +12,7 @@
                 <div class="col-md-8 mx-auto">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">User Details</h5>
+                            <h5 class="card-title mt-4">User Details</h5>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -23,6 +23,7 @@
                                     <p><strong>Reseller ID:</strong> {{ $user->reseller_ID }}</p>
                                     <p><strong>Company Name:</strong> {{ $user->company_name }}</p>
                                     <p><strong>Shipping Address:</strong> {{ $user->shipping_address }}</p>
+                                    <p><strong>Billing Address:</strong> {{ $user->billing_address }}</p>
                                 </div>
                                 <div class="col-md-6">
                                     <!-- Add additional user details here -->
