@@ -83,7 +83,6 @@ class AllproductController extends Controller
     // only for ajax end
     $product_details = Product::with('product_varient','product_varient.colors')->where('id', $pro_id)->get();
 
-
   
 
     foreach ($product_details  as $prod_ids) {
