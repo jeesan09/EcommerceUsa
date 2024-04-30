@@ -156,63 +156,72 @@
                                         <div class="row">
                                             <input type="hidden"  name="user_id" value="{{ $user->id }}">
                                             <div class="col-6">
-                                                <label>First Name *</label>
+                                                <label> Name *</label>
                                                 <input type="text" class="form-control  @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" >
                                                 @error('name')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
 
+                                           
                                             <div class="col-6">
-                                                <label>Last Name *</label>
-                                                <input type="text" class="form-control  @error('last_name') is-invalid @enderror" name="last_name" value="{{ $user->last_name }}" required>
-                                                @error('last_name')
+                                                <label>Reseller ID *</label>
+                                                <input type="text" class="form-control  @error('reseller_ID') is-invalid @enderror" name="reseller_ID" value="{{ $user->reseller_ID }}" >
+                                                @error('reseller_ID')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                      
+  
+                                            
+                                            <div class="col-6">
+                                                <label>Company Name *</label>
+                                                <input type="text" class="form-control  @error('company_name') is-invalid @enderror" name="company_name" value="{{ $user->company_name }}" >
+                                                @error('company_name')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
 
+
+                    
                                             <div class="col-6">
                                                 <label>Phone No *</label>
-                                                <input type="text" class="form-control  @error('phone') is-invalid @enderror" name="phone" value="{{ $user->phone }}" required>
+                                                <input type="text" class="form-control  @error('phone') is-invalid @enderror" name="phone" value="{{ $user->phone }}" >
                                                 @error('phone')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
+
+                    
                                             <div class="col-6">
-                                                <label>Email Address *</label>
-                                                <input type="email" class="form-control  @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" required>
-                                                @error('email')
+                                                <label>Shipping Address *</label>
+                                                <textarea id="shipping_address" class="form-control @error('shipping_address') is-invalid @enderror" name="shipping_address"  >{{ $user->shipping_address }}</textarea>
+                                              
+                                                @error('shipping_address')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
-                                            </div>
+                                            </div>                   
+                    
+
+                    
                                             <div class="col-6">
-                                                <label>District Name *</label>
-                                                <input type="text" class="form-control  @error('district') is-invalid @enderror" name="district" value="{{ $user->district }}" required>
-                                                @error('district')
+                                                <label>Billing Address *</label>
+                                                <textarea id="billing_address" class="form-control @error('billing_address') is-invalid @enderror" name="billing_address"  >{{ $user->billing_address }}</textarea>
+                                              
+                                                @error('billing_address')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
-                                            </div>
+                                            </div>                    
+                    
                                             <div class="col-6">
-                                                <label>Thana Name *</label>
-                                                <input type="text" class="form-control  @error('thana') is-invalid @enderror" name="thana" value="{{ $user->thana }}" required>
-                                                @error('thana')
+                                                <label>E-mail Address *</label>
+                                                <input type="text" class="form-control  @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" >
+                                                @error('phone')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
-                                            </div>
-                                            <div class="col-6">
-                                                <label>Division *</label>
-                                                <input type="text" class="form-control  @error('division') is-invalid @enderror" name="division" value="{{ $user->division }}" required>
-                                                @error('division')
-                                                <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                            <div class="col-6">
-                                                <label>Address/Holdding No *</label>
-                                                <input type="text" class="form-control  @error('address_holdding') is-invalid @enderror" name="address_holdding" value="{{ $user->address_holdding }}" required>
-                                                @error('address_holdding')
-                                                    <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
+                                            </div>                   
+                    
+
                                         </div>
                                     @endforeach
 

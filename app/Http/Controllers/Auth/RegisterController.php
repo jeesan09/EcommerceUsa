@@ -107,6 +107,7 @@ class RegisterController extends Controller
         $user->company_name = $request->company_name;
         $user->email = $request->email;
         $user->shipping_address = $request->shipping_address;
+        $user->billing_address = $request->billing_address;
         $user->phone = $request->phone;
         $user->password = Hash::make($request->password);
         $user->save();

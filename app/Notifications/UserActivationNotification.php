@@ -49,7 +49,7 @@ class UserActivationNotification extends Notification
             ->line('Your account has been activated by the admin.')
             ->line('You can now access all the features of our platform.')
             ->action('Login to your account', route('login'))
-            ->line('Thank you for using our application!');
+            ->line('Thank you for using our application MPW Wholesale!');
     }
 
     /**

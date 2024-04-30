@@ -21,6 +21,6 @@ class NewUserNotification extends Mailable
 
     public function build()
     {
-        return $this->subject('Activate Your Account')->view('emails.new_user_notification');
+        return $this->subject('New user registered')->view('emails.new_user_notification');
     }
 }

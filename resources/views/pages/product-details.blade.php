@@ -1,5 +1,11 @@
 @extends('layouts.fontend-master')
-@section('product_list')   @foreach ($product_details as $product ){{  $product->product_slug }} @endforeach  @endsection
+@section('product_list')
+@foreach ($product_details as $productOnly)
+{{ $productOnly->product_slug }}
+@endforeach
+@endsection
+<link rel="stylesheet" href="{{asset('frotend') }}/assets/css/details_page.css">
+
 @section('content')
 <main class="main">
     <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
@@ -11,12 +17,11 @@
         </div><!-- End .container -->
     </nav><!-- End .breadcrumb-nav -->
     <style>
-
-        .details-action-wrapper .btn-product{
+        .details-action-wrapper .btn-product {
             padding: 7px 64px;
         }
     </style>
-    @foreach ($product_details as $product )
+    @foreach ($product_details as $products)
     <div class="page-content">
         <div class="container">
             <div class="product-details-top product_data">
@@ -25,260 +30,214 @@
                         <div class="product-gallery product-gallery-vertical">
                             <div class="row">
                                 <figure class="product-main-image">
-                                    <img id="product-zoom" src="{{asset( $product->product_img_one) }}" data-zoom-image="{{asset( $product->product_img_one) }}" alt="{{ $product->product_name }}">
-
+                                    @foreach ($products->product_varient as $product)
+                                    <img id="product-zoom" src="{{ asset($product->image) }}" data-zoom-image="{{ asset($product->image) }}" alt="{{ $product->product_name }}">
                                     <a href="#" id="btn-product-gallery" class="btn-product-gallery">
                                         <i class="icon-arrows"></i>
                                     </a>
-                                </figure><!-- End .product-main-image -->
+                                    @break
+                                    @endforeach
+                                </figure>
 
                                 <div id="product-zoom-gallery" class="product-image-gallery">
-                                  
-                                    <a class="product-gallery-item" href="#" data-image="{{asset( $product->product_img_two) }}" data-zoom-image="{{asset( $product->product_img_two) }}">
-                                        <img src="{{asset( $product->product_img_two) }}" alt=" ">
+                                    @foreach ($products->product_varient as $product)
+                                    <a class="product-gallery-item" href="#" data-image="{{ asset($product->image) }}" data-zoom-image="{{ asset($product->image) }}">
+                                        <img src="{{ asset($product->image) }}" alt=" ">
                                     </a>
-
-                                    <a class="product-gallery-item" href="#" data-image="{{asset( $product->product_img_three) }}" data-zoom-image="{{asset( $product->product_img_three) }}">
-                                        <img src="{{asset( $product->product_img_three) }}" alt="  ">
-                                    </a>
-                                    <a class="product-gallery-item" href="#" data-image="{{asset( $product->product_img_four) }}" data-zoom-image="{{asset( $product->product_img_four) }}">
-                                        <img src="{{asset( $product->product_img_four) }}" alt="  ">
-                                    </a>
-                                    <a class="product-gallery-item" href="#" data-image="{{asset( $product->product_img_five) }}" data-zoom-image="{{asset( $product->product_img_five) }}">
-                                        <img src="{{asset( $product->product_img_five) }}" alt=" ">
-                                    </a>
-                                    <a class="product-gallery-item " href="#" data-image="{{asset( $product->product_img_six) }}" data-zoom-image="{{asset( $product->product_img_six) }}">
-                                        <img src="{{asset( $product->product_img_six) }}" alt="">
-                                    </a>
-                                </div><!-- End .product-image-gallery -->
-                            </div><!-- End .row -->
-                        </div><!-- End .product-gallery -->
-                    </div><!-- End .col-md-6 -->
-
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-md-6">
-                        <form action="{{ route('buynow.product') }}" method="post">
-                            @csrf
-                        <div class="product-details">
-                            <h1 class="product-title">{{ $product->product_name }}</h1><!-- End .product-title -->
-                            <input type="hidden" name="product_price" id="product_price" value="{{ $product->product_price }}">
-                            <input type="hidden" name="product_id" id="product_id" value="{{ $product->id }}">
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
-                                </div><!-- End .ratings -->
-                                <a class="ratings-text" href="#product-review-link" id="review-link">( 200 Reviews )</a>
-                            </div><!-- End .rating-container -->
-
-                            <div class="product-price">
-                                <span>&#2547;</span> {{ number_format($product->product_price,2) }}
-                            </div><!-- End .product-price -->
-
-                            <div class="product-content">
-                                {!!substr($product->sort_description ,0, 200) !!}
-                                {{-- <p>{{ substr(strip_tags($product->sort_description),0, 200)}}</p> --}}
-                            </div><!-- End .product-content -->
-
-                            <div class="details-filter-row details-row-size">
-                                <label>Color:</label>
-                               @php
-                                  $colors = json_decode($product->product_color);
-                                  $sizes = json_decode($product->product_size);
-                               @endphp
-                                <div class="product-nav product-nav-thumbs">
-                                    <select name="product_color" id="product_color" required class="form-control">
-                                        <option value="" selected="selected">Select a Color</option>
-                                     @foreach ($colors as $color )
-                                       <option value="{{ $color}}"> {{ $color}}</option>
-                                     @endforeach
-                                    </select>
-                                </div>
-                                <div class="error_msg text-danger ml-5"> </div>
-                            </div><!-- End .details-filter-row -->
-
-                            <div class="details-filter-row details-row-size">
-                                <label for="size">Size:</label>
-                                <div class="select-custom">
-                                    <select name="product_size" id="product_size" required class="form-control" required>
-                                        <option value="" selected="selected">Select a size</option>
-                                        @foreach ($sizes as $size )
-                                        <option value="{{ $size}}"> {{ $size}}</option>
-                                      @endforeach
-                                    </select>
-                                </div>
-                                <div class="error_msg2 text-danger "> </div>
-                            </div><!-- End .details-filter-row -->
-
-                            <div class="details-filter-row details-row-size">
-                                <label for="qty">Qty:</label>
-                                <div class="product-details-quantity">
-                                    <input type="number" name="qty" id="qty" class="form-control" value="1" min="1" max="10"
-                                        step="1" data-decimals="0" required>
-                                </div>
-                                <div class="error_msg3 text-danger ml-5"> </div>
-                            </div><!-- End .details-filter-row -->
-
-                            <div class="product-details-action">
-                                <button class="btn-product btn-cart add_to_cart" ><span>Add To Cart</span></button>
-                                <input type="hidden" id="product_id"  value="{{ $product->id }}">
-                                {{-- <a href="#" class="btn-product btn-cart"><span>BUY NOW</span></a> --}}
-
-                                <div class="details-action-wrapper">
-                                    <input type="hidden" class="product_input_id"  value="{{ $product->id }}">
-                                    <div class="details-action-wrapper">
-                                        <button href="" class="btn btn-success btn-product btn-cart text-white " title="Buynow"><span> Buy Now</span></button>
-                                    </div><!-- End .details-action-wrapper -->
-                              
-                                </div><!-- End .details-action-wrapper -->
-                            </div><!-- End .product-details-action -->
-                        </div><!-- End .product-details -->
-                        </form>
-                    </div><!-- End .col-md-6 -->
-                </div><!-- End .row -->
-            </div><!-- End .product-details-top -->
-
-            <div class="product-details-tab">
-                <ul class="nav nav-pills justify-content-center" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true">Sort Description</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab" aria-controls="product-info-tab" aria-selected="false">Long Description</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="product-shipping-link" data-toggle="tab" href="#product-shipping-tab" role="tab" aria-controls="product-shipping-tab" aria-selected="false">Shipping & Returns</a>
-                    </li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel" aria-labelledby="product-desc-link">
-                        <div class="product-desc-content">
-                            <h3>Product Information</h3>
-                            <p> {!!$product->sort_description  !!} </p>
-                            <h3>Size</h3>
-                            @foreach ($sizes as $size )
-                            <li> {{ $size}}</li>
-                          @endforeach
-                        </div><!-- End .product-desc-content -->
-                    </div><!-- .End .tab-pane -->
-                    <div class="tab-pane fade" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link">
-                        <div class="product-desc-content">
-                            <h3>Long Description</h3>
-                            <p>{{strip_tags($product->long_description) }} </p>
-                            <h3>Size</h3>
-                            @foreach ($sizes as $size )
-                            <li> {{ $size}}</li>
-                          @endforeach
-                        </div><!-- End .product-desc-content -->
-                    </div><!-- .End .tab-pane -->
-                    <div class="tab-pane fade" id="product-shipping-tab" role="tabpanel" aria-labelledby="product-shipping-link">
-                        <div class="product-desc-content">
-                            <h3>Delivery & returns</h3>
-                            <p>We deliver to over 100 countries around the world. For full details of the delivery options we offer, please view our <a href="#">Delivery information</a><br>
-                            We hope you’ll love every purchase, but if you ever need to return an item you can do so within a month of receipt. For full details of how to make a return, please view our <a href="#">Returns information</a></p>
-                        </div><!-- End .product-desc-content -->
-                    </div><!-- .End .tab-pane -->
-                </div><!-- End .tab-content -->
-            </div><!-- End .product-details-tab -->
-            @endforeach
-
-     
-            <h2 class="title text-center mb-4">You May Also Like </h2><!-- End .title text-center -->
-
-            <div class="row mt-5">
-                @foreach ($cat_product as $cat_prouct )
-                <div class="col-6 col-md-4 col-lg-3">
-                    <div class="product product-11 mt-v3 text-center product_data">
-                        <figure class="product-media">
-                           
-                            <a href="{{ route('product.details',$cat_prouct->id) }}">
-                                <img src="{{asset($cat_prouct->product_img_one) }}" alt="{{ $cat_prouct->product_name }}" class="product-image">
-                                <img src="{{asset($cat_prouct->product_img_two) }}" alt="" class="product-image-hover">
-                            </a>
-                            <div class="product-action-vertical">
-                                <a href="{{ url('add/wishlist/'.$cat_prouct->id) }}" class="btn-product-icon btn-wishlist "><span>add to wishlist</span></a>
-                            </div>
-                        </figure>
-    
-                        <div class="product-body">
-                            <h3 class="product-title"><a href="{{  route('product.details',$cat_prouct->id) }}">{{ $cat_prouct->product_name }} </a></h3><!-- End .product-title -->
-                            <div class="product-price">
-                                <span>&#2547; </span>&nbsp;   {{ number_format($cat_prouct->product_price,2) }}
-                            </div><!-- End .product-price -->
-                        </div><!-- End .product-body -->
-                        <div class="product-action">
-                            <button class="btn-product btn-cart cart_btn_click" href="#product_details" data-toggle="modal" ><span>BUY NOW</span></button>
-                            <input type="hidden" class="product_input_id"  value="{{ $cat_prouct->id }}">
-                        </div><!-- End .product-action -->
-                    </div><!-- End .product -->
-                </div>
-                @endforeach
-            </div>
-
-            <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow d-none" data-toggle="owl" 
-                data-owl-options='{
-                    "nav": false, 
-                    "dots": true,
-                    "margin": 20,
-                    "loop": false,
-                    "responsive": {
-                        "0": {
-                            "items":1
-                        },
-                        "480": {
-                            "items":2
-                        },
-                        "768": {
-                            "items":3
-                        },
-                        "992": {
-                            "items":4
-                        },
-                        "1200": {
-                            "items":4,
-                            "nav": true,
-                            "dots": false
-                        }
-                    }
-                }'>
-                @foreach ($cat_product as $cat_prouct )
-                <div class="product product-7 text-center">
-                    <figure class="product-media">
-                        <span class="product-label label-new">New</span>
-                        <a href="{{  route('product.details',$cat_prouct->id) }}">
-                            <img src="{{ asset($cat_prouct->product_img_one)}}" alt="{{ $cat_prouct->product_name }}" class="product-image">
-                        </a>
-                        <div class="product-action-vertical">
-                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
-                            <a href="" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
-                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
-                        </div>
-
-                        <div class="product-action">
-                            
-                            <a href="{{  route('product.details',$cat_prouct->id) }}" class="btn-product btn-cart"><span>BUY NOW</span></a>
-                        </div>
-                    </figure>
-                    <div class="product-body">
-                        <h3 class="product-title"><a href="{{  route('product.details',$cat_prouct->id) }}">{{ $cat_prouct->product_name }}</a></h3><!-- End .product-title -->
-                        <div class="product-price">
-                            <span>&#2547;</span>  {{ number_format($product->product_price,2) }}
-                        </div>
-                        <div class="ratings-container">
-                            <div class="ratings">
-                                <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
-                            </div>
-                            <span class="ratings-text">( 2 Reviews )</span>
+                    <form action="{{ route('buynow.product') }}" method="post">
+    @csrf
+    <style>
+        .initial_d_none {
+            display: none;
+        }
+    </style>
+    <div class="product-details">
+        <h1 class="product-title">{{ $productOnly->product_name }}</h1>
+        @foreach ($products->product_varient as $product)
+        <div class="product-price initial_d_none product_id_{{ $product->id }}">
+            <span>&#2547; </span> &nbsp; {{ number_format($product->price, 2) }}
+        </div>
+        @endforeach
+        <div class="product-content">
+            <label for="condition">Condition:</label>
+            <div class="section over-hide z-bigger">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 p-0">
+                            @php
+                            $first_value = true;
+                            @endphp
+                            @foreach ($products->product_varient as $product)
+                            <input class="checkbox-tools product_id_{{ $product->id }}" type="radio" name="condition" value="{{$product->id}}" id="condition-tool-{{$product->id}}" @if ($first_value) checked @endif>
+                            @php
+                            $first_value = false;
+                            @endphp
+                            <label class="for-checkbox-tools" for="condition-tool-{{$product->id}}">
+                                {{ $product->condition}}
+                            </label>
+                            @endforeach
                         </div>
                     </div>
                 </div>
-                @endforeach
-
             </div>
-          
+
+            <div class="details-filter-row mb-0 details-row-size">
+                <div class="product-nav-thumbs">
+                    <label for="product_color">Color:</label>
+                    <select name="product_color" id="product_color" required class="form-control product_id_{{ $product->id }}">
+                        @foreach ($product_details->flatMap->product_varient->flatMap->colors as $colorNew)
+                        <option value="{{ $colorNew->id }}">
+                            {{ $colorNew->color_name }}
+                        </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="error_msg text-danger ml-5"> </div>
+            </div>
+
+            <label class="mb-0" for="size">Storage:</label>
+            <div class="section over-hide z-bigger">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 p-0">
+                            @php
+                            $first_value = true;
+                            @endphp
+                            @foreach ($products->product_varient as $product)
+                            <input class="checkbox-tools2" type="radio" name="storage" value="{{$product->id}}" id="storage-tool-{{$product->id}}" @if ($first_value) checked @endif>
+                            <label class="for-checkbox-tools" for="storage-tool-{{$product->id}}">{{ $product->storage }}</label>
+                            @php
+                            $first_value = false;
+                            @endphp
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-details-action">
+                <div class="qty-container">
+                    <button class="qty-btn-minus btn-light" type="button"><i class="icon-minus"></i></button>
+                    <input type="text" name="qty" value="0" class="input-qty" />
+                    <button class="qty-btn-plus btn-light" type="button"><i class="icon-plus"></i></button>
+                </div>
+                <div class="details-action-wrapper">
+                    <button class="btn-product btn-cart add_to_cart"><span>Add To Cart</span></button>
+                    <input type="hidden" id="product_id" value="{{ $product->id }}">
+                </div>
+            </div>
         </div>
-    </div><!-- End .page-content -->
-  
-</main><!-- End .main -->
-{{-- <script src="{{asset('frotend') }}/assets/js/jquery.min.js"></script>
-<script src="{{asset('frotend') }}/assets/js/jquery.elevateZoom.min.js"></script>
-<script src="{{asset('frotend') }}/assets/js/jquery.waypoints.min.js"></script> --}}
+    </div>
+</form>
+
+
+                        <div class="product-details-tab">
+                            <h6 class="p-0 m-0">Product Detail</h6>
+                            <hr class="m-0">
+                            <div class="product-detail-content" style="height: 554px;">
+                                <div class="product-detail-content-inner expanded" style="max-height: none; overflow: hidden;">
+
+                                    <ul>
+                                        <li>Originally released September 2019</li>
+                                        <li>Unlocked, Nano-SIM and/or Electronic SIM card, Model A2111</li>
+                                        <li>6.1-inch Liquid Retina HD display</li>
+                                        <li>A13 Bionic chip 6-core CPU with 2 performance and 4 efficiency cores</li>
+                                        <li>Video playback: Up to 17 hours</li>
+                                        <li>
+                                            <span data-mce-fragment="1">4G LTE</span>, Gigabit LTE and 802.11ax Wi‑Fi with 2x2 MIMO
+                                        </li>
+                                        <li>Bluetooth 5.0 wireless technology</li>
+                                        <li>NFC with reader mode</li>
+                                        <li>Dual 12MP Wide and Ultra Wide cameras</li>
+                                        <li>Digital zoom up to 5x</li>
+                                        <li>4K video recording, 1080p HD video recording</li>
+                                        <li>Face ID</li>
+                                        <li>Siri</li>
+                                        <li>Apple Pay</li>
+                                        <li>6.84 ounces and 0.33 inch</li>
+                                        <li>For USA, Canada, Puerto Rico, U.S. Virgin Islands</li>
+                                    </ul>
+
+                                </div>
+
+                                <div class="toggle-read-more">Read Less</div>
+
+                            </div>
+                        </div><!-- End .product-details-tab -->
+
+
+                    </div><!-- End .col-md-6 -->
+                </div><!-- End .row -->
+            </div><!-- End .product-details-top -->
+            @endforeach
+        </div>
+    </div>
+
+</main>
+<script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+<script>
+    var buttonPlus = $(".qty-btn-plus");
+    var buttonMinus = $(".qty-btn-minus");
+
+    var incrementPlus = buttonPlus.click(function() {
+        var $n = $(this)
+            .parent(".qty-container")
+            .find(".input-qty");
+        $n.val(Number($n.val()) + 1);
+    });
+
+    var incrementMinus = buttonMinus.click(function() {
+        var $n = $(this)
+            .parent(".qty-container")
+            .find(".input-qty");
+        var amount = Number($n.val());
+        if (amount > 0) {
+            $n.val(amount - 1);
+        }
+    });
+
+    $(document).ready(function () {
+        // Initially display the price of the first selected condition
+        var selectedProductId = $('input[type=radio][name=condition]:checked').val();
+        var priceElement = $('.product-price.product_id_' + selectedProductId);
+        if (priceElement.length > 0) {
+            $('.product-price').hide(); // Hide all product prices
+            priceElement.show(); // Show the price of the initially selected condition
+            $('#product_price').val(priceElement.text().trim()); // Update the hidden input field
+        }
+
+        // Handle change event of condition radio buttons
+        $('input[type=radio][name=condition]').change(function () {
+            var selectedProductId = $(this).val();
+            var priceElement = $('.product-price.product_id_' + selectedProductId);
+            if (priceElement.length > 0) {
+                $('.product-price').hide(); // Hide all product prices
+                priceElement.show(); // Show the price of the selected condition
+                $('#product_price').val(priceElement.text().trim()); // Update the hidden input field
+            }
+        });
+
+        // Handle change event of color select
+        $('#product_color').change(function () {
+            var selectedOption = $(this).find(':selected');
+            var classes = selectedOption.attr('class');
+            if (classes) {
+                var productId = classes.split('product_id_')[1];
+                var priceElement = $('.product-price.product_id_' + productId);
+                if (priceElement.length > 0) {
+                    $('.product-price').hide(); // Hide all product prices
+                    priceElement.show(); // Show the price of the selected condition
+                    $('#product_price').val(priceElement.text().trim()); // Update the hidden input field
+                }
+            }
+        });
+    });
+$('.product-price').removeClass('.initial_d_none');
+</script>
 @endsection

@@ -144,25 +144,26 @@ $db_pass = Auth::user()->password;
 
 public function user_update(Request $request)
 {
+
+   //return $request;
     $request->validate([
       'name'=>'required',
-      'last_name'=>'required',
-      'phone'=>'required|unique:users,phone',
+      'reseller_ID'=>'required',
+      'phone'=>'required',
       'email'=>'required',
-      'district'=>'required',
-      'thana'=>'required',
-      'division'=>'required',
-      'address_holdding'=>'required',
+      'company_name'=>'required',
+      'shipping_address'=>'required',
+      'billing_address'=>'required',
     ]);
 
    $user = User::where('id',$request->user_id)->update([
       'name'=>$request->name,
-      'last_name'=>$request->last_name,
+      'reseller_ID'=>$request->reseller_ID,
       'phone'=>$request->phone,
       'email'=>$request->email,
-      'district'=>$request->district,
-      'thana'=>$request->thana,
-      'division'=>$request->division,
+      'company_name'=>$request->company_name,
+      'shipping_address'=>$request->shipping_address,
+      'billing_address'=>$request->billing_address,
       'address_holdding'=>$request->address_holdding,
     ]);
 
