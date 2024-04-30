@@ -100,7 +100,7 @@
                                             <select name="color[]" class="form-control">
                                                 <option value="" selected hidden>Select color</option>
                                                 @foreach ($colors as $color)
-                                                    <option value="{{ $color->id }}">{{ $color->color }}</option>
+                                                    <option value="{{ $color->id }}">{{ $color->color_name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -176,7 +176,7 @@
                                     <select name="color[]" class="form-control">
                                         <option value="" selected hidden>Select color</option>
                                         @foreach ($colors as $color)
-                                                    <option value="{{ $color->id }}">{{ $color->color }}</option>
+                                                    <option value="{{ $color->id }}">{{ $color->color_name }}</option>
                                           @endforeach
                                     </select>
                                 </div>
