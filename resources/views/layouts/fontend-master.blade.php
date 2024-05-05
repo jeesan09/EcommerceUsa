@@ -39,7 +39,7 @@
     
 </head>
 
-<body>
+<body id="overlay_body">
     <div class="page-wrapper">
         <header class="header">
             <div class="header-top" >
@@ -150,12 +150,12 @@
                         @endphp
                         <div class="dropdown cart-dropdown   @if($results->count() >=1)show @else @endif" id="cart_realaod">
 
-                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                            <a href="#" onclick="openNav()" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
                                 <i class="icon-shopping-cart"></i>
                                 <span class="cart-count"> {{  $qty }}</span>
                             </a>
 
-                            <div class="dropdown-menu dropdown-menu-right">
+                            <div class="dropdown-menu dropdown-menu-right d-none">
                                 <div class="dropdown-cart-products">
                                     @if($results->count() >=1)
                                     @foreach ( $results  as $product_cart )
@@ -198,10 +198,13 @@
                 </div><!-- End .container -->
             </div><!-- End .header-middle -->
         </header><!-- End .header -->
-
+      
     @yield('content')
+    <div id="overlay" onclick="closeNav()"></div>
 
 
+
+      
         <footer class="footer footer-dark">
         	<div class="footer-middle">
 	            <div class="container">
@@ -389,5 +392,42 @@
 
 
 </body>
+
+
     @include('layouts.ajax.ajax')
+    @include('layouts.sidebar-right.index')
+<script>
+     function openNav() {
+        document.getElementById("mySidenav").style.width = "410px";
+        document.getElementById("overlay").style.display = "block";
+        document.body.style.overflow = "hidden"; // Disable body scrollbar
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("overlay").style.display = "none";
+        document.body.style.overflow = "auto"; // Enable body scrollbar
+    }
+
+	$(document).ready(function() {
+		$('.increment').click(function() {
+			var inputField = $(this).closest('.d-flex').find('.counter');
+			var value = parseInt(inputField.val());
+			value = isNaN(value) ? 1 : value;
+			value++;
+			inputField.val(value);
+		});
+
+		$('.decrement').click(function() {
+			var inputField = $(this).closest('.d-flex').find('.counter');
+			var value = parseInt(inputField.val());
+			value = isNaN(value) ? 1 : value;
+			if (value > 1) {
+				value--;
+				inputField.val(value);
+			}
+		});
+	});
+</script>
+
 </html>
