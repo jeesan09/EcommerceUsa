@@ -68,9 +68,11 @@
 
                             <div class="product-details">
                                 <h1 class="product-title">{{ $productOnly->product_name }}</h1>
+                                <input type="hidden" name="product_id" value="{{  $productOnly->id }}">
                                 @foreach ($products->product_varient as $product)
                                 <div class="product-price initial_d_none product_id_{{ $product->id }}">
                                     <span>&#2547; </span> &nbsp; {{ number_format($product->price, 2) }}
+                                    <input type="text" class="price" name="product_price">
                                 </div>
                                 @endforeach
                                 <div class="product-content">
@@ -230,6 +232,7 @@
         if (priceElement.length > 0) {
             $('.product-price').hide();
             priceElement.show();
+            $('.price').val(priceElement.text().trim())
             $('#product_price').val(priceElement.text().trim());
         }
 
@@ -255,6 +258,7 @@
             if (priceElement.length > 0) {
                 $('.product-price').hide();
                 priceElement.show();
+                $('.price').val(priceElement.text().trim());
                 $('#product_price').val(priceElement.text().trim());
             }
             if (productQuantity > 0) {
@@ -289,13 +293,21 @@
         e.preventDefault(); 
 
         var formData = $('.cart_form form').serialize(); 
-
+       
         $.ajax({
             type: 'POST',
             url: $('.cart_form form').attr('action'),
             data: formData,
             success: function(response) {
-                console.log(response);
+                if(response.success == "Product added to cart"){
+                    openNav();
+                    alertify.set("notifier", "position", "bottom-left");
+                    alertify.success("Product succesfuly add cart");
+                }else{
+                    alertify.set("notifier", "position", "top-right");
+                    alertify.warning("Something wrong");
+
+                }
             },
             error: function(xhr, status, error) {
                 console.error(xhr.responseText);

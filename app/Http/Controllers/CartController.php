@@ -48,6 +48,16 @@ class CartController extends Controller
       return view('pages.cartpage', compact('carts', 'sub_total'));
    }
 
+   public function cartListRender()
+   {
+      $sub_total = Cart::all()->where('user_ip',  session_id())->sum(function ($t) {
+         return  $t->price * $t->qty;
+      });
+ 
+      $carts = Cart::where('user_ip',  session_id())->latest()->get();
+      return view('layouts.sidebar-right.cart-list', compact('carts', 'sub_total'));
+   }
+
    //bad dite hobe
 
    public function cart_remove($id)
@@ -108,46 +118,42 @@ class CartController extends Controller
 
    public function buy_now_add(Request $request)
    {
-      dd($request->all());
-      $request->validate([
-         'product_size' => 'required',
-         'product_color' => 'required',
-         'qty' => 'required',
-      ]);
-
-      $product_id = $request->product_id;
-      $qty = $request->qty;
-      $product_price = $request->product_price;
-      $product_size = $request->product_size;
-      $product_color = $request->product_color;
-
-      $check = Cart::where('product_id', $product_id)->where('user_ip',  session_id())->first();
-      if ($check) {
-         Cart::insert([
-            'product_id' => $product_id,
-            'price' => $product_price,
-            'qty' => $qty,
-            'product_size' => $product_size,
-            'product_color' => $product_color,
-            'user_ip' =>  session_id()
-         ]);
-         return redirect('check/out/buy')->with('success', 'product add to Cart');
-         // Cart::where('product_id', $product_id)->increment('qty');
-         // return redirect('check/out/buy')->with('success', 'product allready Cart');
-      } else {
-         Cart::insert([
-            'product_id' => $product_id,
-            'price' => $product_price,
-            'qty' => $qty,
-            'product_size' => $product_size,
-            'product_color' => $product_color,
-            'user_ip' =>  session_id()
-         ]);
-         return redirect('check/out/buy')->with('success', 'product add to Cart');
-      }
-
+    
+       $request->validate([
+           'storage' => 'required',
+           'qty' => 'required',
+       ]);
+       $price = explode('৳ ', $request->product_price);
+       $product_price = preg_replace('/[^0-9.]/', '', $price[1]);
+       $product_price = floatval($product_price);
+       $values = explode(',', $request->storage); 
+       $varient_id = $values[0]; 
+       $product_id = $request->product_id;
+       $qty = $request->qty;
+       $check = Cart::where('product_id', $product_id)->where('product_varient_id',$varient_id )->where('user_ip',  session_id())->first();
+     
+       if ($check) {
+       
+           $check->qty += $qty;
+           $check->save();
+           return response()->json([
+               'success' => 'Product added to cart'
+           ]);
+       } else {
+           Cart::create([
+               'product_id' => $product_id,
+               'qty' => $qty,
+               'price' => $product_price,
+               'product_varient_id' => $varient_id,
+               'user_ip' => session_id()
+           ]);
+   
+           return response()->json([
+               'success' => 'Product added to cart'
+           ]);
+       }
    }
-
+   
 
 
 
