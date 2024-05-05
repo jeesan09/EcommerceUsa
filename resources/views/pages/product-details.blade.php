@@ -5,7 +5,21 @@
 @endforeach
 @endsection
 <link rel="stylesheet" href="{{asset('frotend') }}/assets/css/details_page.css">
+<style>
+    .details-action-wrapper .btn-product {
+        padding: 7px 64px !important;
+    }
 
+    .initial_d_none {
+        display: none;
+    }
+
+    .product-details-action .CartButtonHide:hover {
+        color: #fff;
+        border-color: #c9c9c9;
+        background-color: #bdbdbd !important;
+    }
+</style>
 @section('content')
 <main class="main">
     <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
@@ -16,11 +30,7 @@
             </ol>
         </div><!-- End .container -->
     </nav><!-- End .breadcrumb-nav -->
-    <style>
-        .details-action-wrapper .btn-product {
-            padding: 7px 64px;
-        }
-    </style>
+
     @foreach ($product_details as $products)
     <div class="page-content">
         <div class="container">
@@ -35,6 +45,9 @@
                                     <a href="#" id="btn-product-gallery" class="btn-product-gallery">
                                         <i class="icon-arrows"></i>
                                     </a>
+                                    @php
+                                    $product_quantity = $product->quantity;
+                                    @endphp
                                     @break
                                     @endforeach
                                 </figure>
@@ -49,93 +62,103 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                    <form action="{{ route('buynow.product') }}" method="post">
-    @csrf
-    <style>
-        .initial_d_none {
-            display: none;
-        }
-    </style>
-    <div class="product-details">
-        <h1 class="product-title">{{ $productOnly->product_name }}</h1>
-        @foreach ($products->product_varient as $product)
-        <div class="product-price initial_d_none product_id_{{ $product->id }}">
-            <span>&#2547; </span> &nbsp; {{ number_format($product->price, 2) }}
-        </div>
-        @endforeach
-        <div class="product-content">
-            <label for="condition">Condition:</label>
-            <div class="section over-hide z-bigger">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 p-0">
-                            @php
-                            $first_value = true;
-                            @endphp
-                            @foreach ($products->product_varient as $product)
-                            <input class="checkbox-tools product_id_{{ $product->id }}" type="radio" name="condition" value="{{$product->id}}" id="condition-tool-{{$product->id}}" @if ($first_value) checked @endif>
-                            @php
-                            $first_value = false;
-                            @endphp
-                            <label class="for-checkbox-tools" for="condition-tool-{{$product->id}}">
-                                {{ $product->condition}}
-                            </label>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    <div class="col-md-6 cart_form">
+                        <form action="{{ route('buynow.product') }}" method="post">
+                            @csrf
 
-            <div class="details-filter-row mb-0 details-row-size">
-                <div class="product-nav-thumbs">
-                    <label for="product_color">Color:</label>
-                    <select name="product_color" id="product_color" required class="form-control product_id_{{ $product->id }}">
-                        @foreach ($product_details->flatMap->product_varient->flatMap->colors as $colorNew)
-                        <option value="{{ $colorNew->id }}">
-                            {{ $colorNew->color_name }}
-                        </option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="error_msg text-danger ml-5"> </div>
-            </div>
+                            <div class="product-details">
+                                <h1 class="product-title">{{ $productOnly->product_name }}</h1>
+                                @foreach ($products->product_varient as $product)
+                                <div class="product-price initial_d_none product_id_{{ $product->id }}">
+                                    <span>&#2547; </span> &nbsp; {{ number_format($product->price, 2) }}
+                                </div>
+                                @endforeach
+                                <div class="product-content">
+                                    <label for="condition">Condition:</label>
+                                    <div class="section over-hide z-bigger">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-12 p-0">
+                                                    @php
+                                                    $first_value = true;
+                                                    @endphp
+                                                    @foreach ($products->product_varient as $product)
+                                                    <input class="checkbox-tools product_id_{{ $product->id }}" type="radio" name="condition" value="{{$product->id}}" id="condition-tool-{{$product->id}}" @if ($first_value) checked @endif>
+                                                    @php
+                                                    $first_value = false;
+                                                    @endphp
+                                                    <label class="for-checkbox-tools" for="condition-tool-{{$product->id}}">
+                                                        {{ $product->condition}}
+                                                    </label>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-            <label class="mb-0" for="size">Storage:</label>
-            <div class="section over-hide z-bigger">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 p-0">
-                            @php
-                            $first_value = true;
-                            @endphp
-                            @foreach ($products->product_varient as $product)
-                            <input class="checkbox-tools2" type="radio" name="storage" value="{{$product->id}}" id="storage-tool-{{$product->id}}" @if ($first_value) checked @endif>
-                            <label class="for-checkbox-tools" for="storage-tool-{{$product->id}}">{{ $product->storage }}</label>
-                            @php
-                            $first_value = false;
-                            @endphp
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                    <div class="details-filter-row mb-0 details-row-size">
+                                        <div class="product-nav-thumbs">
+                                            <label for="product_color">Color:</label>
+                                            <select name="product_color" name="color" required class="form-control">
+                                                @foreach ($product_details->flatMap->product_varient->flatMap->colors as $colorNew)
+                                                <option value="{{ $colorNew->id }}">
+                                                    {{ $colorNew->color_name }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="error_msg text-danger ml-5"> </div>
+                                    </div>
 
-            <div class="product-details-action">
-                <div class="qty-container">
-                    <button class="qty-btn-minus btn-light" type="button"><i class="icon-minus"></i></button>
-                    <input type="text" name="qty" value="0" class="input-qty" />
-                    <button class="qty-btn-plus btn-light" type="button"><i class="icon-plus"></i></button>
-                </div>
-                <div class="details-action-wrapper">
-                    <button class="btn-product btn-cart add_to_cart"><span>Add To Cart</span></button>
-                    <input type="hidden" id="product_id" value="{{ $product->id }}">
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
+                                    <label class="mb-0" for="size">Storage:</label>
+                                    <div class="section over-hide z-bigger">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-12 p-0">
+                                                    @php
+                                                    $first_value = true;
+                                                    @endphp
+                                                    @foreach ($products->product_varient as $product)
+                                                    <input class="checkbox-tools2 product_id_{{ $product->id }}" type="radio" name="storage" value="{{$product->id}},{{$product->quantity}}" id="storage-tool-{{$product->id}}" @if ($first_value) checked @endif>
+                                                    <label class="for-checkbox-tools" for="storage-tool-{{$product->id}}">{{ $product->storage }}</label>
+                                                    @php
+                                                    $first_value = false;
+                                                    @endphp
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
+                                    <div class="product-details-action">
+                                        <div class="qty-container">
+                                            <button class="qty-btn-minus btn-light" type="button"><i class="icon-minus"></i></button>
+                                            <input type="text" name="qty" value="1" class="input-qty" />
+                                            <button class="qty-btn-plus btn-light" type="button"><i class="icon-plus"></i></button>
+                                        </div>
+
+                                        <div class="initial_hide initial_d_none">
+                                            <div class="details-action-wrapper addToCartButton">
+                                                <button class="btn-product btn-cart add_to_cart_product"><span>Add To Cart</span></button>
+                                                <input type="hidden" id="product_id" value="{{ $product->id }}">
+                                            </div>
+                                            <div class="details-action-wrapper addToCartButtonHide">
+                                                <button type="button" class="btn-product CartButtonHide btn-cart disabled" style="  background: #999797c7;  color: white;border-color: #999797c7;"><span>Out Of Stock </span></button>
+                                            </div>
+                                        </div>
+
+                                        <div class="w-100">
+                                            <p class="left_stock">
+                                                @if ($product_quantity>0)
+                                                {{ $product_quantity }} left stock
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
 
                         <div class="product-details-tab">
                             <h6 class="p-0 m-0">Product Detail</h6>
@@ -169,12 +192,10 @@
                                 <div class="toggle-read-more">Read Less</div>
 
                             </div>
-                        </div><!-- End .product-details-tab -->
-
-
-                    </div><!-- End .col-md-6 -->
-                </div><!-- End .row -->
-            </div><!-- End .product-details-top -->
+                        </div>
+                    </div>
+                </div>
+            </div>
             @endforeach
         </div>
     </div>
@@ -202,42 +223,87 @@
         }
     });
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         // Initially display the price of the first selected condition
         var selectedProductId = $('input[type=radio][name=condition]:checked').val();
         var priceElement = $('.product-price.product_id_' + selectedProductId);
         if (priceElement.length > 0) {
-            $('.product-price').hide(); // Hide all product prices
-            priceElement.show(); // Show the price of the initially selected condition
-            $('#product_price').val(priceElement.text().trim()); // Update the hidden input field
+            $('.product-price').hide();
+            priceElement.show();
+            $('#product_price').val(priceElement.text().trim());
         }
 
         // Handle change event of condition radio buttons
-        $('input[type=radio][name=condition]').change(function () {
+        $('input[type=radio][name=condition]').change(function() {
             var selectedProductId = $(this).val();
+
             var priceElement = $('.product-price.product_id_' + selectedProductId);
             if (priceElement.length > 0) {
-                $('.product-price').hide(); // Hide all product prices
-                priceElement.show(); // Show the price of the selected condition
-                $('#product_price').val(priceElement.text().trim()); // Update the hidden input field
+                $('.product-price').hide();
+                priceElement.show();
+                $('#product_price').val(priceElement.text().trim());
             }
         });
 
-        // Handle change event of color select
-        $('#product_color').change(function () {
-            var selectedOption = $(this).find(':selected');
-            var classes = selectedOption.attr('class');
-            if (classes) {
-                var productId = classes.split('product_id_')[1];
-                var priceElement = $('.product-price.product_id_' + productId);
-                if (priceElement.length > 0) {
-                    $('.product-price').hide(); // Hide all product prices
-                    priceElement.show(); // Show the price of the selected condition
-                    $('#product_price').val(priceElement.text().trim()); // Update the hidden input field
-                }
+        $('input[type=radio][name=storage]').change(function() {
+            var selectedValue = $(this).val();
+            var values = selectedValue.split(',');
+            var productId = values[0];
+            var productQuantity = values[1];
+
+            var priceElement = $('.product-price.product_id_' + productId);
+            if (priceElement.length > 0) {
+                $('.product-price').hide();
+                priceElement.show();
+                $('#product_price').val(priceElement.text().trim());
+            }
+            if (productQuantity > 0) {
+                $('.left_stock').show();
+                $('.addToCartButton').show();
+                $('.addToCartButtonHide').hide();
+                $('.left_stock').text(productQuantity + " left in stock");
+            } else {
+                $('.left_stock').hide();
+                $('.addToCartButton').hide();
+                $('.addToCartButtonHide').show();
+            }
+        });
+
+        var storage = $('input[type=radio][name=storage]').val();
+        var values = storage.split(',');
+        var productQuantityCheck = values[1];
+        if (productQuantityCheck == 0) {
+            $('.addToCartButton').hide();
+            $('.addToCartButtonHide').show();
+        } else {
+            $('.addToCartButton').show();
+            $('.addToCartButtonHide').hide();
+        }
+
+    });
+
+    $('.initial_hide').removeClass('initial_d_none');
+
+    $(document).ready(function() {
+    $('.add_to_cart_product').click(function(e) {
+        e.preventDefault(); 
+
+        var formData = $('.cart_form form').serialize(); 
+
+        $.ajax({
+            type: 'POST',
+            url: $('.cart_form form').attr('action'),
+            data: formData,
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
             }
         });
     });
-$('.product-price').removeClass('.initial_d_none');
+});
+
+
 </script>
 @endsection

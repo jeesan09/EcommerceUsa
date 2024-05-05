@@ -108,6 +108,7 @@ class CartController extends Controller
 
    public function buy_now_add(Request $request)
    {
+      dd($request->all());
       $request->validate([
          'product_size' => 'required',
          'product_color' => 'required',

@@ -217,10 +217,21 @@
                             <div class="product product-11 text-center product_data">
                                 <figure class="product-media">
                                     <a href="{{ route('product.details', $product->id) }}">
-                                        <img src="{{ asset($product->product_img_one) }}"
-                                            alt="{{ $product->product_name }}" class="product-image">
-                                        <img src="{{ asset($product->product_img_two) }}" alt=""
-                                            class="product-image-hover">
+
+                                            @php $firstImageBrand = true; @endphp
+                                                @foreach ($product->product_varient as $product_varient_brand)
+                                                    @if ($firstImageBrand)
+                                                        <img src="{{ asset($product_varient_brand->image) }}"
+                                                            alt="{{ $product->product_name }}" class="product-image">
+                                                        @php
+                                                            $firstImageBrand = false;
+                                                            $price = $product_varient_brand->price;
+                                                        @endphp
+                                                    @else
+                                                        <img src="{{ asset($product_varient_brand->image) }}" alt=""
+                                                            class="product-image-hover">
+                                                    @endif
+                                                @endforeach
                                     </a>
                                 </figure>
                                 <div class="product-body">
@@ -228,7 +239,7 @@
                                             href="{{ route('product.details', $product->id) }}">{{ $product->product_name }}</a>
                                     </h3><!-- End .product-title -->
                                     <div class="product-price">
-                                        <span>&#2547; </span>&nbsp; {{ number_format($product->product_price, 2) }}
+                                    <span>&#2547; </span>&nbsp; {{ number_format($price, 2) }}
                                     </div>
                                 </div>
                                 <div class="product-action">
@@ -281,10 +292,21 @@
                                     <figure class="product-media">
                                         <span class="product-label label-new">NEW</span>
                                         <a href="{{ route('product.details', $products_t->id) }}">
-                                            <img src="{{ asset($products_t->product_img_one) }}"
-                                                alt="{{ $products_t->product_name }}" class="product-image">
-                                            <img src="{{ asset($products_t->product_img_two) }}" alt=""
-                                                class="product-image-hover">
+                                          
+                                        @php $ImageBrand = true; @endphp
+                                                @foreach ($product->product_varient as $product_varient_brand)
+                                                    @if ($ImageBrand)
+                                                        <img src="{{ asset($product_varient_brand->image) }}"
+                                                            alt="{{ $product->product_name }}" class="product-image">
+                                                        @php
+                                                            $ImageBrand = false;
+                                                            $price = $product_varient_brand->price;
+                                                        @endphp
+                                                    @else
+                                                        <img src="{{ asset($product_varient_brand->image) }}" alt=""
+                                                            class="product-image-hover">
+                                                    @endif
+                                                @endforeach
                                         </a>
 
 
@@ -299,7 +321,7 @@
                                                 href="{{ route('product.details', $products_t->id) }}">{{ $products_t->product_name }}</a>
                                         </h3><!-- End .product-title -->
                                         <div class="product-price">
-                                            <span>&#2547;</span> {{ number_format($products_t->product_price, 2) }}
+                                        <span>&#2547; </span>&nbsp; {{ number_format($price, 2) }}
                                         </div><!-- End .product-price -->
                                     </div><!-- End .product-body -->
                                     <div class="product-action">
