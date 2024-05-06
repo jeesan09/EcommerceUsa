@@ -53,30 +53,68 @@ class AllproductController extends Controller
     return view('pages.ajax-brand_product', compact('products'))->render();
   }
 
-  public function price_product_search(Request $request)
+ /*  public function price_product_search(Request $request)
   {
     $products = Product::whereBetween('product_price', [$request->max_range, $request->min_range])->orderBy('id', 'desc')->paginate(30);
     return view('pages.ajax-price_search', compact('products'))->render();
   }
+ */
+public function price_product_search(Request $request)
+{
+    $products = Product::whereHas('variants', function ($query) use ($request) {
+            $query->whereBetween('price', [$request->min_range, $request->max_range]);
+        })
+        ->orderBy('id', 'desc')
+        ->paginate(30);
 
+    return view('pages.ajax-price_search', compact('products'))->render();
+}
+
+
+
+  // public function soft_by_product(Request $request)
+  // {
+  //   $sort = "";
+  //   if($request->sort_by_type=='high_peice'){
+  //     $sort = "DESC";
+  //   }else if($request->sort_by_type=='low_price'){
+  //     $sort = "ASC";
+  //   }
+  //   if($request->sort_by_type=='date'){
+  //     $products =  Product::Orderby('created_at','DESC')->paginate(30);
+  //     return view('pages.ajax-sort_by_search', compact('products'))->render();
+
+  //   }
+  //   $products =  Product::Orderby('product_price',$sort)->paginate(30);
+  //   return view('pages.ajax-sort_by_search', compact('products'))->render();
+
+  // }
   public function soft_by_product(Request $request)
   {
-    $sort = "";
-    if($request->sort_by_type=='high_peice'){
-      $sort = "DESC";
-    }else if($request->sort_by_type=='low_price'){
-      $sort = "ASC";
-    }
-    if($request->sort_by_type=='date'){
-      $products =  Product::Orderby('created_at','DESC')->paginate(30);
+      $sort = "";
+  
+      if ($request->sort_by_type == 'high_peice') {
+          $sort = "desc";
+      } elseif ($request->sort_by_type == 'low_price') {
+          $sort = "asc";
+      }
+  
+      if ($request->sort_by_type == 'date') {
+          $products = Product::orderBy('created_at', 'DESC')->paginate(30);
+          return view('pages.ajax-sort_by_search', compact('products'))->render();
+      }
+  
+      if ($sort === "") {
+          throw new \InvalidArgumentException("Invalid sort direction: " . $request->sort_by_type);
+      }
+  
+      $products = Product::with(['variants' => function ($query) use ($sort) {
+              $query->orderBy('price', $sort);
+          }])   ->paginate(30);
+  
       return view('pages.ajax-sort_by_search', compact('products'))->render();
-
-    }
-    $products =  Product::Orderby('product_price',$sort)->paginate(30);
-    return view('pages.ajax-sort_by_search', compact('products'))->render();
-
-
   }
+
 
   public function product_detail($pro_id)
   {
@@ -99,8 +137,9 @@ class AllproductController extends Controller
  // only for ajax
  $products_se = Product::where('id', 0)->latest()->get();
  // only for ajax end
-  $products = Product::where('product_status', 1)->where('category_name',$id)->orderBy('id', 'desc')->paginate(40);
-//   $sliders = SliderModel::where('product_status',1)->latest()->offset(0)->limit(8)->get();
+ // $products = Product::where('product_status', 1)->where('category_name',$id)->orderBy('id', 'desc')->paginate(40);
+ $products = Product::with('product_varient')->where('product_status',1)->where('category_name',$id)->orderBy('id', 'desc')->paginate(40);
+  $sliders = SliderModel::where('status',1)->latest()->offset(0)->limit(8)->get();
   $categoris = Category::where('status', 1)->latest()->get();
   $brands = Brand::where('status', 1)->latest()->get();
   return view('pages.all-product-by-category', compact('products', 'categoris','brands','products_se','sliders'));
@@ -111,10 +150,9 @@ class AllproductController extends Controller
     $products_se = Product::where('id', 0)->latest()->get();
     // only for ajax end
      $products = Product::where('product_status', 1)->where('brand_name',$id)->orderBy('id', 'desc')->paginate(40);
-    //  $sliders = SliderModel::where('product_status',1)->latest()->offset(0)->limit(8)->get();
      $categoris = Category::where('status', 1)->latest()->get();
      $brands = Brand::where('status', 1)->latest()->get();
-     return view('pages.all-product-by-category', compact('products', 'categoris','brands','products_se','sliders'));
+     return view('pages.all-product-by-category', compact('products', 'categoris','brands','products_se'));
     }
 
 

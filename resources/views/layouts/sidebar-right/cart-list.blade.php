@@ -5,11 +5,12 @@
                   <div class="card">
                         <div class="row  align-items-center">
                               <div class="col-5 image_section ">
-                                    <a href="/products/20w70aa-aba?variant=45957189206262"><img src="https://cdn.shopify.com/s/files/1/0671/0221/2342/files/20W70AA_ABA.jpg?v=1706802513" class="item-image w-100 " alt="HP Pavilion Desktop AMD Ryzen 3, 8GB RAM, 256GB SSD, 1TB, Windows 11 Home"></a>
+                                  <a href="#"><img src="{{ asset($cart->product_varient->image) }}"></a>
                               </div>
                               <div class=" col-7 text-section p-3">
+                            
                                     <span>
-                                          HP Pavilion Desktop AMD Ryzen 3, 8GB RAM, 256GB SSD, 1TB, Windows 11 Home
+                                        {{ $cart->product->product_name }}
                                     </span>
                                     <p class="fs-4" style="font-size: 16px; font-weight:500">
                                           ${{ $cart->price* $cart->qty }}

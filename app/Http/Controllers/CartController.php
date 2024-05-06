@@ -29,7 +29,8 @@ class CartController extends Controller
          return  $t->price * $t->qty;
       });
  
-      $carts = Cart::where('user_ip',  session_id())->latest()->get();
+      $carts = Cart::with('product','product_varient')->where('user_ip',  session_id())->latest()->get();
+      
       return view('layouts.sidebar-right.cart-list', compact('carts', 'sub_total'));
    }
 
