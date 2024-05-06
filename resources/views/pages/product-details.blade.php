@@ -72,7 +72,7 @@
                                 @foreach ($products->product_varient as $product)
                                 <div class="product-price initial_d_none product_id_{{ $product->id }}">
                                     <span>&#2547; </span> &nbsp; {{ number_format($product->price, 2) }}
-                                    <input type="text" class="price" name="product_price">
+                                    <input type="hidden" class="price" name="product_price">
                                 </div>
                                 @endforeach
                                 <div class="product-content">

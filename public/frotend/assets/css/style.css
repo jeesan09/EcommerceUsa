@@ -235,4 +235,28 @@
     text-decoration: underline;
     color: red !important;
 } 
-/*# sourceMappingURL=style.css.map */
+
+.subtotal {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.subtotalValue {
+    font-size: 14px;
+    font-weight: 600;
+    text-align: end;
+    float: right;
+    padding-right: 18px;
+}
+
+.celerCart {
+    font-size: 14px !important;
+    font-weight: 500;
+    float: center;
+}
+
+.celerCart:hover {
+    color: red !important;
+    text-decoration: underline !important;
+}
+

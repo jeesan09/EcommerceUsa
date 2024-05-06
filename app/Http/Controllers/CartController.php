@@ -14,31 +14,6 @@ session_start();
 
 class CartController extends Controller
 {
-   // ei toko bad jabe 
-
-   public function cartadd($id)
-   {
-      $product =  Product::where('id', $id)->get();
-      foreach ($product as $row) {
-         $prod_price = $row->product_price;
-      }
-      $chech = Cart::where('product_id', $id)->where('user_ip',  session_id())->first();
-      if ($chech) {
-         Cart::where('product_id', $id)->increment('qty');
-         return redirect()->back()->with('success', 'Product already In cart and Update');
-      } else {
-         Cart::insert([
-            'product_id' => $id,
-            'price' => $prod_price,
-            'qty' => 1,
-            'user_ip' =>  session_id()
-         ]);
-         return redirect()->back()->with('success', 'Product  In cart');
-      }
-   }
-   // ei toko bad jabe 
-
-
    public function cart_page()
    {
       $sub_total = Cart::all()->where('user_ip',  session_id())->sum(function ($t) {
@@ -58,21 +33,22 @@ class CartController extends Controller
       return view('layouts.sidebar-right.cart-list', compact('carts', 'sub_total'));
    }
 
-   //bad dite hobe
-
-   public function cart_remove($id)
+   public function cart_update_qty(Request $request)
    {
-      Cart::find($id)->delete();
-      return redirect()->back()->with('success_delete', 'Cart item remove');
+     $cart = Cart::find($request->cartId);
+     $cart->qty = $request->qty;
+     $cart->save();
+     return response()->json([
+      'success'=>'Cart item quantity updated'
+     ]);
    }
-
-   //bad dite hobe
-
-
-
-
-
-
+   public function cart_item_removed(Request $request)
+   {
+    Cart::find($request->cartId)->delete();
+     return response()->json([
+      'success'=>'Cart item removed'
+     ]);
+   }
 
 
    //ajux add to cart 

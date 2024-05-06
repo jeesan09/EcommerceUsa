@@ -26,7 +26,6 @@
                               <tr>
                                 <th class="">Sl.</th>
                                 <th class="">Product</th>
-                                <th class="">Price</th>
                                 <th class="">img</th>
                                 {{-- <th class="">Product code</th> --}}
                                 <th class="">Category</th>
@@ -45,8 +44,14 @@
                               <tr>
                                 <td>{{ $count++ }}</td>
                                 <td>{{ Illuminate\Support\Str::limit($product->product_name,10)  }}</td>
-                                <td>{{ $product->product_price }}</td>
-                                <td><img src="{{ asset($product->product_img_one) }}" width="50px;" height="50px;" alt=""></td>
+                            
+                               
+                                <td>
+                                @foreach ($product->product_varient as  $productVerient)
+                                <img src="{{ asset($productVerient->image ) }}" width="50px;" height="50px;" alt="">
+                                 @break
+                                @endforeach
+                              </td>
                                 {{-- <td>{{ $product->product_code }}</td> --}}
                                 <td>{{ $product->category->category_name }}</td>
                                 <td>{{ $product->brand->brand_name }}</td>

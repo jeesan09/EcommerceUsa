@@ -20,9 +20,9 @@ class AllproductController extends Controller
     // only for ajax
     $products_se = Product::where('id', 0)->latest()->get();
     // only for ajax end
-    $products = Product::where('product_status', 1)->orderBy('id', 'desc')->paginate(3);
-
-   // $sliders = SliderModel::where('product_status',1)->latest()->offset(0)->limit(8)->get();
+   /*  $products = Product::where('product_status', 1)->orderBy('id', 'desc')->paginate(3); */
+    $products = Product::with('product_varient')->where('product_status',1)->latest()->paginate(15);
+    $sliders = SliderModel::where('status',1)->latest()->offset(0)->limit(8)->get();
 
     $categoris = Category::where('status', 1)->latest()->get();
     $brands = Brand::where('status', 1)->latest()->get();
