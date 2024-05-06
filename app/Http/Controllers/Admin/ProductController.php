@@ -16,8 +16,11 @@ class ProductController extends Controller
         $this->middleware('auth:admin');
     }
     public function index(){
-        $categories = Category::latest()->get();
-        $brands = Brand::latest()->get();
+      
+        $categories = Category::where('status', 1)->latest()->get();
+
+        $brands = Brand::where('status', 1)->latest()->get();
+
         return view('admin.product.index', compact('categories','brands'));
     }
     public function productAdded(Request $request){
