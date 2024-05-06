@@ -64,8 +64,8 @@
                                                     class="btn-product-icon btn-wishlist "><span>add to wishlist</span></a>
                                             </div>
                                                 <div class="product-action">
-                                                    <a class="btn-product btn-cart cart_btn_click" href="#product_details"
-                                                        data-toggle="modal"><span>BUY NOW</span></a>
+                                                   <!--  <a class="btn-product btn-cart cart_btn_click" href="#product_details"
+                                                        data-toggle="modal"><span>BUY NOW</span></a> -->
                                                     <input type="hidden" class="product_input_id"
                                                         value="{{ $product->id }}">
                                                 </div><!-- End .product-action -->
