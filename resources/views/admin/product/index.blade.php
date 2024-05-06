@@ -6,7 +6,7 @@
     active
 @endsection
 <style>
-    .d-sm-none_custom{
+    .d-sm-none_custom {
         display: none;
         visibility: hidden;
     }
@@ -32,7 +32,7 @@
                         <p class="border"></p>
                         <div class="form-layout">
                             <div class="row mg-b-25">
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
                                     <div class="form-group">
                                         <label class="form-control-label">Product Name: <span
                                                 class="tx-danger">*</span></label>
@@ -44,7 +44,7 @@
 
                                     </div>
                                 </div><!-- col-4 -->
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
                                     <div class="form-group">
                                         <label class="form-control-label">Product Code: <span
                                                 class="tx-danger">*</span></label>
@@ -55,29 +55,7 @@
                                         @enderror
                                     </div>
                                 </div><!-- col-4 -->
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label class="form-control-label">Product Price: <span
-                                                class="tx-danger">*</span></label>
-                                        <input class="form-control" type="number" name="product_price"
-                                            value="{{ old('product_price') }}" placeholder="Enter Price">
-                                        @error('product_price')
-                                            <strong class="text-danger">{{ $message }}</strong>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group mg-b-10-force">
-                                        <label class="form-control-label">Product Quantity: <span
-                                                class="tx-danger">*</span></label>
-                                        <input class="form-control" type="number" name="product_quantity"
-                                            value="{{ old('product_quantity') }}" placeholder="Enter quantity">
-                                        @error('product_quantity')
-                                            <strong class="text-danger">{{ $message }}</strong>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
                                     <div class="form-group mg-b-10-force">
                                         <label class="form-control-label"> Brand Name: <span
                                                 class="tx-danger">*</span></label>
@@ -93,7 +71,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
                                     <div class="form-group mg-b-10-force">
                                         <label class="form-control-label"> Category Name: <span
                                                 class="tx-danger">*</span></label>
@@ -111,30 +89,42 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-12 ">
+                                <div class="col-lg-12">
                                     <div class="row border ml-0 mr-0 pb-3 form-row">
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-2">
                                             <label for="condition">Condition</label>
                                             <input type="text" class="form-control" name="condition[]">
                                         </div>
-                                        <div class="col-sm-3">
-                                            <label for="color">Color</label>
+                                        <div class="col-sm-2">
+                                            <label for="color">Colors</label>
                                             <select name="color[]" class="form-control">
                                                 <option value="" selected hidden>Select color</option>
+                                                @foreach ($colors as $color)
+                                                    <option value="{{ $color->id }}">{{ $color->color_name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-2">
                                             <label for="storage">Storage</label>
                                             <input type="text" class="form-control" name="storage[]">
                                         </div>
-                                        <div class="col-sm-3">
-                                                <label for="image">Image</label>
-                                                <input type="file" class="form-control" name="image[]">
+                                        <div class="col-sm-2">
+                                            <label for="price">Price</label>
+                                            <input type="number"  min="1" class="form-control" name="price[]">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label for="qty">Quantity</label>
+                                            <input type="number"  min="1" class="form-control" name="qty[]">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label for="image">Image</label>
+                                            <input type="file" class="form-control" name="image[]">
                                         </div>
                                     </div>
                                     <div id="form-container"></div>
                                     <div class="col-12 text-right mt-1">
-                                        <button type="button" id="add-row" class="btn btn-primary btn-sm">Add More</button>
+                                        <button type="button" id="add-row" class="btn btn-primary btn-sm">Add
+                                            Row</button>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -160,127 +150,6 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="form-group mg-b-10-force">
-                                                <label class="form-control-label">Product Image 1: <span
-                                                        class="tx-danger">*</span></label>
-                                                <input class="form-control" type="file" name="product_img_one"
-                                                    id="file-ip-1" accept="image/*" onchange="showPreview(event);">
-                                                @error('product_img_one')
-                                                    <strong class="text-danger">{{ $message }}</strong>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="preview">
-                                                <img class="w-75" id="file-ip-1-preview">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="form-group mg-b-10-force">
-                                                <label class="form-control-label">Product Image 2: <span
-                                                        class="tx-danger">*</span></label>
-                                                <input class="form-control" type="file" name="product_img_two"
-                                                    id="file-ip-2" accept="image/*" onchange="showPreview2(event);">
-                                                @error('product_img_two')
-                                                    <strong class="text-danger">{{ $message }}</strong>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="preview">
-                                                <img class="w-75" id="file-ip-2-preview">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="form-group mg-b-10-force">
-                                                <label class="form-control-label">Product Image 3: <span
-                                                        class="tx-danger">*</span></label>
-                                                <input class="form-control" type="file" name="product_img_three"
-                                                    id="file-ip-3" accept="image/*" onchange="showPreview3(event);">
-                                                @error('product_img_three')
-                                                    <strong class="text-danger">{{ $message }}</strong>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="preview">
-                                                <img class="w-75" id="file-ip-3-preview">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="form-group mg-b-10-force">
-                                                <label class="form-control-label">Product Image 4: <span
-                                                        class="tx-danger">*</span></label>
-                                                <input class="form-control" type="file" name="product_img_four"
-                                                    id="file-ip-3" accept="image/*" onchange="showPreview4(event);">
-                                                @error('product_img_four')
-                                                    <strong class="text-danger">{{ $message }}</strong>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="preview">
-                                                <img class="w-75" id="file-ip-4-preview">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="form-group mg-b-10-force">
-                                                <label class="form-control-label">Product Image 5: <span
-                                                        class="tx-danger">*</span></label>
-                                                <input class="form-control" type="file" name="product_img_five"
-                                                    id="file-ip-3" accept="image/*" onchange="showPreview5(event);">
-                                                @error('product_img_five')
-                                                    <strong class="text-danger">{{ $message }}</strong>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="preview">
-                                                <img class="w-75" id="file-ip-5-preview">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="form-group mg-b-10-force">
-                                                <label class="form-control-label">Product Image 6: <span
-                                                        class="tx-danger">*</span></label>
-                                                <input class="form-control" type="file" name="product_img_six"
-                                                    id="file-ip-3" accept="image/*" onchange="showPreview6(event);">
-                                                @error('product_img_six')
-                                                    <strong class="text-danger">{{ $message }}</strong>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="preview">
-                                                <img class="w-75" id="file-ip-6-preview">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             <div class="form-layout-footer">
                                 <button class="btn btn-info mg-r-5">Product Added</button>
@@ -296,24 +165,39 @@
             // Add row
             $('#add-row').click(function() {
                 var newRow = `<div class="row border  ml-0 mr-0 pb-3 form-row">
-                                <div class="col-sm-3">
+                                <div class="col-sm-2">
                                     <label class="d-sm-block"> </label>
                                     <label for="condition " class="d-sm-none ">Condition</label>
                                     <input type="text" class="form-control" name="condition[]">
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-2">
                                     <label class="d-sm-block"> </label>
                                     <label for="color " class="d-sm-none">Color</label>
                                     <select name="color[]" class="form-control">
                                         <option value="" selected hidden>Select color</option>
+                                        @foreach ($colors as $color)
+                                                    <option value="{{ $color->id }}">{{ $color->color_name }}</option>
+                                          @endforeach
                                     </select>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-2">
                                     <label class="d-sm-block"> </label>
                                     <label for="storage " class="d-sm-none">Storage</label>
                                     <input type="text" class="form-control" name="storage[]">
                                 </div>
-                                <div class="col-sm-3 d-flex align-items-end">
+
+                                <div class="col-sm-2">
+                                        <label class="d-sm-block"> </label>
+                                            <label for="price"  class="d-sm-none">Price</label>
+                                            <input type="number" min="1" class="form-control" name="price[]">
+                                 </div>
+
+                                 <div class="col-sm-2">
+                                    <label class="d-sm-block"> </label>
+                                            <label for="qty" class="d-sm-none">Quantity</label>
+                                            <input type="number" min="1" class="form-control" name="qty[]">
+                                        </div>
+                                <div class="col-sm-2 d-flex align-items-end">
                                     <div>
                                         <label class="d-sm-block"> </label>
                                         <label for="image " class="d-sm-none">Image</label>
@@ -326,13 +210,13 @@
                             </div>`;
                 $('#form-container').append(newRow);
             });
-        
+
             // Remove row
             $(document).on('click', '.remove-row', function() {
                 $(this).closest('.form-row').remove();
             });
         });
-        </script>
+    </script>
 
     <script>
         function showPreview(event) {

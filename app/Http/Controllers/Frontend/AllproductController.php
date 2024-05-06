@@ -20,8 +20,10 @@ class AllproductController extends Controller
     // only for ajax
     $products_se = Product::where('id', 0)->latest()->get();
     // only for ajax end
-    $products = Product::where('product_status', 1)->orderBy('id', 'desc')->paginate(3);
-  //  $sliders = SliderModel::where('product_status',1)->latest()->offset(0)->limit(8)->get();
+   /*  $products = Product::where('product_status', 1)->orderBy('id', 'desc')->paginate(3); */
+    $products = Product::with('product_varient')->where('product_status',1)->latest()->paginate(15);
+    $sliders = SliderModel::where('status',1)->latest()->offset(0)->limit(8)->get();
+
     $categoris = Category::where('status', 1)->latest()->get();
     $brands = Brand::where('status', 1)->latest()->get();
     return view('pages.all-product', compact('products', 'categoris','brands','products_se','sliders'));
@@ -81,7 +83,9 @@ class AllproductController extends Controller
     // only for ajax
     $products_se = Product::where('id', 0)->latest()->get();
     // only for ajax end
-    $product_details = Product::where('id', $pro_id)->get();
+    $product_details = Product::with('product_varient','product_varient.colors')->where('id', $pro_id)->get();
+
+  
 
     foreach ($product_details  as $prod_ids) {
       $cate_id =  $prod_ids->category_name;
@@ -96,7 +100,7 @@ class AllproductController extends Controller
  $products_se = Product::where('id', 0)->latest()->get();
  // only for ajax end
   $products = Product::where('product_status', 1)->where('category_name',$id)->orderBy('id', 'desc')->paginate(40);
-  $sliders = SliderModel::where('product_status',1)->latest()->offset(0)->limit(8)->get();
+//   $sliders = SliderModel::where('product_status',1)->latest()->offset(0)->limit(8)->get();
   $categoris = Category::where('status', 1)->latest()->get();
   $brands = Brand::where('status', 1)->latest()->get();
   return view('pages.all-product-by-category', compact('products', 'categoris','brands','products_se','sliders'));
@@ -107,7 +111,7 @@ class AllproductController extends Controller
     $products_se = Product::where('id', 0)->latest()->get();
     // only for ajax end
      $products = Product::where('product_status', 1)->where('brand_name',$id)->orderBy('id', 'desc')->paginate(40);
-     $sliders = SliderModel::where('product_status',1)->latest()->offset(0)->limit(8)->get();
+    //  $sliders = SliderModel::where('product_status',1)->latest()->offset(0)->limit(8)->get();
      $categoris = Category::where('status', 1)->latest()->get();
      $brands = Brand::where('status', 1)->latest()->get();
      return view('pages.all-product-by-category', compact('products', 'categoris','brands','products_se','sliders'));

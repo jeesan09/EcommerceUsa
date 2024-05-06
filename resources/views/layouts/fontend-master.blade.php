@@ -39,7 +39,7 @@
     
 </head>
 
-<body>
+<body id="overlay_body">
     <div class="page-wrapper">
         <header class="header">
             <div class="header-top" >
@@ -150,34 +150,14 @@
                         @endphp
                         <div class="dropdown cart-dropdown   @if($results->count() >=1)show @else @endif" id="cart_realaod">
 
-                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                            <a href="#" onclick="openNav()" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
                                 <i class="icon-shopping-cart"></i>
                                 <span class="cart-count"> {{  $qty }}</span>
                             </a>
 
-                            <div class="dropdown-menu dropdown-menu-right">
+                            <div class="dropdown-menu dropdown-menu-right d-none">
                                 <div class="dropdown-cart-products">
-                                    @if($results->count() >=1)
-                                    @foreach ( $results  as $product_cart )
-                                    <div class="product product_data">
-                                        <div class="product-cart-details">
-                                            <h4 class="product-title">
-                                                <a >{{ $product_cart->product_name }}</a>
-                                            </h4>
-                                            <span class="cart-product-info">
-                                                <span class="cart-product-qty">{{ $product_cart->qty }}</span>
-                                                x     <span>&#2547; </span>{{ $product_cart->product_price }}
-                                            </span>
-                                        </div>
-                                        <figure class="product-image-container">
-                                            <a class="product-image">
-                                                <img src="{{asset($product_cart->product_img_one) }}" alt="{{ $product_cart->product_name }}">
-                                            </a>
-                                        </figure>
-                                        <input type="hidden" value="{{ $product_cart->id }}" id="cart_remove_id_valu" >
-                                        <a href=""  id="cart_remove_id"  class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
-                                    </div>
-                                    @endforeach
+                                   
 
                                 <div class="dropdown-cart-total">
                                     <span>Total</span>
@@ -189,18 +169,16 @@
                                     <a href="{{ url('shopping/cart/list') }}" class="btn btn-primary">View Cart</a>
                                     <a href="{{ url('/check/out/buy') }}" class="btn btn-outline-primary-2"><span>Buy Now</span><i class="icon-long-arrow-right"></i></a>
                                 </div><!-- End .dropdown-cart-total -->
-                                @else
-                                <p class="text-danger text-center"> No Product in Cart</p>
-                                @endif
+                              
                             </div><!-- End .dropdown-menu -->
                         </div><!-- End .cart-dropdown -->
                     </div><!-- End .header-right -->
                 </div><!-- End .container -->
             </div><!-- End .header-middle -->
         </header><!-- End .header -->
-
+      
     @yield('content')
-
+    <div id="overlay" onclick="closeNav()"></div>
 
         <footer class="footer footer-dark">
         	<div class="footer-middle">
@@ -390,4 +368,31 @@
 
 </body>
     @include('layouts.ajax.ajax')
+    @include('layouts.sidebar-right.index')
+<script>
+     function openNav() {
+        document.getElementById("mySidenav").style.width = "410px";
+        document.getElementById("overlay").style.display = "block";
+        document.body.style.overflow = "hidden"; 
+        $.ajax({
+                 type: 'get',
+                 url:"/product/cart-list/",
+                 success: function(response) {
+			$('.cartContainer').html(response);
+                 },
+                 error: function(xhr, status, error) {
+                     console.error(xhr.responseText);
+                 }
+             });
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("overlay").style.display = "none";
+        document.body.style.overflow = "auto"; // Enable body scrollbar
+    }
+
+	
+</script>
+
 </html>
