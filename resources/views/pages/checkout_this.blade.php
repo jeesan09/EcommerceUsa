@@ -92,7 +92,8 @@
                                         @foreach ($cart_join_prod as $cart_product )
                                         <tr>
                                             <td><a >{{ $cart_product->product_name }} * {{ $cart_product->qty }}</a></td>
-                                            <td>    <span>&#2547; </span>&nbsp; {{ number_format($cart_product->product_price * $cart_product->qty,2) }}</td>
+                                            <td>   
+                                                 <span>&#2547; </span>&nbsp; {{ number_format($cart_product->product_price * $cart_product->qty,2) }}</td>
                                         </tr>
                                         @endforeach
 

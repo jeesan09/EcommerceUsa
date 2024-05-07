@@ -49,7 +49,8 @@ class HomeController extends Controller
             ->get(); 
 
         if(Cart::where('user_ip',  session_id())->count() >=1){
-            return view('pages.checkout_this',compact('sub_total', 'cart_join_prod'));
+            return view('pages.index', compact('products','categoris','brands','products_brand','products_se','sliders','side_sliders'));
+          //  return view('pages.checkout_this',compact('sub_total', 'cart_join_prod'));
         }else{
            return view('pages.index', compact('products','categoris','brands','products_brand','products_se','sliders','side_sliders'));
         }
