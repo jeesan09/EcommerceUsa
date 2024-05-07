@@ -1,26 +1,27 @@
 <?php
 
-use App\Http\Controllers\AboutPageController;
-use App\Http\Controllers\Admin\BrandController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\LoginController;
-use App\Http\Controllers\Admin\PdfController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\ChekoutController;
-use App\Http\Controllers\CouponController;
-use App\Http\Controllers\Frontend\AllproductController;
-use App\Http\Controllers\FrontendController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\SliderController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\WishListController;
 use Faker\Guesser\Name;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\CouponController;
+use App\Http\Controllers\SliderController;
+use App\Http\Controllers\ChekoutController;
+use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\WishListController;
+use App\Http\Controllers\AboutPageController;
+use App\Http\Controllers\Admin\PdfController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\StripePaymentController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Frontend\AllproductController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -168,7 +169,7 @@ Route::get('wishlist/remove/{prod_id}',[WishListController::class,'product_remov
 
  Route::middleware('auth.user_or_admin')->group(function () {
      // home page
-    Route::get('/', 'FrontendController@index');
+    Route::get('/', 'FrontendController@index')->name('frontend.home');
 
 
     // all product show
@@ -222,6 +223,13 @@ Route::get('wishlist/remove/{prod_id}',[WishListController::class,'product_remov
 });
 
 Route::post('/user/{id}/change-status', [UserController::class, 'changeStatus'])->name('changeStatus');
+
+Route::controller(StripePaymentController::class)->group(function(){
+    Route::get('stripe', 'stripe')->name('stripe');
+    Route::post('stripe', 'stripePost')->name('stripe.post');
+});
+
+
 
 Route::get('/clear_cache', function () {
 
