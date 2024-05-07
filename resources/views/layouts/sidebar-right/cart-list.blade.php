@@ -63,7 +63,7 @@
 
 <div class=" row justify-content-center">
       <div class="text-center">
-            <a class="celerCart"  href="">Clear Cart</a>
+            <a type="button" class="celerCart"  href="#">Clear Cart</a>
       </div>
       <button class="btn btn-success btn-block mt-3">Checkout</button>
 </div>
@@ -118,15 +118,15 @@
                   });
             });
             $('.celerCart').click(function() {
-                
                   $.ajax({
                         type: 'post',
-                        url: "/cart-item-removed",
+                        url: "/cart-item-removed-all",
                         success: function(response) {
-                              if (response.success == "Cart item removed") {
+                              if (response.success == "Cart item removed all") {
                                     openNav();
                                     alertify.set("notifier", "position", "bottom-left");
-                                    alertify.success("Cart item removed");
+                                    alertify.success("Cart item removed all");
+                                    $("#cart_realaod").load(location.href + " #cart_realaod");
                               } else {
                                     alertify.set("notifier", "position", "top-right");
                                     alertify.warning("Something wrong");

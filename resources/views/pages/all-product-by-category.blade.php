@@ -8,7 +8,7 @@
 @section('content')
     <main class="main">
         <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
-            <div class="container">
+            <div class="container-fluid">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
                     <li class="breadcrumb-item"><a href="#">All Product</a></li>
@@ -17,7 +17,7 @@
         </nav><!-- End .breadcrumb-nav -->
 
         <div class="page-content">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-9">
                         <div class="toolbox">
@@ -60,10 +60,10 @@
                                                     @endif
                                                 @endforeach
                                             </a>
-                                            <div class="product-action-vertical">
+                                           <!--  <div class="product-action-vertical">
                                                 <a href="{{ url('add/wishlist/' . $product->id) }}"
                                                     class="btn-product-icon btn-wishlist "><span>add to wishlist</span></a>
-                                            </div>
+                                            </div> -->
                                                 <div class="product-action">
                                                    <!--  <a class="btn-product btn-cart cart_btn_click" href="#product_details"
                                                         data-toggle="modal"><span>BUY NOW</span></a> -->
