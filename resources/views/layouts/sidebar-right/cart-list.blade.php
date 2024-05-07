@@ -136,11 +136,17 @@
         $('#confirmPayment').click(function() {
             var paymentOption = $("input[name='payment_option']:checked").val();
             
-            var additionalData = "your_additional_data"; // Add your additional data here
+          //  var additionalData = "your_additional_data"; // Add your additional data here
+
+          var additionalData = {
+                  carts: {!! json_encode($carts) !!}, // Encode $carts as JSON
+                  otherData: "your_additional_data" // Add your other additional data here
+          };
 
             
             if (paymentOption === 'online_payment') {
-                  window.location.href = "{{ route('stripe') }}" + "?additionalData=" + encodeURIComponent(additionalData);
+              //    window.location.href = "{{ route('stripe') }}" + "?additionalData=" + encodeURIComponent(additionalData);
+              window.location.href = "{{ route('stripe') }}" + "?additionalData=" + encodeURIComponent(JSON.stringify(additionalData));
             } else {
                 window.location.href = "{{ route('frontend.home') }}";
             }
