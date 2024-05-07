@@ -8,7 +8,7 @@
 @section('content')
     <main class="main">
         <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
-            <div class="container">
+            <div class="container-fluid">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
                     <li class="breadcrumb-item"><a href="#">All Product</a></li>
@@ -17,7 +17,7 @@
         </nav><!-- End .breadcrumb-nav -->
 
         <div class="page-content">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-9">
                         <div class="toolbox">

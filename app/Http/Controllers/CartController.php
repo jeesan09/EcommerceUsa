@@ -50,6 +50,13 @@ class CartController extends Controller
       'success'=>'Cart item removed'
      ]);
    }
+   public function cart_item_removed_all(Request $request)
+   {
+    Cart::where('user_ip',session_id())->delete();
+     return response()->json([
+      'success'=>'Cart item removed all'
+     ]);
+   }
 
 
    //ajux add to cart 

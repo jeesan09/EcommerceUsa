@@ -10,6 +10,9 @@
         width: 100% !important;
         height: 84vh;
     }
+ .product.product-11 .product-body {
+    padding-bottom: 1.5rem !important;
+}
 </style>
 @section('content')
     <main class="main">
@@ -78,10 +81,10 @@
                                                     @endif
                                                 @endforeach
                                             </a>
-                                            <div class="product-action-vertical">
+                                          <!--   <div class="product-action-vertical">
                                                 <a href="{{ url('add/wishlist/' . $product->id) }}"
                                                     class="btn-product-icon btn-wishlist "><span>add to wishlist</span></a>
-                                            </div>
+                                            </div> -->
                                         </figure>
 
                                         <div class="product-body">
@@ -92,11 +95,11 @@
                                                 <span>&#2547; </span>&nbsp; {{ number_format($price, 2) }}
                                             </div>
                                         </div>
-                                        <div class="product-action">
+                                      <!--   <div class="product-action">
                                             <button class="btn-product btn-cart cart_btn_click" href="#product_details"
                                                 data-toggle="modal"><span>BUY NOW</span></button>
                                             <input type="hidden" class="product_input_id" value="{{ $product->id }}">
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             @endforeach
@@ -135,10 +138,10 @@
                                                         @endif
                                                     @endforeach
                                                 </a>
-                                                <div class="product-action-vertical">
+                                              <!--   <div class="product-action-vertical">
                                                     <a href="#" class="btn-product-icon btn-wishlist "><span>add to
                                                             wishlist</span></a>
-                                                </div><!-- End .product-action-vertical -->
+                                                </div> -->
                                             </figure><!-- End .product-media -->
 
                                             <div class="product-body">
@@ -149,12 +152,13 @@
                                                     <span>&#2547; </span>&nbsp; {{ number_format($price, 2) }}
                                                 </div><!-- End .product-price -->
                                             </div><!-- End .product-body -->
-                                            <div class="product-action">
+                                          <!--   <div class="product-action">
                                                 <button class="btn-product btn-cart cart_btn_click" href="#product_details"
                                                     data-toggle="modal"><span>BUY NOW</span></button>
                                                 <input type="hidden" class="product_input_id"
                                                     value="{{ $products_t->id }}">
-                                            </div><!-- End .product-action -->
+                                            </div> -->
+                                            <!-- End .product-action -->
                                         </div><!-- End .product -->
                                     </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
                                 @endforeach
@@ -242,11 +246,11 @@
                                     <span>&#2547; </span>&nbsp; {{ number_format($price, 2) }}
                                     </div>
                                 </div>
-                                <div class="product-action">
+                               <!--  <div class="product-action">
                                     <button class="btn-product btn-cart cart_btn_click" href="#product_details"
                                         data-toggle="modal"><span>BUY NOW</span></button>
                                     <input type="hidden" class="product_input_id" value="{{ $product->id }}">
-                                </div>
+                                </div> -->
                             </div>
                         @endforeach
 
@@ -324,11 +328,12 @@
                                         <span>&#2547; </span>&nbsp; {{ number_format($price, 2) }}
                                         </div><!-- End .product-price -->
                                     </div><!-- End .product-body -->
-                                    <div class="product-action">
+                                  <!--   <div class="product-action">
                                         <button class="btn-product btn-cart cart_btn_click" href="#product_details"
                                             data-toggle="modal"><span>BUY NOW</span></button>
                                         <input type="hidden" class="product_input_id" value="{{ $products_t->id }}">
-                                    </div><!-- End .product-action -->
+                                    </div> -->
+                                    <!-- End .product-action -->
                                 </div><!-- End .product -->
                             @endforeach
                         </div><!-- End .owl-carousel -->

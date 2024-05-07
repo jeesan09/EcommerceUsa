@@ -23,17 +23,17 @@
 @section('content')
 <main class="main">
     <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
-        <div class="container d-flex align-items-center">
+        <div class="container-fluid d-flex align-items-center">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Products Details</a></li>
+                <li class="breadcrumb-item"><a href="#">Product Detail</a></li>
             </ol>
         </div><!-- End .container -->
     </nav><!-- End .breadcrumb-nav -->
 
     @foreach ($product_details as $products)
     <div class="page-content">
-        <div class="container">
+        <div class="container-fluid">
             <div class="product-details-top product_data">
                 <div class="row">
                     <div class="col-md-6">
@@ -303,6 +303,7 @@
                     openNav();
                     alertify.set("notifier", "position", "bottom-left");
                     alertify.success("Product succesfuly add cart");
+                    $("#cart_realaod").load(location.href + " #cart_realaod");
                 }else{
                     alertify.set("notifier", "position", "top-right");
                     alertify.warning("Something wrong");

@@ -189,6 +189,7 @@ Route::get('wishlist/remove/{prod_id}',[WishListController::class,'product_remov
    
     Route::post('/cart-update-qty',[CartController::class,'cart_update_qty']);
     Route::post('/cart-item-removed',[CartController::class,'cart_item_removed']);
+    Route::post('/cart-item-removed-all',[CartController::class,'cart_item_removed_all']);
     // buy now page
     Route::post('/buy-now',[CartController::class,'buy_now_add'])->name('buynow.product');
 

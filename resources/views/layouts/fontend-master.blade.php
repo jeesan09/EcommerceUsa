@@ -138,40 +138,14 @@
                      </style>
 
                      @php
-
-                            use App\Cart;
-                            $total = App\Cart::all()->where('user_ip', session_id())->sum(function($t){
-                            return  $t->price * $t->qty;
-                            });
-                            $qty = App\Cart::all()->where('user_ip',  session_id())->sum('qty');
-                            $results = DB::table('products')
-                            ->join('carts', 'products.id', '=', 'carts.product_id')->where('user_ip',  session_id())
-                            ->get();
-                        @endphp
-                        <div class="dropdown cart-dropdown   @if($results->count() >=1)show @else @endif" id="cart_realaod">
-
+                        use App\Cart;
+                        $qty = App\Cart::all()->where('user_ip',  session_id())->count();
+                     @endphp
+                        <div class="dropdown cart-dropdown" id="cart_realaod">
                             <a href="#" onclick="openNav()" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
                                 <i class="icon-shopping-cart"></i>
                                 <span class="cart-count"> {{  $qty }}</span>
                             </a>
-
-                            <div class="dropdown-menu dropdown-menu-right d-none">
-                                <div class="dropdown-cart-products">
-                                   
-
-                                <div class="dropdown-cart-total">
-                                    <span>Total</span>
-
-                                    <span class="cart-total-price">     <span>&#2547; </span>&nbsp;{{  number_format($total,2) }}</span>
-                                </div><!-- End .dropdown-cart-total -->
-
-                                <div class="dropdown-cart-action">
-                                    <a href="{{ url('shopping/cart/list') }}" class="btn btn-primary">View Cart</a>
-                                    <a href="{{ url('/check/out/buy') }}" class="btn btn-outline-primary-2"><span>Buy Now</span><i class="icon-long-arrow-right"></i></a>
-                                </div><!-- End .dropdown-cart-total -->
-                              
-                            </div><!-- End .dropdown-menu -->
-                        </div><!-- End .cart-dropdown -->
                     </div><!-- End .header-right -->
                 </div><!-- End .container -->
             </div><!-- End .header-middle -->
