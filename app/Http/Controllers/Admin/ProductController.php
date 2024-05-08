@@ -92,11 +92,10 @@ class ProductController extends Controller
   {
     $categories = Category::latest()->get();
     $brands = Brand::latest()->get();
-    $product_edit = DB::table("products")->select("products.*")
-      ->join("brands", "brands.id", "=", "products.brand_name")
-      ->join("categories", "categories.id", "=", "products.category_name")->where('products.id',$id)
-      ->get();
-     return view('admin.product.edit', compact('product_edit','categories','brands'));
+    $product_edit =Product::where('id',$id)->get();
+      $product_varient = ProductVarient::where('product_id',$id)->get();
+      $colors = color::get();
+     return view('admin.product.edit', compact('product_edit','categories','brands','colors','product_varient'));
   }
 
 public function productUpdate( Request $request,$id)
