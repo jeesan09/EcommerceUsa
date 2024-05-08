@@ -363,7 +363,7 @@
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
         document.getElementById("overlay").style.display = "none";
-        document.body.style.overflow = "auto"; // Enable body scrollbar
+        document.body.style.overflow = ""; 
     }
 
 	

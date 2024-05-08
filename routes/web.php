@@ -74,7 +74,9 @@ Route::get('product-list/', [ProductController::class,'productList'])->name('pro
 Route::get('prod-status-dactive/{prod_id}', [ProductController::class,'deactive_prod']);
 Route::get('prod-status-active/{prod_id}', [ProductController::class,'active_prod']);
 Route::get('product-edit/{id}',[ProductController::class,'productedit']);
+Route::get('/product-single-delate/{id}',[ProductController::class,'productDeletesingle']);
 Route::post('/product-update/{pro_id}', [ProductController::class,'productUpdate'])->name('update.product');
+Route::post('/product-single-update/{pro_id}', [ProductController::class,'singleProductUpdate']);
 Route::post('/product-image/{pro_id}', [ProductController::class,'productImage'])->name('update.image');
 Route::get('delete-product/{prod_id}',[ProductController::class,'product_delete'])->name('delete.product');
 

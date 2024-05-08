@@ -19,6 +19,21 @@
         border-color: #c9c9c9;
         background-color: #bdbdbd !important;
     }
+    /* ul,ol {
+    list-style:auto !important;
+    padding: 20px !important;
+    margin: 0 0 1.5rem;
+} */
+
+@media screen and (min-width: 992px) {
+    .product-image-gallery {
+    display: block !important;
+    flex-flow: unset;
+    /* margin-left: -.5rem; */
+    /* margin-right: -.5rem; */
+}
+}
+
 </style>
 @section('content')
 <main class="main">
@@ -89,7 +104,9 @@
                                                     @php
                                                     $first_value = false;
                                                     @endphp
-                                                    <label class="for-checkbox-tools" for="condition-tool-{{$product->id}}">
+                                                    <label class="for-checkbox-tools @if ($product->condition ==null)
+                                                        d-none
+                                                    @endif" for="condition-tool-{{$product->id}}">
                                                         {{ $product->condition}}
                                                     </label>
                                                     @endforeach
@@ -165,30 +182,12 @@
                         <div class="product-details-tab">
                             <h6 class="p-0 m-0">Product Detail</h6>
                             <hr class="m-0">
-                            <div class="product-detail-content" style="height: 554px;">
-                                <div class="product-detail-content-inner expanded" style="max-height: none; overflow: hidden;">
-
-                                    <ul>
-                                        <li>Originally released September 2019</li>
-                                        <li>Unlocked, Nano-SIM and/or Electronic SIM card, Model A2111</li>
-                                        <li>6.1-inch Liquid Retina HD display</li>
-                                        <li>A13 Bionic chip 6-core CPU with 2 performance and 4 efficiency cores</li>
-                                        <li>Video playback: Up to 17 hours</li>
-                                        <li>
-                                            <span data-mce-fragment="1">4G LTE</span>, Gigabit LTE and 802.11ax Wi‑Fi with 2x2 MIMO
-                                        </li>
-                                        <li>Bluetooth 5.0 wireless technology</li>
-                                        <li>NFC with reader mode</li>
-                                        <li>Dual 12MP Wide and Ultra Wide cameras</li>
-                                        <li>Digital zoom up to 5x</li>
-                                        <li>4K video recording, 1080p HD video recording</li>
-                                        <li>Face ID</li>
-                                        <li>Siri</li>
-                                        <li>Apple Pay</li>
-                                        <li>6.84 ounces and 0.33 inch</li>
-                                        <li>For USA, Canada, Puerto Rico, U.S. Virgin Islands</li>
-                                    </ul>
-
+                            <div class="product-detail-content " style="height: 500px; overflow: hidden; overflow-y: scroll;">
+                                <div class="product-detail-content-inner expanded   ">
+                              
+                                        {!! $productOnly->sort_description !!}
+                                      <br>
+                                      {!! $productOnly->long_description !!}
                                 </div>
 
                                 <div class="toggle-read-more">Read Less</div>
