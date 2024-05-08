@@ -14,7 +14,7 @@ use App\Notifications\UserActivationNotification;
 class UserController extends Controller
 {
     public function __construct() {
-        $this->middleware('auth:admin');
+        $this->middleware('auth:admin')->except('updateShippingAddress');
     }
     
     public function user_list()
@@ -59,7 +59,22 @@ class UserController extends Controller
         return view('admin.user-list.show', ['user' => $user]);
     }
 
+    public function updateShippingAddress(Request $request)
+    {
+        $user = Auth::user();
 
+        // Update user's shipping address
+        $user->shipping_address = $request->input('shipping_address');
+        // Update other details if needed
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->phone = $request->input('phone');
+
+        // Save changes
+        $user->save();
+
+        return response()->json(['success' => true]);
+    }
 
     public function destroy($id)
     {

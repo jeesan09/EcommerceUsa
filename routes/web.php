@@ -30,7 +30,7 @@ use App\Http\Controllers\Frontend\AllproductController;
 Auth::routes();
 
 
-
+Route::post('/update-shipping-address', [UserController::class, 'updateShippingAddress'])->name('update.shipping.address');
 
 
 Route::get('/home',  [HomeController::class,'index'])->name('home');

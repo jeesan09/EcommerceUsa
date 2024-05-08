@@ -12,7 +12,38 @@
     <h1 style="text-align: center; margin-bottom:40px;">Payment Gateway</h1>
     
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+       
+
+        <div class="col-md-7  mt-3 mb-4">
+            <!-- User details form -->
+
+            <h3> Shipping detail information</h3>
+            <form id="userDetailsForm">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name" value="{{ $user->name }}" >
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Phone:</label>
+                    <input type="text" class="form-control" id="phone" value="{{ $user->phone }}" >
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" value="{{ $user->email }}">
+                </div>
+                <div class="form-group">
+                    <label for="shippingAddress">Shipping Address:</label>
+                    <input type="text" class="form-control" id="shippingAddress" value="{{ $user->shipping_address }}">
+                </div>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div> 
+
+        {{-- <?php dd($CartData); ?> --}}
+
+        <div class="col-md-5 ">
             <div class="panel panel-default credit-card-box">
                 <div class="panel-heading display-table" >
                         <h3 class="panel-title" >Payment Details</h3>
@@ -35,6 +66,13 @@
                             data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"
                             id="payment-form">
                         @csrf
+
+
+                        <!-- Hidden input field for subtotal -->
+                        <input type="hidden" name="subtotal" value="{{ $subtotal }}">
+
+                        <!-- Hidden input field for CartData -->
+                        <input type="hidden" name="cartData" value="{{ json_encode($CartData) }}">
     
                         <div class='form-row row'>
                             <div class='col-xs-12 form-group required'>
@@ -78,7 +116,7 @@
     
                         <div class="row">
                             <div class="col-xs-12">
-                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now ($100)</button>
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now ( {{ $subtotal }}$ )</button>
                             </div>
                         </div>
                             
@@ -86,6 +124,11 @@
                 </div>
             </div>        
         </div>
+
+
+
+
+
     </div>
         
 </div>
@@ -95,6 +138,41 @@
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
     
 <script type="text/javascript">
+
+
+$(document).ready(function() {
+        // AJAX request to update shipping address
+        $('#userDetailsForm').submit(function(event) {
+
+            event.preventDefault();
+
+            var shippingAddress = $('#shippingAddress').val();
+            var name = $('#name').val();
+            var email = $('#email').val();
+            var phone = $('#phone').val();
+
+            $.ajax({
+                url: "{{ route('update.shipping.address') }}",
+                type: "POST",
+                data: {
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    shipping_address: shippingAddress,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function(response) {
+                    alert('User infrormation has been updated successfully!');
+                    // You can add additional actions upon successful update
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseText);
+                    alert('Error updating User infrormation. Please try again.');
+                }
+            });
+        });
+    });
+
   
 $(function() {
   
