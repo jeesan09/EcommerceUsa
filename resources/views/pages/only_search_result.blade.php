@@ -23,33 +23,36 @@
                             <div class="col-6 col-md-4 col-lg-4 col-xl-3 product_data">
                                 <div class="product product-7 text-center">
                                     <figure class="product-media">
-                                        <span class="product-label label-new">New</span>
+                                        {{-- <span class="product-label label-new">New</span> --}}
                                         <a href=" {{ route('product.details',$product->id) }}">
-                                            <img src="{{asset($product->product_img_one) }}" alt="{{ $product->product_name }}" class="product-image">
+                                            @php $categoryProduct = true; @endphp
+                                            @foreach ($product->variants as $product_varient)
+                                                @if ($categoryProduct)
+                                                    <img src="{{ asset($product_varient->image) }}"
+                                                        alt="{{ $product->product_name }}" class="product-image">
+                                                    @php
+                                                        $categoryProduct = false;
+                                                        $price = $product_varient->price;
+                                                    @endphp
+                                                @else
+                                                    <img src="{{ asset($product_varient->image) }}" alt=""
+                                                        class="product-image-hover">
+                                                @endif
+                                            @endforeach
                                         </a>
-                                        <div class="product-action-vertical">
-                                            <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
-                                            <a href="" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
-                                            <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
-                                        </div><!-- End .product-action-vertical -->
-
-                                        <div class="product-action">
-                                            <a class="btn-product btn-cart " href="{{ route('product.details',$product->id) }}"  ><span>Buy Now</span></a>
-                                            <input type="hidden" class="product_input_id"  value="{{ $product->id }}">
-                                        </div><!-- End .product-action -->
                                     </figure><!-- End .product-media -->
 
                                     <div class="product-body">
                                         <h3 class="product-title"><a href="{{  route('product.details',$product->id)  }}">{{ $product->product_name }}</a></h3><!-- End .product-title -->
                                         <div class="product-price">
-                                            <span>&#2547; </span>&nbsp;    {{ number_format($product->product_price,2) }}
-                                        </div><!-- End .product-price -->
-                                        <div class="ratings-container">
+                                            <span>&#2547; </span>&nbsp; {{ number_format($price, 2) }}
+                                        </div>
+                                        {{-- <div class="ratings-container">
                                             <div class="ratings">
                                                 <div class="ratings-val" style="width: 90%;"></div><!-- End .ratings-val -->
                                             </div><!-- End .ratings -->
                                             <span class="ratings-text">( 2 Reviews )</span>
-                                        </div><!-- End .rating-container -->
+                                        </div><!-- End .rating-container --> --}}
                                     </div><!-- End .product-body -->
                                 </div><!-- End .product -->
                             </div>

@@ -416,7 +416,8 @@ blockquote.text-white cite span {
 
 .main {
     flex: 1;
-    width: 100%
+    width: 100%;
+    background: #f6f6f6;
 }
 
 .page-content {
@@ -7598,13 +7599,13 @@ p {
 }
 
 .product:hover {
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05)
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.10)
 }
 
 .product-media {
     position: relative;
     display: block;
-    background-color: #d7d7d7;
+    background-color: #ffffff;
     margin-bottom: 0;
     overflow: hidden
 }
@@ -7616,7 +7617,8 @@ p {
 .product-image {
     display: block;
     width: 100%;
-    height: auto
+    height: auto;
+    padding: 18px 14px 24px 11px;
 }
 
 .product-image-hover {
@@ -7626,7 +7628,8 @@ p {
     opacity: 0;
     width: 100%;
     height: auto;
-    transition: all .4s ease
+    transition: all .4s ease;
+    padding: 18px 14px 24px 11px;
 }
 
 .product:hover .product-image-hover {
@@ -10859,8 +10862,9 @@ small.form-text {
     color: #333;
     text-align: center;
     z-index: 11;
-    background: white;
+    background: #ffffff1a;
     border: none;
+    margin-top: 5px;
 }
 
 @media(max-width:990px) {

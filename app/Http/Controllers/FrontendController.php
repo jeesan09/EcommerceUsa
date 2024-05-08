@@ -68,17 +68,19 @@ public function orderSuccesfullyCompalte()
 
 public function search_all_product(Request $request)
 {
-
-
-
-    $products = DB::table('products')
-    ->join('brands', 'products.brand_name', '=', 'brands.id')
-    ->join('categories', 'products.category_name', '=', 'categories.id')
-    ->where('products.product_name', 'LIKE', "%{$request->search_product}%")
-    ->orWhere('categories.category_name', 'LIKE', "%{$request->search_product}%")
-    ->orWhere('brands.brand_name', 'LIKE', "%{$request->search_product}%")
-    ->select('products.*')
-    ->paginate(30);
+  $products = Product::query()
+        ->with('brand', 'category', 'variants')
+        ->whereHas('brand', function ($query) use ($request) {
+            $query->where('brand_name', 'LIKE', "%{$request->search_product}%");
+        })
+        ->orWhereHas('category', function ($query) use ($request) {
+            $query->where('category_name', 'LIKE', "%{$request->search_product}%");
+        })
+        ->orWhere('product_name', 'LIKE', "%{$request->search_product}%")
+        ->orWhereHas('variants', function ($query) use ($request) {
+            $query->where('storage', 'LIKE', "%{$request->search_product}%");
+        })
+        ->paginate(30);
 
   return view('pages.only_search_result', compact('products'));
 }
