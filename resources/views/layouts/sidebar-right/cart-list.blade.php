@@ -56,35 +56,6 @@
 
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-            <div class="modal-content">
-                  <div class="modal-header">
-                        <h5 class="modal-title" id="paymentModalLabel">Select Payment Method</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                        <div class="form-check">
-                              <input class="form-check-input" type="radio" name="payment_option" id="online_payment" value="online_payment" checked>
-                              <label class="form-check-label" for="online_payment">
-                                    Online Payment
-                              </label>
-                        </div>
-                        <div class="form-check">
-                              <input class="form-check-input" type="radio" name="payment_option" id="cash_on_delivery" value="cash_on_delivery">
-                              <label class="form-check-label" for="cash_on_delivery">
-                                    Cash on Delivery
-                              </label>
-                        </div>
-                  </div>
-                  <div class="modal-footer">
-
-                        <button type="button" class="btn btn-primary" id="confirmPayment">Confirm</button>
-                  </div>
-            </div>
-      </div>
-</div>
 
 <div class="row Subtotal-section">
       <div class="col-6">
@@ -163,38 +134,36 @@
 
 <script>
       $(document).ready(function() {
+            
+
+    // Handle checkout button click
+    $('#checkout_button').click(function() {
+        // Determine the selected payment method
+        var paymentMethod = $('input[name="payment_option"]:checked').val();
+
+        // Serialize the $carts data to a JSON string
+        var cartsData = JSON.stringify(<?php echo json_encode($carts); ?>);
+
+        // Get the sub_total value
+        var subTotal = <?php echo $sub_total; ?>;
+
+        // Perform different actions based on the selected payment method
+        if (paymentMethod === 'online_payment') {
+            // Redirect to the /stripe route with cart data and sub_total
+            window.location.href = '/stripe?payment_method=online_payment&carts=' + encodeURIComponent(cartsData) + '&sub_total=' + subTotal;
+        } else if (paymentMethod === 'cash_on_delivery') {
+            // Redirect to the / route with cart data and sub_total
+            window.location.href = '/checkout?payment_method=cash_on_delivery&carts=' + encodeURIComponent(cartsData) + '&sub_total=' + subTotal;
+        }
+    });
 
 
-            // Show modal when checkout button is clicked
-            $('#checkout_button').click(function(e) {
-                  e.preventDefault();
-                  $('#paymentModal').modal('show');
-            });
-
-            // Close modal when the "Close" button is clicked using jQuery
-            $('.btn-close').on('click', function() {
-                  $('#paymentModal').modal('hide');
-            });
-
-            // Redirect based on selected payment option after confirmation
-            $('#confirmPayment').click(function() {
-                  var paymentOption = $("input[name='payment_option']:checked").val();
-
-                  //  var additionalData = "your_additional_data"; // Add your additional data here
-
-                  var additionalData = {
-                     //   carts: {  !!json_encode($carts) !!  }, // Encode $carts as JSON
-                        otherData: "your_additional_data" // Add your other additional data here
-                  };
 
 
-                  if (paymentOption === 'online_payment') {
-                        //    window.location.href = "{{ route('stripe') }}" + "?additionalData=" + encodeURIComponent(additionalData);
-                        window.location.href = "{{ route('stripe') }}" + "?additionalData=" + encodeURIComponent(JSON.stringify(additionalData));
-                  } else {
-                        window.location.href = "{{ route('frontend.home') }}";
-                  }
-            });
+
+
+
+
 
             // Your existing JavaScript code for cart functionality
 
