@@ -76,43 +76,47 @@
                             <div class="col-lg-12">
                                 @foreach ($product_varient as $varient)
                                 <div class="row border ml-0 mr-0 pb-3 form-row">
+                                    <input type="hidden" class="varient_id" value="{{$varient->id}}">
+                                    <input type="hidden" class="product_id" value="{{$varient->product_id}}">
                                     <div class="col-sm-2">
                                         <label for="condition">Condition</label>
-                                        <input type="text" class="form-control" value="{{$varient->condition}}" name="condition[]">
+                                        <input type="text" class="form-control condition" value="{{$varient->condition}}" name="condition[]">
                                     </div>
                                     <div class="col-sm-2">
                                         <label for="color">Colors</label>
-                                        <select name="color[]" class="form-control">
+                                        <select name="color[]" class="form-control color">
                                             <option value="" selected hidden>Select color</option>
                                             @foreach ($colors as $color)
-                                            <option value="{{ $color->id }}">{{ $color->color_name }}</option>
+                                            <option value="{{ $color->id }}" @if ($varient->color_id == $color->id) selected @endif>{{ $color->color_name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="col-sm-2">
                                         <label for="storage">Storage</label>
-                                        <input type="text" class="form-control" name="storage[]">
+                                        <input type="text" value="{{ $varient->storage}}" class="form-control storage" name="storage[]">
                                     </div>
                                     <div class="col-sm-2">
                                         <label for="price">Price</label>
-                                        <input type="number" min="1" class="form-control" name="price[]">
+                                        <input type="number" min="1" value="{{ $varient->price}}" class="form-control price" name="price[]">
                                     </div>
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-1">
                                         <label for="qty">Quantity</label>
-                                        <input type="number" min="1" class="form-control" name="qty[]">
+                                        <input type="number" value="{{ $varient->quantity}}" min="1" class="form-control qty" name="qty[]">
                                     </div>
-                                    <div class="col-sm-2 d-flex align-items-end">
+                                    <div class="col-sm-3 d-flex align-items-end">
                                         <div>
                                             <label class="d-sm-block"> </label>
                                             <label for="image " class="d-sm-none">Image</label>
-                                            <input type="file" class="form-control" name="image[]">
+                                            <input type="file" class="form-control image" name="image[]">
                                         </div>
-                                        <div class="ml-2">
-                                            <button type="button" class="btn btn-danger remove-row">Remove</button>
+                                        <div class="ml-2 d-flex">
+                                            <button type="button" class="btn btn-warning btn-sm update-row mr-1">Update</button>
+
+                                            <button type="button" class="btn btn-danger btn-sm remove-row">Remove</button>
                                         </div>
                                     </div>
                                 </div>
-                                    
+
                                 @endforeach
                                 <div id="form-container"></div>
                                 <div class="col-12 text-right mt-1">
@@ -219,12 +223,12 @@
                                 <div class="col-sm-2">
                                     <label class="d-sm-block"> </label>
                                     <label for="condition " class="d-sm-none ">Condition</label>
-                                    <input type="text" class="form-control" name="condition[]">
+                                    <input type="text" class="form-control" name="conditionNew[]">
                                 </div>
                                 <div class="col-sm-2">
                                     <label class="d-sm-block"> </label>
                                     <label for="color " class="d-sm-none">Color</label>
-                                    <select name="color[]" class="form-control">
+                                    <select name="colorNew[]" class="form-control">
                                         <option value="" selected hidden>Select color</option>
                                         @foreach ($colors as $color)
                                                     <option value="{{ $color->id }}">{{ $color->color_name }}</option>
@@ -234,25 +238,25 @@
                                 <div class="col-sm-2">
                                     <label class="d-sm-block"> </label>
                                     <label for="storage " class="d-sm-none">Storage</label>
-                                    <input type="text" class="form-control" name="storage[]">
+                                    <input type="text" class="form-control" name="storageNew[]">
                                 </div>
 
                                 <div class="col-sm-2">
                                         <label class="d-sm-block"> </label>
                                             <label for="price"  class="d-sm-none">Price</label>
-                                            <input type="number" min="1" class="form-control" name="price[]">
+                                            <input type="number" min="1" class="form-control" name="priceNew[]">
                                  </div>
 
                                  <div class="col-sm-2">
                                     <label class="d-sm-block"> </label>
                                             <label for="qty" class="d-sm-none">Quantity</label>
-                                            <input type="number" min="1" class="form-control" name="qty[]">
+                                            <input type="number" min="1" class="form-control" name="qtyNew[]">
                                         </div>
                                 <div class="col-sm-2 d-flex align-items-end">
                                     <div>
                                         <label class="d-sm-block"> </label>
                                         <label for="image " class="d-sm-none">Image</label>
-                                        <input type="file" class="form-control" name="image[]">
+                                        <input type="file" class="form-control" name="imageNew[]">
                                     </div>
                                     <div class="ml-2">
                                         <button type="button" class="btn btn-danger remove-row">Remove</button>
@@ -265,7 +269,63 @@
         // Remove row
         $(document).on('click', '.remove-row', function() {
             $(this).closest('.form-row').remove();
+            var varientId = $(this).closest('.form-row').find('.varient_id').val();
+            if(varientId !=""){
+                $.ajax({
+                    url: '/product-single-delate/' + varientId,
+                    method: 'get',
+                    success: function(response) {
+                        alertify.set('notifier','position', 'top-right');
+                         alertify.success('<strong class="text-light d-flex align-items-center justify-content-start">&nbsp; <i class="icon ion-ios-checkmark d-flex align-items-center font_size"></i> &nbsp Succesfuly deleted</strong>');
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error
+                    }
+                });
+            }
         });
+
+        $(document).on('click', '.update-row', function() {
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                }
+            });
+
+            var varientId = $(this).closest('.form-row').find('.varient_id').val();
+            var condition = $(this).closest('.form-row').find('.condition').val();
+            var color = $(this).closest('.form-row').find('.color').val();
+            var storage = $(this).closest('.form-row').find('.storage').val();
+            var price = $(this).closest('.form-row').find('.price').val();
+            var product_id = $(this).closest('.form-row').find('.product_id').val();
+            var qty = $(this).closest('.form-row').find('.qty').val();
+            var formData = new FormData();
+            var image = $(this).closest('.form-row').find('.image')[0].files[0];
+            formData.append('image', image);
+            formData.append('condition', condition);
+            formData.append('color', color);
+            formData.append('storage', storage);
+            formData.append('qty', qty);
+            formData.append('price', price);
+            formData.append('product_id', product_id);
+            $.ajax({
+                url: '/product-single-update/' + varientId,
+                method: 'POST',
+                data: formData,
+                processData: false, 
+                contentType: false, 
+                success: function(response) {
+                    alertify.set('notifier','position', 'top-right');
+                     alertify.success('<strong class="text-light d-flex align-items-center justify-content-start">&nbsp; <i class="icon ion-ios-checkmark d-flex align-items-center font_size"></i> &nbsp Succesfuly updated</strong>');
+                },
+                error: function(xhr, status, error) {
+                    // Handle error
+                }
+            });
+        });
+
+
     });
 </script>
 
