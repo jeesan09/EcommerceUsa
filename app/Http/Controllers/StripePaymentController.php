@@ -13,12 +13,12 @@ class StripePaymentController extends Controller
     public function stripe(Request $request)
     {
 
-        $additionalData = json_decode($request->input('additionalData'), true);
-        $carts = $additionalData['carts'];
+        //  $additionalData = json_decode($request->input('additionalData'), true);
+        // $carts = $additionalData['carts'];
 
-        return $additionalData;
+        // return $additionalData;
 
-        return $request;
+        // return $request; 
         return view('stripe');
     }
     
