@@ -17,10 +17,15 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->string('user_id')->nullable();
             $table->string('invoice');
-            $table->string('payemnt_type');
+            $table->string('payment_type');
             $table->string('total');
             $table->string('subtotal');
-            $table->string('payment_inside');
+            $table->string('payment_inside'); 
+
+            $table->boolean('payment_status')->nullable();
+            $table->text('stripe_url')->nullable();
+            $table->string('stripe_id')->nullable();
+            
             $table->integer('order_status')->default('1');
             $table->integer('copon_discount')->nullable();
             $table->integer('order_hide_status')->default(1);

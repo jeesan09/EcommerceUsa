@@ -66,6 +66,7 @@
                                         <th scope="col">Total Amount</th>
                                         <th scope="col">Date</th>
                                         <th scope="col">Order Status</th>
+                                        <th scope="col">Paymet Status</th>
                                         <th scope="col">Action</th>
                                       </tr>
                                     </thead>
@@ -100,6 +101,14 @@
                                                 @endif
                                                  
                                             </td>
+                                            <td  class="text-center fs-1">
+                                                @if($order->payment_status=="0")
+                                                  <p  class="badge badge-warning text-white">Pendding</p>
+                                                @elseif ($order->payment_status=="1")
+                                                  <p  class="badge badge-primary text-white">Paid</p>
+                                                @endif
+                                            </td>
+
                                             <td style="padding-left: 10px;">
                                                 <a href="{{ route('my.order.details',$order->id) }}" class="btn btn-success btn-sm">View Details</a>
                                                 @if($order->order_status=="1" OR $order->order_status=="2")

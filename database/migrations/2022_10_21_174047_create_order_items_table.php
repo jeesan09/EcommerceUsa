@@ -18,8 +18,9 @@ class CreateOrderItemsTable extends Migration
             $table->integer('order_id');
             $table->integer('product_id');
             $table->integer('product_qty');
-            $table->string('product_size');
-            $table->string('product_color');
+            $table->integer('product_variant_id');
+            $table->string('product_size')->nullable();
+            $table->string('product_color')->nullable();
             $table->timestamps();
         });
     }

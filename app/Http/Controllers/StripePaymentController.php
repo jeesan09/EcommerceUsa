@@ -2,7 +2,14 @@
 namespace App\Http\Controllers;
 use Stripe;
 use Session;
+use App\Order;
+use Exception;
+use App\Shipping;
+use App\OrderItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
 class StripePaymentController extends Controller
@@ -36,10 +43,8 @@ class StripePaymentController extends Controller
     {
         
         $user = Auth::user();
-        $CartData = json_decode($request->input('cartData'), true);
+        $carts = json_decode($request->input('cartData'), true);
         $subtotal = $request->input('subtotal');
-
-
 
      //   return $subtotal;
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
@@ -74,10 +79,81 @@ class StripePaymentController extends Controller
 
        // return $Charge->id; //here we get charge ID
         
-       return $Charge;
-      
-        Session::flash('success', 'Payment successful!');
-              
-        return back();
+    //   return $Charge;
+
+        if ($Charge->status == "succeeded") {
+        
+            DB::beginTransaction();
+
+            try {
+                // Deduct the amount from the sender's account
+                $order_id = Order::insertGetId([
+                    'user_id' => Auth::id(),
+                    'invoice' =>  mt_rand(10000000, 99999999),
+                    'payment_type' => "online",
+                    'total' => $subtotal,
+                    'payment_inside'=>'payment done',
+                    'payment_status'=>1,
+                    'order_status'=>'2',
+                    'subtotal' => $subtotal,
+                    'stripe_id' => $Charge->id,
+                    'stripe_url' => $Charge->receipt_url,
+                    'created_at' => Carbon::now(),
+                ]);
+
+                if (  count($carts) >= 1) {
+                    foreach ($carts as $cart) {
+
+                    //return $cart['product_varient']['color_id'];
+                    OrderItem::insert([
+                        'order_id' => $order_id,
+                        'product_id' => $cart['product_id'],
+                        'product_qty' => $cart['qty'],
+                        'product_variant_id' => $cart['product_varient_id'],
+                        'product_color' => $cart['product_varient']['color_id'],
+                        'created_at' => Carbon::now(),
+                    ]);
+                    }
+                }
+
+                Shipping::insert([
+                    'order_id' => $order_id,
+                    'user_name' => $user->name,
+                    'phone' => $user->phone,
+                    'email' => $user->email,
+                    'shiping_address' => $user->shipping_address,
+                    'created_at' => Carbon::now(),
+                ]);
+
+                DB::commit();
+
+            } catch (Exception $e) {
+                // If an exception occurred, rollback the transaction
+                DB::rollback();
+                
+                // Log the error or handle it appropriately
+                // For example:
+                Log::error('Transaction failed: ' . $e->getMessage());
+        
+                // You might also throw the exception again to let the caller know something went wrong
+                throw $e;
+            }
+
+            Session::flash('success', 'Payment successful!');
+            return back();
+
+        } else {
+            
+         Session::flash('error', 'Payment failed!');
+         return back();
+  
+       }
+                   
+        
     }
+
+
+
+
+
 }

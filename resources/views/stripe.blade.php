@@ -54,6 +54,7 @@
                         <div class="alert alert-success text-center">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
                             <p>{{ Session::get('success') }}</p>
+                            <p>{{ Session::get('error') }}</p>
                         </div>
                     @endif
     
