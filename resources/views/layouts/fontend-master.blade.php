@@ -43,7 +43,7 @@
     <div class="page-wrapper">
         <header class="header">
             <div class="header-top" >
-                <div class="container">
+                <div class="container-fluid">
                     <div class="header-right" >
                         <ul class="top-menu">
                             <li>

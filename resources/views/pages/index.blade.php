@@ -13,6 +13,11 @@
  .product.product-11 .product-body {
     padding-bottom: 1.5rem !important;
 }
+
+.search-toggle1 {
+  
+    margin-top: 15px !important;
+}
 </style>
 @section('content')
     <main class="main">
@@ -168,7 +173,7 @@
                 @endforeach
             </div><!-- End .tab-content -->
         </div><!-- End .container -->
-        <div class="container">
+        <div class="container mt-3">
             <div class="heading heading-center mb-3">
                 <h2 class="title-lg">Trendy Products</h2><!-- End .title -->
 

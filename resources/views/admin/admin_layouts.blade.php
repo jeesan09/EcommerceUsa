@@ -18,7 +18,7 @@
     <link href="{{asset('backend')}}/lib/medium-editor/medium-editor.css" rel="stylesheet">
     <link href="{{asset('backend')}}/lib/medium-editor/default.css" rel="stylesheet">
     <link href="{{asset('backend')}}/lib/summernote/summernote-bs4.css" rel="stylesheet">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- alertify alert er jonno  -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
