@@ -1,7 +1,8 @@
 @extends('layouts.fontend-master')
 {{-- @section('product_list')Login-page @endsection --}}
 @section('content')
-<div class="container">
+<main class="main">
+<div class="container"  style=" background: #f6f6f6;">
     <div class="row justify-content-center my-4">
         <div class="col-sm-6">
             <div class="form-box">
@@ -46,7 +47,7 @@
                                     </button>
 
                                     <div class="text-center ">
-                                        <a href="/register" class="btn btn-primary">Register</a>
+                                        <a href="/register" style="text-decoration: none; color:white" class="btn btn-primary">Register</a>
                                     </div>                                   
 
                                     {{-- <div class="custom-control custom-checkbox">
@@ -98,4 +99,5 @@
 
 
 </div>
+</main>
 @endsection

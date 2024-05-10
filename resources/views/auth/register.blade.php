@@ -1,15 +1,24 @@
 @extends('layouts.fontend-master')
 
 @section('content')
-<div class="container">
+<main class="main">
+<div class="container" style=" background: #f6f6f6;">
+    <style>
+        .form-box {
+    max-width: 800px !important;
+  
+}
+    </style>
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <h4 class="card-header text-center mt-4">{{ __('Register') }}</h4> 
-
-                <div class="card-body">
-
-
+        <div class="col-md-8 my-4">
+            <div class="form-box">
+                <div class="form-tab">
+                <ul class="nav nav-pills nav-fill" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="signin-tab" data-toggle="tab" href="#signin" role="tab" aria-controls="signin" aria-selected="true">Register</a>
+                    </li>
+                </ul>
+                <div class="card-body mt-2">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
                         <div class="form-group">
@@ -80,8 +89,8 @@
 
 
 
-                        <div class="d-flex">
-                            <div class=" ">
+                        <div class="row">
+                            <div class="col-md-6">
                                 <label for="phone">Phone No *</label>
                                 <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone">
                                 @error('phone')
@@ -90,7 +99,7 @@
                                     </span>
                                 @enderror
                             </div><!-- End .form-group -->
-                            <div class="ml-5">
+                            <div class="col-md-6">
                                 <label for="email">E-mail Address *</label>
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
                                 @error('email')
@@ -99,9 +108,8 @@
                                     </span>
                                 @enderror
                             </div><!-- End .form-group -->
-                        </div>
-                        <div class="d-flex">
-                            <div class=" ">
+
+                            <div class="col-md-6 ">
                                 <label for="password">Password *</label>
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
                                 @error('password')
@@ -111,16 +119,14 @@
                                 @enderror
 
                             </div><!-- End .form-group -->
-                            <div class="ml-5">
+                            <div class="col-md-6">
                                 <label for="cpassword">Confirm Password *</label>
                                 <input id="cpassword" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
                         <div class="form-footer d-flex justify-content-between mb-4">
- 
-            
                             <!-- Back button -->
-                            <a href="javascript:history.back()" class="btn btn-outline-primary-2">Back</a>
+                            <a href="javascript:history.back()" style="color: black; text-decoration:none " class="btn btn-outline-primary-2">Back</a>
 
                             <button type="submit" class="btn btn-outline-primary-2">
                                 <span>REGISTER</span>
@@ -131,7 +137,10 @@
                     </form>
                 </div>
             </div>
+            </div>
         </div>
     </div>
 </div>
+
+</main>
 @endsection

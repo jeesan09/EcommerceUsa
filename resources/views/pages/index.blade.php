@@ -407,7 +407,4 @@
 
     </main>
 
-    <style>
-
-    </style>
 @endsection

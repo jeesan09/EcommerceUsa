@@ -19,7 +19,7 @@
         <div class="page-content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-9">
+                    <div class="col-lg-10">
                         <div class="toolbox">
                             <div class="toolbox-right">
                                 <div class="toolbox-sort">
@@ -101,7 +101,7 @@
 
 
                     </div><!-- End .col-lg-9 -->
-                    <aside class="col-lg-3 order-lg-first">
+                    <aside class="col-lg-2 order-lg-first">
                         <div class="sidebar sidebar-shop">
                             <div class="widget widget-clean">
                                 <label>Filters:</label>
