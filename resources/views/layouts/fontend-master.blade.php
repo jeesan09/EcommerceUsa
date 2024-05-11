@@ -52,11 +52,14 @@
                             <li>
                                 <a href="#">Links</a>
                                 <ul>
+                                    @php
+                                        $logo = App\Websitelogo::find(1);
+                                    @endphp
                                     @if (Auth::check())
                                         @php
                                             $count = App\Wishlist::where('user_ip', Auth::user()->id)->count();
                                             /*   $count_order = App\Order::where('user_id', Auth::user()->id)->count(); */
-                                            $logo = App\Websitelogo::find(1);
+                                          
 
                                         @endphp
                                         {{--   @if ($count_order > 0)
@@ -78,7 +81,7 @@
             </div><!-- End .header-top -->
 
             <div class="header-middle sticky-header">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="header-left">
                         <button class="mobile-menu-toggler">
                             <span class="sr-only">Toggle mobile menu</span>
@@ -90,13 +93,13 @@
                                 font-weight: 700;
                             }
                         </style>
-                        {{-- <a href="{{url('/')}}" class=" name_logo">
+                        <a href="{{url('/')}}" class=" name_logo">
                             @if ($logo->header_logo != '')
-                            <img src="{{ asset($logo->header_logo) }}" alt="" width="125" height="25">
+                            <img src="{{ asset($logo->header_logo) }}" height="auto" alt="" >
                             @else
-                            SellsPoints
+                            MPW WHOLESALE
                        @endif
-                        </a> --}}
+                        </a>
                         <nav class="main-nav">
                             <ul class="menu sf-arrows">
                                 <li class="megamenu-container @yield('home')">

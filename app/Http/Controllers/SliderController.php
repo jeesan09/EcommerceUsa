@@ -32,12 +32,12 @@ class SliderController extends Controller
 
         $request->validate([
             'slider_title' => 'required|max:255',
-            'slider_image' => 'required|mimes:jpg,jpeg,gif,png',
+            'slider_image' => 'required|mimes:jpg,jpeg,gif,png,webp',
         ]);
 
         $image_one = $request->file('slider_image');
         $name_gena = hexdec(uniqid()) . "." . $image_one->getClientOriginalExtension();
-        \Image::make($image_one)->resize(2070, 1000)->save('frotend/img/product/upload/' . $name_gena);
+        \Image::make($image_one)->resize(1600, 600)->save('frotend/img/product/upload/' . $name_gena);
         $image_url = 'frotend/img/product/upload/' . $name_gena;
 
         SliderModel::insert([
@@ -179,6 +179,7 @@ class SliderController extends Controller
     }
 
     function create_logo(){
+       
        $logo = Websitelogo::find(1);
         return view('admin.logo.index',compact('logo'));
     }
@@ -189,7 +190,7 @@ class SliderController extends Controller
             if ($request->has('product_img_one')) {
                 $image_one = $request->file('product_img_one');
                 $name_gena = hexdec(uniqid()) . "." . $image_one->getClientOriginalExtension();
-                \Image::make($image_one)->resize(300, 180)->save('frotend/img/product/upload/' . $name_gena);
+                \Image::make($image_one)->resize(250, 70)->save('frotend/img/product/upload/' . $name_gena);
                 $image_url = 'frotend/img/product/upload/' . $name_gena;
                 Websitelogo::find($id)->update([
                     'header_logo' => $image_url,

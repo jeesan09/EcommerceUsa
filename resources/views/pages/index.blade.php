@@ -8,7 +8,9 @@
 <style>
     .slider-image img {
         width: 100% !important;
-        height: 84vh;
+    height: auto;
+    overflow: auto;
+    object-fit: cover;
     }
  .product.product-11 .product-body {
     padding-bottom: 1.5rem !important;
@@ -22,7 +24,7 @@
 @section('content')
     <main class="main">
         <div class="intro-section bg-lighter mb-3">
-            <div class="container-fluid">
+            <div class="">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="slider-image">
