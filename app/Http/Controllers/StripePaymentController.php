@@ -1,5 +1,7 @@
 <?php
 namespace App\Http\Controllers;
+
+use App\Cart;
 use Stripe;
 use Session;
 use App\Order;
@@ -27,7 +29,10 @@ class StripePaymentController extends Controller
         // Retrieve additional data and subtotal from the request
         $CartData = json_decode($request->input('carts'), true);
         $subtotal = $request->input('sub_total');
-
+        if($subtotal <= 0 ){
+            Session::flash('success_delete', 'Cart list is empty');
+         return redirect()->back();
+        }
         //return $subtotal;
     
         // Pass user data, additional data, and subtotal to the view
@@ -46,6 +51,7 @@ class StripePaymentController extends Controller
         $carts = json_decode($request->input('cartData'), true);
         $subtotal = $request->input('subtotal');
 
+       
      //   return $subtotal;
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
@@ -138,10 +144,8 @@ class StripePaymentController extends Controller
                 // You might also throw the exception again to let the caller know something went wrong
                 throw $e;
             }
-
-            Session::flash('success', 'Payment successful!');
-            return back();
-
+            $carts = Cart::where('user_ip',   $user->id)->delete();
+            return redirect()->to('my-profile/')->with('success', 'Payment successfuly Done !');
         } else {
             
          Session::flash('error', 'Payment failed!');

@@ -145,7 +145,7 @@
         // ==========   Quantity update product ===================
 
         // ========== Pagenition  product All product ===================
-        $(document).on("click", ".pagination a", function(e) {
+        $(document).on("click", ".all-product .pagination a", function(e) {
             e.preventDefault();
             var page = $(this).attr('href').split('page=')[1];
             product(page)

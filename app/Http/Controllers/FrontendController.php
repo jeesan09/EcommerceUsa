@@ -9,6 +9,7 @@ use App\Order;
 use App\Product;
 use App\SliderModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 session_start();
 class FrontendController extends Controller
@@ -51,7 +52,8 @@ public function contact_page()
 
 public function orderSuccesfullyCompalte()
 {
-   $order_id =  Order::where('user_id', session_id())->orderBy('created_at', 'DESC')->limit('1')->get();
+  $user_id = Auth::user()->id;
+   $order_id =  Order::where('user_id', $user_id)->orderBy('created_at', 'DESC')->limit('1')->get();
     foreach($order_id as $or_id){
     $id = $or_id->id;
     }
@@ -59,7 +61,7 @@ public function orderSuccesfullyCompalte()
     ->join('order_items', 'orders.id', '=', 'order_items.order_id')
     ->join('shippings', 'orders.id', '=', 'shippings.order_id')
     ->join('products', 'order_items.product_id', '=', 'products.id')
-    ->select('order_items.*','orders.*', 'products.product_img_one','products.product_price','products.product_name','shippings.frist_name','shippings.phone','shippings.address_holdding')
+    ->select('order_items.*','orders.*', 'products.product_name','shippings.user_name','shippings.phone','shippings.shiping_address')
     ->where('orders.id', $id )->orderBy('order_items.created_at', 'DESC')->get();
 
     return view('pages.buy-now-order-success', compact('join_table'));

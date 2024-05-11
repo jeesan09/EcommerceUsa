@@ -67,7 +67,7 @@
                     <div class="products">
                         <div class="row justify-content-center">
                             @foreach ($products as $product)
-                                <div class="col-6 col-md-4 col-lg-3">
+                                <div class="col-6 col-md-4 col-lg-3 mb-4">
                                     <div class="product product-11 mt-v3 text-center product_data">
                                         <figure class="product-media">
                                             <a href="{{ route('product.details', $product->id) }}">
@@ -123,7 +123,7 @@
                         <div class="products">
                             <div class="row justify-content-center">
                                 @foreach ($products_category as $products_t)
-                                    <div class="col-6 col-md-4 col-lg-3">
+                                    <div class="col-6 col-md-4 col-lg-3 mb-4">
                                         <div class="product product-11 mt-v3 text-center product_data">
                                             <figure class="product-media">
                                                 <span class="product-label label-new">NEW</span>

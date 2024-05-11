@@ -4,32 +4,31 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\Copon;
+use App\Order;
+use App\OrderItem;
 use App\Product;
+use App\Shipping;
+use Carbon\Carbon;
+use Exception;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 session_start();
 
 
 class CartController extends Controller
 {
-   public function cart_page()
-   {
-      $sub_total = Cart::all()->where('user_ip',  session_id())->sum(function ($t) {
-         return  $t->price * $t->qty;
-      });
-      $carts = Cart::where('user_ip',  session_id())->get();
-      return view('pages.cartpage', compact('carts', 'sub_total'));
-   }
-
    public function cartListRender()
    {
-      $sub_total = Cart::all()->where('user_ip',  session_id())->sum(function ($t) {
+     $user_id =  Auth::user()->id;
+      $sub_total = Cart::all()->where('user_ip', $user_id)->sum(function ($t) {
          return  $t->price * $t->qty;
       });
  
-      $carts = Cart::with('product','product_varient')->where('user_ip',  session_id())->latest()->get();
+      $carts = Cart::with('product','product_varient')->where('user_ip',  $user_id)->latest()->get();
       
       return view('layouts.sidebar-right.cart-list', compact('carts', 'sub_total'));
    }
@@ -52,57 +51,17 @@ class CartController extends Controller
    }
    public function cart_item_removed_all(Request $request)
    {
-    Cart::where('user_ip',session_id())->delete();
+      $user_id =  Auth::user()->id;
+    Cart::where('user_ip',$user_id)->delete();
      return response()->json([
       'success'=>'Cart item removed all'
      ]);
    }
 
 
-   //ajux add to cart 
-   public function add_to_cart(Request $request, $product_id)
-   {
-      $request->validate([
-         'product_size' => 'required',
-         'product_color' => 'required',
-         'qty' => 'required',
-      ]);
-
-      $product_id = $product_id;
-      $qty = $request->qty;
-      $product_price = $request->product_price;
-      $product_size = $request->product_size;
-      $product_color = $request->product_color;
-
-      $check = Cart::where('product_id', $product_id)->where('user_ip',  session_id())->first();
-      if ($check) {
-         // Cart::where('product_id', $product_id)->increment('qty');
-         // return redirect()->back()->with('success', 'product allready Cart');
-         Cart::insert([
-            'product_id' => $product_id,
-            'price' => $product_price,
-            'qty' => $qty,
-            'product_size' => $product_size,
-            'product_color' => $product_color,
-            'user_ip' =>  session_id()
-         ]);
-         return redirect()->back()->with('success', 'product add to Cart');
-      } else {
-         Cart::insert([
-            'product_id' => $product_id,
-            'price' => $product_price,
-            'qty' => $qty,
-            'product_size' => $product_size,
-            'product_color' => $product_color,
-            'user_ip' =>  session_id()
-         ]);
-         return redirect()->back()->with('success', 'product add to Cart');
-      }
-   }
-
    public function buy_now_add(Request $request)
    {
-    
+      $user_id =  Auth::user()->id;
        $request->validate([
            'storage' => 'required',
            'qty' => 'required',
@@ -114,7 +73,9 @@ class CartController extends Controller
        $varient_id = $values[0]; 
        $product_id = $request->product_id;
        $qty = $request->qty;
-       $check = Cart::where('product_id', $product_id)->where('product_varient_id',$varient_id )->where('user_ip',  session_id())->first();
+       $check = Cart::where('product_id', $product_id)
+                     ->where('product_varient_id',$varient_id )
+                     ->where('user_ip',  $user_id)->first();
      
        if ($check) {
        
@@ -129,7 +90,7 @@ class CartController extends Controller
                'qty' => $qty,
                'price' => $product_price,
                'product_varient_id' => $varient_id,
-               'user_ip' => session_id()
+               'user_ip' => $user_id
            ]);
    
            return response()->json([
@@ -139,25 +100,7 @@ class CartController extends Controller
    }
    
 
-
-
-   // remove cart itmem
-   public function cart_product_remove(Request $request)
-   {
-      Cart::find($request->cart_id)->delete();
-      return redirect()->back()->with('success_delete', 'Cart item remove');
-   }
-
-   // remove cart list page
-   public function cart_list_page()
-   {
-      $sub_total = Cart::all()->where('user_ip',  session_id())->sum(function ($t) {
-         return  $t->price * $t->qty;
-      });
-      $carts = Cart::where('user_ip',  session_id())->get();
-   
-      return view('pages.cart-list', compact('carts', 'sub_total'));
-   }
+ 
 
    //cart product update 
    public function cart_product_update(Request $request)
@@ -169,59 +112,84 @@ class CartController extends Controller
       return redirect()->back()->with('success', 'Cart Quantity Updated');
      
    }
-   //cart product decriment 
-   public function cart_product_decrement(Request $request)
-   {
-      Cart::where('id', $request->cart_id)->decrement('qty');
-      if (Session::has('copon')) {
-         session()->forget('copon');
-      }
-      return redirect()->back()->with('success', 'Cart Quantity Decriment');
-      
+ 
 
+
+   public function paymentCheckout(Request $request)
+   {
+      $user_id =  Auth::user()->id;
+      $cart_join_prod = DB::table('products')
+      ->join('carts', 'products.id', '=', 'carts.product_id')
+      ->where('user_ip', $user_id)
+      ->get();
+        $user = Auth::user();
+        $CartData = json_decode($request->input('carts'), true);
+        $sub_total  = $request->input('sub_total');
+        if($sub_total>0){
+           return view('pages.check-out-buy-page',compact('user','cart_join_prod','sub_total', 'CartData'));
+        }else{
+         Session::flash('success_delete', 'Cart list is empty');
+         return redirect()->back();
+        }
    }
+   public function orderCheckout(Request $request)
+   {  
+      $user = Auth::user();
+      $carts = Cart::where('user_ip',  $user->id)->get();
+      if($carts->isNotEmpty()){
 
-   //apply Copon in cart product
-   public function apply_copon(Request $request)
-   {
-      $sub_total = Cart::all()->where('user_ip',  session_id())->sum(function ($t) {
-         return  $t->price * $t->qty;
-      });
-      $chack = Copon::where('coupon_name', $request->copon_name)->first();
+         DB::beginTransaction();
+         try {
+             $order_id = Order::insertGetId([
+                 'user_id' => Auth::id(),
+                 'invoice' =>  mt_rand(10000000, 99999999),
+                 'payment_type' => "COD",
+                 'total' => $request->subtotal,
+                 'payment_inside'=>'COD',
+                 'payment_status'=>0,
+                 'order_status'=>'1',
+                 'subtotal' =>$request->subtotal,
+                 'stripe_id' => null,
+                 'stripe_url' => null,
+                 'created_at' => Carbon::now(),
+             ]);
 
-      if ($chack) {
-         Session::put('copon', [
-            'coupon_name' => $chack->coupon_name,
-            'coupon_discount' => $chack->discount,
-            'discount_amount' => $sub_total * ($chack->discount / 100)
-         ]);
-         return redirect()->back()->with('success', 'Successfuly Coupon Added');
-      } else {
-         return redirect()->back()->with('success_delete', 'Invalid Coupon please Try Again');
+             if (  count($carts) >= 1) {
+                 foreach ($carts as $cart) {
+                 OrderItem::insert([
+                     'order_id' => $order_id,
+                     'product_id' => $cart->product_id,
+                     'product_qty' => $cart->qty,
+                     'product_variant_id' => $cart->product_varient_id,
+                     'product_color' => null,
+                     'created_at' => Carbon::now(),
+                 ]);
+                 }
+             }
+
+             Shipping::insert([
+                 'order_id' => $order_id,
+                 'user_name' => $user->name,
+                 'phone' => $user->phone,
+                 'email' => $user->email,
+                 'shiping_address' => $user->shipping_address,
+                 'created_at' => Carbon::now(),
+             ]);
+
+             DB::commit();
+
+
+
+         } catch (Exception $e) {
+             DB::rollback();
+             Log::error('Transaction failed: ' . $e->getMessage());
+             throw $e;
+         }
+         $carts = Cart::where('user_ip',  $user->id)->delete();
+         return redirect()->to('my-profile/')->with('success', 'Order successfuly submit');
+      }else{
+         dd(0);
       }
-   }
-
-
-   // Coupun remove 
-   public function couponremove()
-   {
-      if (Session::has('copon')) {
-         session()->forget('copon');
-         return redirect()->back()->with('success_delete', 'Succesfuly Coupon destroy');
-      }
-   }
-
-   public function checkout_buy_page()
-   {
-    $sub_total = Cart::all()->where('user_ip',  session_id())->sum(function($t){
-        return  $t->price * $t->qty;
-        });
-
-        $cart_join_prod = DB::table('products')
-        ->join('carts', 'products.id', '=', 'carts.product_id')
-        ->where('user_ip',  session_id())
-        ->get();
-        return view('pages.check-out-buy-page',compact('sub_total', 'cart_join_prod'));
    }
    
 

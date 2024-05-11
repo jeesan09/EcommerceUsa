@@ -19,7 +19,7 @@
         <div class="page-content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-9">
+                    <div class="col-lg-10">
                         <div class="toolbox">
                             <div class="toolbox-right">
                                 <div class="toolbox-sort">
@@ -107,7 +107,7 @@
 
 
                     </div><!-- End .col-lg-9 -->
-                    <aside class="col-lg-3 order-lg-first">
+                    <aside class="col-lg-2 order-lg-first">
                         <div class="sidebar sidebar-shop">
                             <div class="widget widget-clean">
                                 <label>Filters:</label>
@@ -131,7 +131,7 @@
                                     <div class="widget-body">
                                         <div class="">
                                             @foreach ($categoris as $category)
-                                                <div class=" product_data d-flex justify-content-between">
+                                                <div class=" product_data d-flex justify-content-between  pr-4">
 
                                                     <div class="category_pro">
                                                         <a href="{{ url('product/category',$category->id) }}" class="text-dark">
@@ -245,7 +245,7 @@
                                 <div class="collapse show" id="widget-4">
                                     <div class="">
                                         @foreach ($brands as $brand)
-                                        <div class=" product_data d-flex justify-content-between">
+                                        <div class=" product_data d-flex justify-content-between  pr-4">
                                             <div class="category_pro">
                                                 <a  href="{{ url('product/brand',$brand->id) }}" class="text-dark"> {{ $brand->brand_name }}</a>
                                                 <input type="hidden" id="brand_id" value="{{ $brand->id }}">

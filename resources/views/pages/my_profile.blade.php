@@ -1,26 +1,32 @@
 @extends('layouts.fontend-master')
 @section('content')
-@section('product_list')  my-profile-{{ Auth::user()->name}}  @endsection
-
+<style>
+ .btn {
+    padding: 0.5rem .05rem !important;
+    min-width: 0px !important;
+    border-radius: 4px ;
+}
+</style>
+@section('product_list')  My-profile-{{ Auth::user()->name}}  @endsection
 <main class="main" >
     <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
         <div class="container">
-            <h1 class="page-title">My Account<span> [{{ Auth::user()->name}}]</span></h1>
+            <h1 class="page-title">My Profile<span> [{{ Auth::user()->name}}]</span></h1>
         </div><!-- End .container -->
     </div><!-- End .page-header -->
     <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
-        <div class="container">
+        <div class="container-fluid">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
                 <li class="breadcrumb-item"><a href="#">Shop</a></li>
-                <li class="breadcrumb-item active" aria-current="page">My Account</li>
+                <li class="breadcrumb-item active" aria-current="page">My Profile</li>
             </ol>
         </div><!-- End .container -->
     </nav><!-- End .breadcrumb-nav -->
    
     <div class="page-content" >
         <div class="dashboard">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
                     <aside class="col-sm-2 col-lg-2">
                         <ul class="nav nav-dashboard flex-column mb-3 mb-md-0" role="tablist">
@@ -66,7 +72,8 @@
                                         <th scope="col">Total Amount</th>
                                         <th scope="col">Date</th>
                                         <th scope="col">Order Status</th>
-                                        <th scope="col">Paymet Status</th>
+                                        <th scope="col">Payment Method</th>
+                                        <th scope="col">Payment Status</th>
                                         <th scope="col">Action</th>
                                       </tr>
                                     </thead>
@@ -76,7 +83,7 @@
                                         @endphp
                                         @foreach ($orders as $order)
                                         <tr>
-                                            <th style="padding-left: 10px;"  > {{  $count++ }}</th>
+                                            <th style="padding-left: 10px;"  > {{ $loop->iteration }}</th>
                                             <th style="padding-left: 10px;"  ># {{ $order->invoice }}</th>
                                             <td style="padding-left: 10px;"> <span>&#2547;</span>{{ number_format($order->subtotal) }}</td>
                                             <td style="padding-left: 10px;" > <span>&#2547;</span> {{ number_format($order->copon_discount) }}</td>
@@ -102,23 +109,34 @@
                                                  
                                             </td>
                                             <td  class="text-center fs-1">
+                                                @if($order->payment_inside=="COD")
+                                                  <p  class="badge badge-warning text-white">COD</p>
+                                                @else
+                                                  <p  class="badge badge-success text-white">Online Payment</p>
+                                                @endif
+                                            </td>
+                                            <td  class="text-center fs-1">
                                                 @if($order->payment_status=="0")
-                                                  <p  class="badge badge-warning text-white">Pendding</p>
+                                                  <p  class="badge badge-warning text-white">Unpaid</p>
                                                 @elseif ($order->payment_status=="1")
                                                   <p  class="badge badge-primary text-white">Paid</p>
                                                 @endif
                                             </td>
 
                                             <td style="padding-left: 10px;">
-                                                <a href="{{ route('my.order.details',$order->id) }}" class="btn btn-success btn-sm">View Details</a>
-                                                @if($order->order_status=="1" OR $order->order_status=="2")
-                                                <a href="{{ route('my.order.cancel',$order->id) }}" class="btn btn-danger btn-sm">Cancel</a>
+                                                <a href="{{ route('my.order.details',$order->id) }}" class="btn btn-outline-success btn-sm" title="Order Details"> <i class="icon-eye"></i></a>
+                                                @if($order->order_status=="1" OR $order->order_status=="2"  OR $order->order_status=="5")
+                                                <a href="{{ route('my.order.cancel',$order->id) }}" title="Cancle order" class="btn btn-outline-danger btn-sm @if ($order->order_status=="5")
+                                                    disabled
+                                                @endif"> <i class="icon-close"></i></a>
                                                 @endif
                                             </td>
                                         </tr>
                                         @endforeach
                                   </table>
-                                  
+                                <div class="d-flex justify-content-end">
+                                    {{  $orders->links() }}
+                                </div>
                             </div><!-- .End .tab-pane -->
 
 

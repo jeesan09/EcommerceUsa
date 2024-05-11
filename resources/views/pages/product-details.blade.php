@@ -150,11 +150,11 @@
                                                 <label for="product_color">Color:</label>
                                                 <select name="product_color" name="color" required
                                                     class="form-control">
-                                                    @foreach ($product_details->flatMap->product_varient->flatMap->colors as $colorNew)
-                                                        <option value="{{ $colorNew->id }}">
-                                                            {{ $colorNew->color_name }}
-                                                        </option>
-                                                    @endforeach
+                                                    @foreach ($product_details->flatMap->product_varient->flatMap->colors->unique('color_name') as $colorNew)
+                                                    <option value="{{ $colorNew->id }}">
+                                                        {{ $colorNew->color_name }}
+                                                    </option>
+                                                @endforeach
                                                 </select>
                                             </div>
                                             <div class="error_msg text-danger ml-5"> </div>
@@ -175,7 +175,7 @@
                                                                 value="{{ $product->id }},{{ $product->quantity }}"
                                                                 id="storage-tool-{{ $product->id }}"
                                                                 @if ($first_value) checked @endif>
-                                                            <label class="for-checkbox-tools"
+                                                            <label class="for-checkbox-tools @if ($product->storage == null) d-none @endif"
                                                                 for="storage-tool-{{ $product->id }}">{{ $product->storage }}</label>
                                                             @php
                                                                 $first_value = false;

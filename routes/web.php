@@ -133,12 +133,6 @@ Route::get('user-list/', [UserController::class,'user_list'])->name('all-user.li
 Route::get('/user/{id}/details', 'UserController@show')->name('user.details');
 
 
-
-
-
-
-
-
 //cart product remove
 Route::get('/product/cart/remove',[CartController::class,'cart_product_remove']);
 //cart product Update
@@ -194,6 +188,11 @@ Route::get('wishlist/remove/{prod_id}',[WishListController::class,'product_remov
     Route::post('/cart-item-removed',[CartController::class,'cart_item_removed']);
     Route::post('/cart-item-removed-all',[CartController::class,'cart_item_removed_all']);
     // buy now page
+    
+    Route::get('/checkout',[CartController::class,'paymentCheckout']);
+    Route::post('/checkout-order',[CartController::class,'orderCheckout'])->name('checkout.order');
+
+
     Route::post('/buy-now',[CartController::class,'buy_now_add'])->name('buynow.product');
 
     Route::get('check/out/buy',[CartController::class,'checkout_buy_page']);

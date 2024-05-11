@@ -11,13 +11,14 @@ class ChekoutController extends Controller
 {
     public function index()
     {
-        $sub_total = Cart::all()->where('user_ip',  session_id())->sum(function($t){
+       $user_id =  Auth::user()->id;
+        $sub_total = Cart::all()->where('user_ip',  $user_id)->sum(function($t){
             return  $t->price * $t->qty;
             });
 
             $cart_join_prod = DB::table('products')
             ->join('carts', 'products.id', '=', 'carts.product_id')
-            ->where('user_ip',  session_id())
+            ->where('user_ip',  $user_id)
             ->get(); 
 
         if(Auth::check()){

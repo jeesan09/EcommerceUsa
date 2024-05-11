@@ -1,3 +1,5 @@
+          
+
 <div class="section-height">
       @forelse ($carts as $cart)
       <div class="row">
@@ -125,12 +127,6 @@
      </div>
 </div>
 <a href="#" id="checkout_button" class="btn btn-success btn-block mt-1 text-white">Checkout</a>
-
-
-{{-- <button class="btn btn-success btn-block mt-3">Checkout</button> --}}
-{{-- <a href="{{ route('stripe') }}" class="btn btn-success btn-block mt-3 text-white">Checkout</a> --}}
-
-
 
 <script>
       $(document).ready(function() {

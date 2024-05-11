@@ -1,7 +1,13 @@
 @extends('layouts.fontend-master')
 @section('about') active  @endsection
 @section('product_list')  About-us  @endsection
-
+<style>
+    .section-height {
+    height: 60% !important;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+</style>
 @section('content')
 
 <main class="main">
