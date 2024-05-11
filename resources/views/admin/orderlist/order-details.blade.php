@@ -10,83 +10,97 @@
             <span class="breadcrumb-item active">Order Page</span>
           </nav>
         <div class="sl-pagebody">
+            <div class="text-right mb-2">
+              <a class="btn btn-primary" href="{{ url('/order/list') }}">Back to order list</a>
+            </div>
             <div class="row">
-                <div class="col-12">
-                    <div class="card pd-20 pd-sm-40">
-                        <h6 class="card-body-title">Order Product  Details</h6>
-                        <div class="table-wrapper">
-                          <table id="" class="table display responsive nowrap">
-                            <thead>
-                              <tr>
-                                <th class="wd-10p">Sl.</th>
-                                <th class="wd-15p">P.Name</th>
-                                <th class="wd-15p">P.image</th>
-                                <th class="wd-20p">P.Price</th>
-                                <th class="wd-20p">P.Size</th>
-                                <th class="wd-20p">P.Qty</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <?php
-                                $count = 1;
-                                ?>
-                              @foreach ($order_items AS $order)
-                              <tr>
-                                <td>{{ $count++ }}</td>
-                                <td>{{ $order->product->product_name }}</td>
-                                <td> <img src="{{ asset($order->product->product_img_one ) }}" style="width: 50px;" alt=""></td>
-                                <td>{{ $order->product->product_price }}</td>
-                                <td>{{ $order->product_size }}</td>
-                                <td>{{ $order->product_qty }}</td>
-                               </tr>
-                              @endforeach
-                            </tbody>
-                          </table>
-                        </div><!-- table-wrapper -->
-                        <H5>Shipping Details</H5>
-                        <form>
-                            <fieldset disabled>
-                          @foreach ($shipping as $ship )
-                             <div class="row">
-                                <div class="col-4">
-                                    <div class="mb-3">
-                                        <label for="disabledTextInput" class="form-label">First Name</label>
-                                        <input type="text" id="disabledTextInput" class="form-control" value="{{ $ship->frist_name }}">
-                                      </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="mb-3">
-                                        <label for="disabledTextInput" class="form-label">Last Name</label>
-                                        <input type="text" id="disabledTextInput" class="form-control"value="{{ $ship->last_name }}">
-                                      </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="mb-3">
-                                        <label for="disabledTextInput" class="form-label">Shipping E-mail</label>
-                                        <input type="text" id="disabledTextInput" class="form-control" value="{{ $ship->email }}">
-                                      </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="mb-3">
-                                        <label for="disabledTextInput" class="form-label">Shipping Phone</label>
-                                        <input type="text" id="disabledTextInput" class="form-control" value="{{ $ship->phone }}">
-                                      </div>
-                                </div>
-                                <div class="col-4">
-                                  <div class="mb-3">
-                                      <label for="disabledTextInput" class="form-label">Shipping Address</label>
-                                      <p> House/holding no :  {{ $ship->address_holdding }}, &nbsp; &nbsp; Thana:  {{ $ship->thana }}, <br class="mb-2">
-                                        District:  {{ $ship->district }}, &nbsp; &nbsp; &nbsp; &nbsp; Division: {{ $ship->division }}</p>
-                                    </div>
-                              </div>
-                             </div>
-                             @endforeach
-                            </fieldset>
-                          </form>
 
-                      </div>
-                </div>
-        
+              <div class="col-lg-6">
+                <div class="card border">
+                  <div class="card-header  text-center mt-2">
+                    <h5>Order Products List</h5>
+                  </div>
+                  @php
+                    $subtotal = 0;
+                  @endphp
+                  <div class="card-body">
+                    <table class="table table-hover table-bordered text-center">
+                      <thead>
+                        <tr>
+                          <th scope="col">Item No</th>
+                          <th scope="col">Product name</th>
+                          <th scope="col">Product Image</th>
+                          <th scope="col">Quantity</th>
+                          <th scope="col">Color</th>
+                          <th scope="col">Storage</th>
+                          <th scope="col">Price</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @foreach ( $order_items as  $order_item)
+                        <tr>
+                          <th scope="row"> {{ $loop->iteration }} </th>
+                          <td>{{ $order_item->product->product_name }}</td>
+                          <td style="text-align:center"> <img src="{{ asset($order_item->product_varient->image) }}" style="width: 50px;" alt=""></td>
+                          <td>${{ $order_item->product_varient->price }}x{{ $order_item->product_qty}}</td>
+                          <td>{{ $order_item->product_varient->colors->first()->color_name }}</td>
+                          <td>{{ $order_item->product_varient->storage}}</td>
+                          <td><span>$</span>{{ $order_item->product_qty*$order_item->product_varient->price}}</td>
+                          @php
+                              $subtotal +=  $order_item->product_qty*$order_item->product_varient->price;
+                          @endphp
+                        </tr>
+                        @endforeach
+                        <tr >
+                          <td colspan="6" style="text-align: right; padding-right:4px; font-size:16px; font-weight:500 " >Sub Total</td>
+                          <td style=" font-size:16px; font-weight:500 "  >${{ number_format($subtotal,2)  }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card border">
+                  <div class="card-header  text-center">
+                    <h5 class="pt-2">Shipping Address</h5>
+                  </div>
+                  @php
+                    $count = 1;
+                  @endphp
+                  <div class="card-body">
+                    <table class="table table-hover table-bordered ">
+                      <thead>
+                        <tr>
+                          <th colspan="2" class="text-center"> Address Details</th>
+                        </tr>
+                      </thead>
+                      <tbody >
+                        @foreach ( $shippings as  $shipping)
+                        <tr>
+                          <td class="pl-2 w-50"> Name</td>
+                          <td class="pl-2 w-50">{{ $shipping->user_name}}</td>
+                        </tr>
+                        <tr>
+                          <td class="pl-2 w-50">Phone</td>
+                          <td class="pl-2 w-50">{{ $shipping->phone }}</td>
+                        </tr>
+                        <tr>
+                          <td class="pl-2 w-50">Email</td>
+                          <td class="pl-2 w-50">{{ $shipping->email }}</td>
+                        </tr>
+                        <tr>
+                          <td class="pl-2 w-50">Address</td>
+                          <td class="pl-2 w-50">{{ $shipping->shiping_address }} </td>
+                        </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
+                  </div>
+                  </div>
+             
+              </div>
+             
             </div>
         </div><!-- sl-pagebody -->
       </div><!-- sl-mainpanel -->

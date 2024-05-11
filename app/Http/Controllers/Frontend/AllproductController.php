@@ -62,10 +62,11 @@ class AllproductController extends Controller
 public function price_product_search(Request $request)
 {
     $products = Product::whereHas('variants', function ($query) use ($request) {
-            $query->whereBetween('price', [$request->min_range, $request->max_range]);
+            $query->whereBetween('price', [ $request->max_range, $request->min_range]);
         })
         ->orderBy('id', 'desc')
         ->paginate(30);
+       // dd($products , $request->max_range ,$request->min_range) ;
 
     return view('pages.ajax-price_search', compact('products'))->render();
 }

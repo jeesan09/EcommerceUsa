@@ -303,24 +303,24 @@
                 <div class="invoice-single-details">
                     <h4 class="invoice-details-title">{{ __('Bill To:') }}</h4>
                     <ul class="details-list">
-                        <li class="list"> {{ __('Md. Alamin Hossain  ') }} </li>
-                        <li class="list"> <a href="#"> </a> Mirpur 10</li>
-                        <li class="list"> <a href="#"> 0167846483</a> </li>
+                        <li class="list"> {{ __('Md. xxxxxxxxxxxxx ') }} </li>
+                        <li class="list"> <a href="#"> </a> xxxxxxxxxxxxxxxxxxx</li>
+                        <li class="list"> <a href="#"> 01xxxxxxxxxxxxx</a> </li>
                     </ul>
                 </div>
                 <div class="invoice-single-details" style="float:right;margin-top:-120px;">
                     <h4 class="invoice-details-title">{{ __('Shipping To:') }}</h4>
                     <ul class="details-list">
                          @foreach ($shipping as $shipping)
-                            <li class="list"> <strong>{{ __('Customer Name') }}: </strong> {{ $shipping->frist_name }} </li>
+                            <li class="list"> <strong>{{ __('Customer Name') }}: </strong> {{ $shipping->user_name }} </li>
                             <li class="list"> <strong>{{ __('Phone No') }}: </strong> {{ $shipping->phone }} </li>
                             @if ($shipping->email=="No value")
                             @else 
                             <li class="list"> <strong>{{ __('E-mail') }}: </strong> {{ $shipping->email }} </li>
-                            <li class="list"> <strong>{{ __('District') }}: </strong> {{ $shipping->district }} </li>
-                            <li class="list"> <strong>{{ __('Thana') }}: </strong> {{ $shipping->thana }} </li>
+                          {{--   <li class="list"> <strong>{{ __('District') }}: </strong> {{ $shipping->district }} </li>
+                            <li class="list"> <strong>{{ __('Thana') }}: </strong> {{ $shipping->thana }} </li> --}}
                             @endif
-                            <li class="list"> <strong>{{ __('Address') }}: </strong>{{ $shipping->address_holdding }}</li>
+                            <li class="list"> <strong>{{ __('Address') }}: </strong>{{ $shipping->shiping_address }}</li>
                         @endforeach
                     </ul>
                 </div>
@@ -338,7 +338,7 @@
                     <th>{{ __('Product name') }}</th>
                     <th>{{ __('Image') }}</th>
                     <th>{{ __('Color') }}</th>
-                    <th>{{ __('Size') }}</th>
+                    <th>{{ __('Storage') }}</th>
                     <th>{{ __('Unit Price') }}</th>
                     <th>{{ __('Quantity') }}</th>
                     <th>{{ __('Total') }}</th>
@@ -348,32 +348,32 @@
                     @foreach ($orderItems as $orderitem )
                 <tr  class="table_footer_row">
                     <td>{{ $orderitem->product->product_name }}</td>
-                    <td><img src="{{ public_path($orderitem->product->product_img_one) }}" style="width:60px; height:60px;" alt=""></td>
-                    <td>{{ $orderitem->product_color }}</td>
-                    <td>{{ $orderitem->product_size }}</td>
-                    <td> <span> Tk.</span> {{ number_format($orderitem->product->product_price,2) }}</td>
+                    <td><img src="{{ public_path($orderitem->product_varient->image) }}" style="width:60px; height:60px;" alt=""></td>
+                    <td>{{ $orderitem->product_varient->colors->first()->color_name }}</td>
+                    <td>{{ $orderitem->product_varient->storage}}</td>
+                    <td><span>$</span>{{ $orderitem->product_varient->price}}</td>
                     <td>{{ $orderitem->product_qty }}</td>
-                    <td><span>Tk.</span> {{ number_format($orderitem->product->product_price * $orderitem->product_qty,2)}} </td>
+                    <td><span>$</span>{{ $orderitem->product_qty*$orderitem->product_varient->price}}</td>
                 </tr>
                 @endforeach
 
                 @foreach ($orders as $order )
                 <tr class="table_footer_row">
                     <td colspan="6"><strong>{{ __('Sub Total') }}</strong></td>
-                    <td><strong> <span> Tk. </span>{{ number_format($order->subtotal,2) }}</strong></td>
+                    <td><strong> <span> $</span>{{ number_format($order->subtotal,2) }}</strong></td>
                 </tr>
                 <tr class="table_footer_row">
                     <td colspan="6"><strong>{{ __('Service Charge') }}</strong></td>
-                    <td><strong> <span> Tk. </span>{{ number_format($order->payment_inside,2) }}</strong></td>
+                    <td><strong> <span>$</span>{{ number_format(0,2) }}</strong></td>
                 </tr>
              
                 <tr class="table_footer_row">
                     <td colspan="6"><strong>{{ __('Coupon Discount') }}</strong></td>
-                    <td><strong>  <span> Tk. </span> {{ number_format($order->copon_discount,2) }}</strong></td>
+                    <td><strong>  <span> $</span> {{ number_format(0,2) }}</strong></td>
                 </tr>
                 <tr class="table_footer_row">
                     <td colspan="6"><strong>{{ __('Total Amount') }}</strong></td>
-                    <td><strong> <span> Tk. </span> {{ number_format($order->total+$order->payment_inside,2) }}</strong></td>
+                    <td><strong> <span>$</span> {{ number_format($order->subtotal,2) }}</strong></td>
                 </tr>
                 @endforeach
                 </tbody>
@@ -382,7 +382,7 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-12" style="text-align:center; margin-top:20px;">
-            <strong>Thanks for staying with <span style="color:green;">sellspoints.com</span></span></strong>
+            <strong>Thanks for staying with <span style="color:green;">Company name</span></span></strong>
         </div>
     </div>
 </div>

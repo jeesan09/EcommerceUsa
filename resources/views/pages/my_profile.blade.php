@@ -85,9 +85,9 @@
                                         <tr>
                                             <th style="padding-left: 10px;"  > {{ $loop->iteration }}</th>
                                             <th style="padding-left: 10px;"  ># {{ $order->invoice }}</th>
-                                            <td style="padding-left: 10px;"> <span>&#2547;</span>{{ number_format($order->subtotal) }}</td>
-                                            <td style="padding-left: 10px;" > <span>&#2547;</span> {{ number_format($order->copon_discount) }}</td>
-                                            <td style="padding-left: 10px;"> <span>&#2547;</span> {{ number_format($order->total) }}</td>
+                                            <td style="padding-left: 10px;"> <span>$</span>{{ number_format($order->subtotal) }}</td>
+                                            <td style="padding-left: 10px;" > <span>$</span>{{ number_format($order->copon_discount) }}</td>
+                                            <td style="padding-left: 10px;"> <span>$</span>{{ number_format($order->total) }}</td>
                                             <td style="padding-left: 10px;">
                                                 @php
                                                  $newtime = strtotime($order->created_at)
@@ -126,7 +126,7 @@
                                             <td style="padding-left: 10px;">
                                                 <a href="{{ route('my.order.details',$order->id) }}" class="btn btn-outline-success btn-sm" title="Order Details"> <i class="icon-eye"></i></a>
                                                 @if($order->order_status=="1" OR $order->order_status=="2"  OR $order->order_status=="5")
-                                                <a href="{{ route('my.order.cancel',$order->id) }}" title="Cancle order" class="btn btn-outline-danger btn-sm @if ($order->order_status=="5")
+                                                <a onclick="return confirm('Are you sure you want to cancel this order ?')" href="{{ route('my.order.cancel',$order->id) }}" title="Cancel order" class="btn btn-outline-danger btn-sm @if ($order->order_status=="5")
                                                     disabled
                                                 @endif"> <i class="icon-close"></i></a>
                                                 @endif

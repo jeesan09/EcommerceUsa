@@ -114,7 +114,7 @@
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
           <li class="nav-item"><a href="{{ route('order.list') }}" class="nav-link @yield('order-sub')">Order List</a></li>
-          <li class="nav-item text-danger"><a href="{{ route('order.list.remove') }}" class="nav-link @yield('order-sub')">Remove  List</a></li>
+          <li class="nav-item text-danger"><a href="{{ route('order.list.remove') }}" class="nav-link @yield('order-remove')">Remove  List</a></li>
         </ul>
       </div>
 

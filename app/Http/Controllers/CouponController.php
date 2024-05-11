@@ -105,11 +105,10 @@ class CouponController extends Controller
 
     public function order_id($order_id)
     {
-       $shipping = Shipping::where('order_id',$order_id)->get();
-        
+       $shippings = Shipping::where('order_id',$order_id)->get();
       $order_items = OrderItem::where('order_id', $order_id)->get();
       
-       return view('admin.orderlist.order-details', compact('shipping','order_items'));
+       return view('admin.orderlist.order-details', compact('shippings','order_items'));
     }
 
     public function order_status($stutas_change)
