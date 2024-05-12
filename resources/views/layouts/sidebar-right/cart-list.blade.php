@@ -146,10 +146,12 @@
         // Perform different actions based on the selected payment method
         if (paymentMethod === 'online_payment') {
             // Redirect to the /stripe route with cart data and sub_total
-            window.location.href = '/stripe?payment_method=online_payment&carts=' + encodeURIComponent(cartsData) + '&sub_total=' + subTotal;
+         /*    window.location.href = '/stripe?payment_method=online_payment&sub_total=' + subTotal; */
+            window.location.href = '/stripe';
         } else if (paymentMethod === 'cash_on_delivery') {
             // Redirect to the / route with cart data and sub_total
-            window.location.href = '/checkout?payment_method=cash_on_delivery&carts=' + encodeURIComponent(cartsData) + '&sub_total=' + subTotal;
+           /*  window.location.href = '/checkout?payment_method=cash_on_delivery&carts=' + encodeURIComponent(cartsData) + '&sub_total=' + subTotal; */
+            window.location.href = '/checkout';
         }
     });
 

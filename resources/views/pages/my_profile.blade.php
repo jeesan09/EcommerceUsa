@@ -6,6 +6,11 @@
     min-width: 0px !important;
     border-radius: 4px ;
 }
+.table .thead-dark th {
+    color: #fff;
+    background-color: #c96 !important;
+    border-color: #f7f7f7 !important;
+}
 </style>
 @section('product_list')  My-profile-{{ Auth::user()->name}}  @endsection
 <main class="main" >
