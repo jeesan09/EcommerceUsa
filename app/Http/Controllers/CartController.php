@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin\ProductVarient;
 use App\Cart;
 use App\Copon;
 use App\Order;
@@ -156,6 +157,8 @@ class CartController extends Controller
                             'product_color' => null,
                             'created_at' => Carbon::now(),
                         ]);
+
+                        ProductVarient::where('id', $cart['product_varient_id'])->decrement('quantity', $cart['qty']);
                     }
                 }
 
