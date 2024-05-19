@@ -177,7 +177,14 @@ class CartController extends Controller
                 Log::error('Transaction failed: ' . $e->getMessage());
                 throw $e;
             }
-            $carts = Cart::where('user_ip', $user->id)->delete();
+
+            $carts = Cart::where('user_ip', $user->id)->get();
+            foreach ($carts as $cart) {
+                $cart->delete();
+            }
+
+
+         //   $carts = Cart::where('user_ip', $user->id)->delete();
             return redirect()->to('my-profile/')->with('success', 'Order successfuly submit');
         } else {
             dd(0);

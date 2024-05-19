@@ -148,7 +148,10 @@ class StripePaymentController extends Controller
                 // You might also throw the exception again to let the caller know something went wrong
                 throw $e;
             }
-            $carts = Cart::where('user_ip',   $user->id)->delete();
+            $carts = Cart::where('user_ip', $user->id)->get();
+            foreach ($carts as $cart) {
+                $cart->delete();
+            }
             return redirect()->to('my-profile/')->with('success', 'Payment successfuly Done !');
         } else {
             
