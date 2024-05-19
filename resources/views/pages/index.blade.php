@@ -8,7 +8,9 @@
 <style>
     .slider-image img {
         width: 100% !important;
-        height: 84vh;
+    height: auto;
+    overflow: auto;
+    object-fit: cover;
     }
  .product.product-11 .product-body {
     padding-bottom: 1.5rem !important;
@@ -22,7 +24,7 @@
 @section('content')
     <main class="main">
         <div class="intro-section bg-lighter mb-3">
-            <div class="container-fluid">
+            <div class="">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="slider-image">
@@ -67,7 +69,7 @@
                     <div class="products">
                         <div class="row justify-content-center">
                             @foreach ($products as $product)
-                                <div class="col-6 col-md-4 col-lg-3">
+                                <div class="col-6 col-md-4 col-lg-3 mb-4">
                                     <div class="product product-11 mt-v3 text-center product_data">
                                         <figure class="product-media">
                                             <a href="{{ route('product.details', $product->id) }}">
@@ -123,7 +125,7 @@
                         <div class="products">
                             <div class="row justify-content-center">
                                 @foreach ($products_category as $products_t)
-                                    <div class="col-6 col-md-4 col-lg-3">
+                                    <div class="col-6 col-md-4 col-lg-3 mb-4">
                                         <div class="product product-11 mt-v3 text-center product_data">
                                             <figure class="product-media">
                                                 <span class="product-label label-new">NEW</span>
@@ -407,7 +409,4 @@
 
     </main>
 
-    <style>
-
-    </style>
 @endsection

@@ -1,6 +1,6 @@
 @extends('admin.admin_layouts')
 @section('order') active show-sub @endsection
-@section('order-sub') active @endsection
+@section('order-remove') active @endsection
 @section('admin_content')
 
     <!-- ########## START: MAIN PANEL ########## -->

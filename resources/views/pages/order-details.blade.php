@@ -3,31 +3,36 @@
 @section('content')
 <main class="main">
     <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
-        <div class="container">
+        <div class="container-fluid">
             <h1 class="page-title">My Order Details <span>Shop</span></h1>
         </div><!-- End .container -->
     </div><!-- End .page-header -->
     <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
-        <div class="container">
+        <div class="container-fluid d-flex justify-content-between">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
                 <li class="breadcrumb-item"><a href="{{url('my-profile/') }}">My-Profile</a></li>
                 <li class="breadcrumb-item active" aria-current="page">My Order </li>
             </ol>
+            <div>
+              <div>
+                  <a class="btn btn-primary" href="{{ url('my-profile') }}"><i class="icon-long-arrow-left"></i>Back to Dashboard</a>
+              </div>
+            </div>
         </div><!-- End .container -->
     </nav><!-- End .breadcrumb-nav -->
 
     <div class="page-content">
         <div class="dashboard">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-md-6">
                       <div class="card border">
                         <div class="card-header  text-center mt-2">
                           <h5>Order Products List</h5>
                         </div>
                         @php
-                          $count = 1;
+                          $subtotal = 0;
                         @endphp
                         <div class="card-body">
                           <table class="table table-hover table-bordered text-center">
@@ -36,31 +41,40 @@
                                 <th scope="col">Item No</th>
                                 <th scope="col">Product name</th>
                                 <th scope="col">Product Image</th>
+                                <th scope="col">Quantity</th>
                                 <th scope="col">Color</th>
-                                <th scope="col">Size</th>
+                                <th scope="col">Storage</th>
                                 <th scope="col">Price</th>
                               </tr>
                             </thead>
                             <tbody>
                               @foreach ( $order_items as  $order_item)
                               <tr>
-                                <th scope="row">{{ $count++ }}</th>
+                                <th scope="row"> {{ $loop->iteration }} </th>
                                 <td>{{ $order_item->product->product_name }}</td>
-                                <td> <img src="{{ asset($order_item->product->product_img_one) }}" style="width: 50px;" alt=""></td>
-                                <td>{{ $order_item->product_color}}</td>
-                                <td>{{ $order_item->product_size}}</td>
-                                <td>    <span>&#2547; </span>&nbsp;  {{ $order_item->product->product_price}}</td>
+                                <td style="text-align:center"> <img src="{{ asset($order_item->product_varient->image) }}" style="width: 50px;" alt=""></td>
+                                <td>${{ $order_item->product_varient->price }}x{{ $order_item->product_qty}}</td>
+                                <td>{{ $order_item->product_varient->colors->first()->color_name }}</td>
+                                <td>{{ $order_item->product_varient->storage}}</td>
+                                <td><span>$</span>{{ $order_item->product_qty*$order_item->product_varient->price}}</td>
+                                @php
+                                    $subtotal +=  $order_item->product_qty*$order_item->product_varient->price;
+                                @endphp
                               </tr>
                               @endforeach
+                              <tr >
+                                <td colspan="6" style="text-align: right; padding-right:4px; font-size:16px; font-weight:500 " >Sub Total</td>
+                                <td style=" font-size:16px; font-weight:500 "  >${{ number_format($subtotal,2)  }}</td>
+                              </tr>
                             </tbody>
                           </table>
                         </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-md-6">
                       <div class="card border">
                         <div class="card-header  text-center">
-                          <h5>Shipping Address</h5>
+                          <h5 class="pt-2">Shipping Address</h5>
                         </div>
                         @php
                           $count = 1;
@@ -76,7 +90,7 @@
                               @foreach ( $shippings as  $shipping)
                               <tr>
                                 <td class="pl-2 w-50"> Name</td>
-                                <td class="pl-2 w-50">{{ $shipping->frist_name}}</td>
+                                <td class="pl-2 w-50">{{ $shipping->user_name}}</td>
                               </tr>
                               <tr>
                                 <td class="pl-2 w-50">Phone</td>
@@ -88,7 +102,7 @@
                               </tr>
                               <tr>
                                 <td class="pl-2 w-50">Address</td>
-                                <td class="pl-2 w-50">{{ $shipping->address_holdding }}, {{ $shipping->thana }}, {{ $shipping->district }},  {{ $shipping->division }}</td>
+                                <td class="pl-2 w-50">{{ $shipping->shiping_address }} </td>
                               </tr>
                               @endforeach
                             </tbody>

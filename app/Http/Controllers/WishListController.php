@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Wishlist;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 session_start();
 class WishListController extends Controller
 {
     public function index()
     {
-        $wishlists_pro =   Wishlist::where('user_ip',  session_id())->get();
+        $user_id =  Auth::user()->id;
+        $wishlists_pro =   Wishlist::where('user_ip', $user_id)->get();
         return view('pages.wishlist-page', compact('wishlists_pro'));
     }
 
@@ -18,7 +20,7 @@ class WishListController extends Controller
     public function add_wisshlist(Request $request)
     {
         $id = $request->product_id;
-        $user_ip =   session_id();
+        $user_ip =  Auth::user()->id;
         $check = Wishlist::where('product_id', $id)->first();
         if ($check) {
             return redirect()->back()->with('success_delete', 'Allready Product wishlist');

@@ -17,6 +17,7 @@ class OrderController extends Controller
 {
   public function proccessTo_check(Request $request)
   {
+    $user_id =  Auth::user()->id;
     $request->validate([
       'frist_name' => 'required',
       'phone' => 'required',
@@ -38,7 +39,7 @@ class OrderController extends Controller
       'created_at' => Carbon::now(),
     ]);
 
-    $carts = Cart::where('user_ip',  session_id())->latest()->get();
+    $carts = Cart::where('user_ip',  $user_id)->latest()->get();
 
     if ($carts->count() >= 1) {
       foreach ($carts as $cart) {
@@ -69,7 +70,7 @@ class OrderController extends Controller
         session()->forget('copon');
       }
 
-      $carts = Cart::where('user_ip',  session_id())->delete();
+      $carts = Cart::where('user_ip',  $user_id)->delete();
 
       return redirect()->to('my-profile/')->with('success', 'Order successfuly Submit');
     } else {
@@ -81,7 +82,7 @@ class OrderController extends Controller
   {
     if (Auth::check()) {
      $users = User::where('id', Auth::id())->get();
-      $orders =  Order::where('user_id', Auth::user()->id)->latest()->get();
+      $orders =  Order::where('user_id', Auth::user()->id)->latest()->paginate(10);
       return view('pages.my_profile', compact('orders','users'));
     } else {
       return redirect()->route('login');
@@ -168,69 +169,6 @@ public function user_update(Request $request)
     ]);
 
     return redirect()->back()->with('success','Profile Successfuly Updated');
-}
-
-// Proccess to check out buy now page 
-public function proccessTo_check_buyNow(Request $request)
-{
-  $request->validate([
-    'frist_name' => 'required',
-    'phone' => 'required',
-    'email' => 'required',
-    'country' => 'required',
-    'division' => 'required',
-    'district' => 'required',
-    'thana' => 'required',
-    'address_holdding' => 'required'
-  ]);
-  $order_id = Order::insertGetId([
-    'user_id' => session_id(),
-    'invoice' =>  mt_rand(10000000, 99999999),
-    'payemnt_type' => $request->payment_type,
-    'total' => $request->total,
-    'payment_inside'=>$request->payment_inside,
-    'subtotal' => $request->subtotal,
-    'copon_discount' => $request->discount,
-    'created_at' => Carbon::now(),
-  ]);
-
-  $carts = Cart::where('user_ip',  session_id())->latest()->get();
-
-  if ($carts->count() >= 1) {
-    foreach ($carts as $cart) {
-      OrderItem::insert([
-        'order_id' => $order_id,
-        'product_id' => $cart->product_id,
-        'product_qty' => $cart->qty,
-        'product_size' => $cart->product_size,
-        'product_color' => $cart->product_color,
-        'created_at' => Carbon::now(),
-      ]);
-    }
-    Shipping::insert([
-      'order_id' => $order_id,
-      'frist_name' => $request->frist_name,
-      'last_name' => $request->last_name,
-      'phone' => $request->phone,
-      'email' => $request->email,
-      'country' => $request->country,
-      'division' => $request->division,
-      'district' => $request->district,
-      'thana' => $request->thana,
-      'address_holdding' => $request->address_holdding,
-      'created_at' => Carbon::now(),
-    ]);
-
-    if (Session::has('copon')) {
-      session()->forget('copon');
-    }
-
-    $carts = Cart::where('user_ip',  session_id())->delete();
-
-    return redirect()->to('/buynow/order-complate')->with('success', 'Order successfuly Submit');
-  } else {
-    return redirect()->route('all.product')->with('success_delete', 'Cart Is empty Please try Again');
-  }
 }
 
 

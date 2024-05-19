@@ -5,6 +5,13 @@
 @section('product_list')
     all-product-list
 @endsection
+<style>
+    .section-height {
+    height: 60% !important;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+</style>
 @section('content')
     <main class="main">
         <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
@@ -19,7 +26,7 @@
         <div class="page-content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-9">
+                    <div class="col-lg-10">
                         <div class="toolbox">
                             <div class="toolbox-right">
                                 <div class="toolbox-sort">
@@ -92,7 +99,7 @@
                                 }
                             </style>
 
-                            <nav aria-label="Page navigation">
+                            <nav aria-label="Page navigation all-product">
                                 <ul class="pagination justify-content-center">
                                     {{ $products->links() }}
                                 </ul>
@@ -101,7 +108,7 @@
 
 
                     </div><!-- End .col-lg-9 -->
-                    <aside class="col-lg-3 order-lg-first">
+                    <aside class="col-lg-2 order-lg-first">
                         <div class="sidebar sidebar-shop">
                             <div class="widget widget-clean">
                                 <label>Filters:</label>
@@ -125,7 +132,7 @@
                                     <div class="widget-body">
                                         <div class="">
                                             @foreach ($categoris as $category)
-                                            <div class=" product_data d-flex justify-content-between">
+                                            <div class=" product_data d-flex justify-content-between  pr-4">
 
                                                 <div class="category_pro">
                                                     <a href="{{ url('product/category',$category->id) }}" class="text-dark">
@@ -148,52 +155,6 @@
                                     </div><!-- End .widget-body -->
                                 </div><!-- End .collapse -->
                             </div><!-- End .widget -->
-
-                            {{-- <div class="widget widget-collapsible">
-                            <h3 class="widget-title">
-                                <a data-toggle="collapse" href="#widget-2" role="button" aria-expanded="true" aria-controls="widget-2">
-                                    Size
-                                </a>
-                            </h3>
-
-                            <div class="collapse show" id="widget-2">
-                                <div class="category_pro">
-                                        <button class="my_button_s border-0 bg-white" value="S"> Small(S)</button>
-                                        <br>
-                                        <button class="my_button_m border-0 bg-white" value="M"> Medium(M)</button>
-                                        <br>
-                                        <button class="my_button_l border-0 bg-white" value="L"> Large(L)</button>
-                                        <br>
-                                        <button class="my_button_xl border-0 bg-white" value="XL"> Exra Large(XL)</button>
-                                        <br>
-                                        <button class="my_button_xxl border-0 bg-white" value="XL"> Double XL(XXl)</button>
-
-                                </div>
-                            </div>
-                        </div> --}}
-
-                            {{-- <div class="widget widget-collapsible">
-                            <h3 class="widget-title">
-                                <a data-toggle="collapse" href="#widget-3" role="button" aria-expanded="true" aria-controls="widget-3">
-                                    Colour
-                                </a>
-                            </h3>
-
-                            <div class="collapse show" id="widget-3">
-                                <div class="widget-body">
-                                    <div class="filter-colors">
-                                        <a href="#" style="background: #b87145;"><span class="sr-only">Color Name</span></a>
-                                        <a href="#" style="background: #f0c04a;"><span class="sr-only">Color Name</span></a>
-                                        <a href="#" style="background: #333333;"><span class="sr-only">Color Name</span></a>
-                                        <a href="#" style="background: #cc3333;"><span class="sr-only">Color Name</span></a>
-                                        <a href="#" style="background: #3399cc;"><span class="sr-only">Color Name</span></a>
-                                        <a href="#" style="background: #669933;"><span class="sr-only">Color Name</span></a>
-                                        <a href="#" style="background: #f2719c;"><span class="sr-only">Color Name</span></a>
-                                        <a href="#" style="background: #ebebeb;"><span class="sr-only">Color Name</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
 
                             <div class="widget widget-collapsible">
                                 <h3 class="widget-title">
@@ -239,7 +200,7 @@
                                 <div class="collapse show" id="widget-4">
                                     <div class="">
                                         @foreach ($brands as $brand)
-                                            <div class=" product_data d-flex justify-content-between">
+                                            <div class=" product_data d-flex justify-content-between  pr-4">
                                                 <div class="category_pro">
                                                     <a  href="{{ url('product/brand',$brand->id) }}" class="text-dark"> {{ $brand->brand_name }}</a>
                                                     <input type="hidden" id="brand_id" value="{{ $brand->id }}">

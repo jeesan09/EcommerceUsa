@@ -34,11 +34,11 @@
                         <tr>
                             <td  class="px-3" >{{ $count ++ }}</td>
                             <td>{{ $order_value->product_name }}</td>
-                            <td>  <img src="{{ asset($order_value->product_img_one) }}" width="60px" height="50px"> </td>
-                            <td>{{ $order_value->product_color }}</td>
-                            <td>{{ $order_value->product_qty }}</td>
-                            <td> {{ $order_value->product_size }}</td>
-                            <td class="text-right pr-4"> &#2547;  {{ $order_value->product_price }} </td>
+                            <td>  <img src="" width="60px" height="50px"> </td>
+                            <td>{{-- {{ $order_value->product_color }} --}}</td>
+                            <td>{{-- {{ $order_value->product_qty }} --}}</td>
+                            <td> {{-- {{ $order_value->product_size }} --}}</td>
+                            <td class="text-right pr-4"> &#2547; {{--  {{ $order_value->product_price }}  --}}</td>
                         </tr>
                         @endforeach
                         <tr>
@@ -51,7 +51,7 @@
                         </tr> 
                         <tr>
                             <th colspan="6" class="text-right pr-4"> <strong>Total</strong></th>
-                            <th class="text-right pr-2"><strong> &#2547;  {{$order_value->payment_inside + $order_value->total }} </strong></th>
+                            <th class="text-right pr-2"><strong> &#2547;  {{-- {{$order_value->payment_inside + $order_value->total }} --}} </strong></th>
                         </tr> 
                        
                         <strong>Invoice :#{{ $order_value->invoice }}</strong>
@@ -74,7 +74,7 @@
                             <table class="table table-border border-0">
                                 <tr>
                                     <th>Full name:</th>
-                                    <th>{{ $order_value2->frist_name }}</th>
+                                    <th>{{ $order_value2->user_name }}</th>
                                 </tr>
                                 <tr>
                                     <th>Phone No:</th>
@@ -82,7 +82,7 @@
                                 </tr>
                                 <tr>
                                     <th>Address: </th>
-                                    <th>{{  $order_value2->address_holdding  }}</th>
+                                    <th>{{  $order_value2->shiping_address  }}</th>
                                 </tr>
                             </table>
                         </div>

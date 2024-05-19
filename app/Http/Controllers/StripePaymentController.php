@@ -1,5 +1,8 @@
 <?php
 namespace App\Http\Controllers;
+
+use App\Admin\ProductVarient;
+use App\Cart;
 use Stripe;
 use Session;
 use App\Order;
@@ -21,16 +24,20 @@ class StripePaymentController extends Controller
      */
     public function stripe(Request $request)
     {
-        // Retrieve the currently authenticated user
         $user = Auth::user();
-    
-        // Retrieve additional data and subtotal from the request
-        $CartData = json_decode($request->input('carts'), true);
-        $subtotal = $request->input('sub_total');
-
-        //return $subtotal;
-    
-        // Pass user data, additional data, and subtotal to the view
+        $subtotal = Cart::all()
+            ->where('user_ip', $user->id)
+            ->sum(function ($t) {
+                return $t->price * $t->qty;
+            });
+            $CartData = DB::table('products')
+            ->join('carts', 'products.id', '=', 'carts.product_id')
+            ->where('user_ip', $user->id)
+            ->get();
+        if($subtotal <= 0 ){
+            Session::flash('success_delete', 'Cart list is empty');
+         return redirect()->back();
+        }
         return view('stripe', compact('user', 'CartData', 'subtotal'));
     }
     
@@ -46,6 +53,7 @@ class StripePaymentController extends Controller
         $carts = json_decode($request->input('cartData'), true);
         $subtotal = $request->input('subtotal');
 
+       
      //   return $subtotal;
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
@@ -110,9 +118,11 @@ class StripePaymentController extends Controller
                         'product_id' => $cart['product_id'],
                         'product_qty' => $cart['qty'],
                         'product_variant_id' => $cart['product_varient_id'],
-                        'product_color' => $cart['product_varient']['color_id'],
+                        'product_color' =>null,
                         'created_at' => Carbon::now(),
                     ]);
+
+                    ProductVarient::where('id', $cart['product_varient_id'])->decrement('quantity', $cart['qty']);
                     }
                 }
 
@@ -138,10 +148,8 @@ class StripePaymentController extends Controller
                 // You might also throw the exception again to let the caller know something went wrong
                 throw $e;
             }
-
-            Session::flash('success', 'Payment successful!');
-            return back();
-
+            $carts = Cart::where('user_ip',   $user->id)->delete();
+            return redirect()->to('my-profile/')->with('success', 'Payment successfuly Done !');
         } else {
             
          Session::flash('error', 'Payment failed!');

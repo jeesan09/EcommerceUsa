@@ -17,10 +17,8 @@ class PdfController extends Controller
        $orders = Order::where('id',$order_id)->get();
        $shipping = Shipping::where('order_id',$order_id)->get();
        $orderItems = OrderItem::where('order_id',$order_id)->get();
-
-
         $pdf = Pdf::loadView('admin.invoice.billing_invoice',compact('orderItems','orders','shipping'));
-        return $pdf->stream('Sells-points-invoice.pdf');
+        return $pdf->stream('Order-invoice.pdf');
     }
 
     public function download_pdf()
