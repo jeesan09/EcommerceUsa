@@ -156,13 +156,13 @@
                                 </div><!-- End .collapse -->
                             </div><!-- End .widget -->
 
-                            <div class="widget widget-collapsible">
+                            {{-- <div class="widget widget-collapsible">
                                 <h3 class="widget-title">
                                     <a data-toggle="collapse" href="#widget-5" role="button" aria-expanded="true"
                                         aria-controls="widget-5">
                                         Price
                                     </a>
-                                </h3><!-- End .widget-title -->
+                                </h3>
                                 <div class="collapse show" id="widget-5">
 
                                     <div class="price-input">
@@ -185,9 +185,14 @@
                                         <input type="range" id="range_price_right" class="range-max" min="0"
                                             max="2000" value="1200" step="50">
                                     </div>
-                                </div><!-- End .collapse -->
+                                </div>
+                                
+                             
 
-                            </div><!-- End .widget -->
+                            </div> --}}
+                            
+                            
+                            <!-- End .widget -->
                             <hr>
                             <div class="widget widget-collapsible">
                                 <h3 class="widget-title">
