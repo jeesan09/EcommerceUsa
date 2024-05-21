@@ -154,21 +154,9 @@
             window.location.href = '/checkout';
         }
     });
-
-
-
-
-
-
-
-
-
-            // Your existing JavaScript code for cart functionality
-
-
-
-
+       // Your existing JavaScript code for cart functionality
             $('.increment').click(function() {
+                  var increment = 1;
                   var cartId = $(this).data('cart-id');
                   var inputField = $(this).closest('.d-flex').find('.counter');
                   var value = parseInt(inputField.val());
@@ -176,10 +164,11 @@
                   value++;
                   inputField.val(value);
 
-                  updateCart(cartId, value);
+                  updateCart(cartId, value, increment, inputField);
             });
 
             $('.decrement').click(function() {
+                  var increment = 0;
                   var cartId = $(this).data('cart-id');
                   var inputField = $(this).closest('.d-flex').find('.counter');
                   var value = parseInt(inputField.val());
@@ -188,7 +177,7 @@
                         value--;
                         inputField.val(value);
                   }
-                  updateCart(cartId, value);
+                  updateCart(cartId, value, increment, null);
             });
 
             $('.remove_button').click(function() {
@@ -238,7 +227,7 @@
 
       });
 
-      function updateCart(cartId, qty) {
+      function updateCart(cartId, qty, increment, inputField) {
             var cartId = cartId;
             var qty = qty;
             $.ajax({
@@ -246,7 +235,8 @@
                   url: "/cart-update-qty",
                   data: {
                         cartId: cartId,
-                        qty: qty
+                        qty: qty,
+                        increment: increment,
                   },
                   success: function(response) {
                         if (response.success == "Cart item quantity updated") {
@@ -254,7 +244,18 @@
                               alertify.set("notifier", "position", "bottom-left");
                               alertify.success("Cart item quantity updated");
                         } else {
-                              alertify.set("notifier", "position", "top-right");
+                         if(response.warning){
+                            alertify.set("notifier", "position", "bottom-left");
+                            alertify.warning("Out of stock ! Please check quantity. ");
+                           if(inputField !=null){
+                              var value = parseInt(inputField.val());
+                              value = isNaN(value) ? 1 : value;
+                              value--;
+                              inputField.val(value);
+                           }
+                          return;
+                           }
+                              alertify.set("notifier", "position", "bottom-left");
                               alertify.warning("Something wrong");
                         }
                   },

@@ -38,6 +38,12 @@ class CartController extends Controller
     public function cart_update_qty(Request $request)
     {
         $cart = Cart::find($request->cartId);
+        $varient_product = ProductVarient::findOrFail($cart->product_varient_id);
+        if($request->qty > $varient_product->quantity && $request->increment==1){
+            return response()->json([
+                'warning' => 'Please check valid quantity',
+            ]);
+           }
         $cart->qty = $request->qty;
         $cart->save();
         return response()->json([
@@ -74,9 +80,20 @@ class CartController extends Controller
         $varient_id = $values[0];
         $product_id = $request->product_id;
         $qty = $request->qty;
+
+        
         $check = Cart::where('product_id', $product_id)->where('product_varient_id', $varient_id)->where('user_ip', $user_id)->first();
 
         if ($check) {
+           $varient_product = ProductVarient::findOrFail($varient_id);
+
+           if(($check->qty+$qty) > $varient_product->quantity ){
+           
+            return response()->json([
+                'warning' => 'Please check valid quantity',
+            ]);
+           }
+
             $check->qty += $qty;
             $check->save();
             return response()->json([

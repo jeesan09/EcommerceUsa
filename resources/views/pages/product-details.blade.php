@@ -55,6 +55,12 @@
     .widget {
         margin-bottom: 0.5rem !important;
     }
+
+    .btn-light.disabled, .btn-light:disabled {
+        color: #212529 !important;
+    background-color: #dadde1 !important;
+    border-color: #d5d5d5 !important;
+}
 </style>
 @section('content')
     <main class="main">
@@ -189,7 +195,7 @@
                                             <div class="qty-container">
                                                 <button class="qty-btn-minus btn-light" type="button"><i
                                                         class="icon-minus"></i></button>
-                                                <input type="text" name="qty" value="1" class="input-qty" />
+                                                <input type="number" name="qty" value="1" class="input-qty" />
                                                 <button class="qty-btn-plus btn-light" type="button"><i
                                                         class="icon-plus"></i></button>
                                             </div>
@@ -209,10 +215,14 @@
                                             </div>
 
                                             <div class="w-100">
+                                             
+                                                <input type="hidden" class="input_current_stock" value="{{ $product_quantity }}">
                                                 <p class="left_stock">
                                                     @if ($product_quantity > 0)
-                                                        {{ $product_quantity }} left stock
+                                                        {{ $product_quantity }} left in stock
+                                                      
                                                     @endif
+
                                                 </p>
                                             </div>
                                         </div>
@@ -278,22 +288,25 @@
     var buttonPlus = $(".qty-btn-plus");
     var buttonMinus = $(".qty-btn-minus");
 
-    var incrementPlus = buttonPlus.click(function() {
-        var $n = $(this)
-            .parent(".qty-container")
-            .find(".input-qty");
-        $n.val(Number($n.val()) + 1);
-    });
+    buttonPlus.click(function() {
+        if ($(this).hasClass('disabled')) {
+                    return; 
+                }
+                var $n = $(this)
+                    .parent(".qty-container")
+                    .find(".input-qty");
+                $n.val(Number($n.val()) + 1).change();
+            });
 
-    var incrementMinus = buttonMinus.click(function() {
-        var $n = $(this)
-            .parent(".qty-container")
-            .find(".input-qty");
-        var amount = Number($n.val());
-        if (amount > 0) {
-            $n.val(amount - 1);
-        }
-    });
+            buttonMinus.click(function() {
+                var $n = $(this)
+                    .parent(".qty-container")
+                    .find(".input-qty");
+                var amount = Number($n.val());
+                if (amount > 1) {
+                    $n.val(amount - 1).change();
+                }
+            });
 
     $(document).ready(function() {
         // Initially display the price of the first selected condition
@@ -318,6 +331,17 @@
             }
         });
 
+        $('.input-qty').on('change', function(){
+
+            var input_qty = $('.input-qty').val();
+            var stock_qty = $('.input_current_stock').val();
+            if(input_qty == stock_qty){
+                buttonPlus.addClass('disabled');
+            }else{
+                buttonPlus.removeClass('disabled');
+            }
+           });
+
         $('input[type=radio][name=storage]').change(function() {
             var selectedValue = $(this).val();
             var values = selectedValue.split(',');
@@ -330,6 +354,7 @@
                 priceElement.show();
                 $('.price').val(priceElement.text().trim());
                 $('#product_price').val(priceElement.text().trim());
+                $('.input-qty').val(1).change();
             }
             if (productQuantity > 0) {
                 $('.left_stock').show();
@@ -341,8 +366,10 @@
                 $('.addToCartButton').hide();
                 $('.addToCartButtonHide').show();
             }
+            $('.input_current_stock').val(productQuantity);
         });
 
+       
         var storage = $('input[type=radio][name=storage]').val();
         var values = storage.split(',');
         var productQuantityCheck = values[1];
@@ -375,6 +402,11 @@
                         alertify.success("Product succesfuly add cart");
                         $("#cart_realaod").load(location.href + " #cart_realaod");
                     } else {
+                        if(response.warning){
+                            alertify.set("notifier", "position", "top-right");
+                          alertify.warning("Out of stock ! Please check quantity ");
+                          return;
+                        }
                         alertify.set("notifier", "position", "top-right");
                         alertify.warning("Something wrong");
 

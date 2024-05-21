@@ -364,6 +364,12 @@
                 '<strong class="text-danger d-flex align-items-center justify-content-start">&nbsp; <i class="icon ion-ios-checkmark d-flex align-items-center font_size"></i> {{ session('success_delete') }}</strong>'
             );
         @endif
+        @if (session('warning'))
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.warning(
+                '<strong class="text-danger d-flex align-items-center justify-content-start">&nbsp; <i class="icon ion-ios-checkmark d-flex align-items-center font_size"></i> {{ session('warning') }}</strong>'
+            );
+        @endif
     </script>
 
     <!-- alertify alert er jonno  -->
