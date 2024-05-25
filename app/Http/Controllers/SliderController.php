@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\facades\Image;
 
-
 class SliderController extends Controller
 {
     public function __construct()
@@ -29,20 +28,22 @@ class SliderController extends Controller
 
     public function s_productAdded(Request $request)
     {
-
         $request->validate([
             'slider_title' => 'required|max:255',
             'slider_image' => 'required|mimes:jpg,jpeg,gif,png,webp',
         ]);
 
         $image_one = $request->file('slider_image');
-        $name_gena = hexdec(uniqid()) . "." . $image_one->getClientOriginalExtension();
-        \Image::make($image_one)->resize(1600, 600)->save('frotend/img/product/upload/' . $name_gena);
+        $name_gena = hexdec(uniqid()) . '.' . $image_one->getClientOriginalExtension();
+        \Image::make($image_one)
+            ->resize(1600, 600)
+            ->save('frotend/img/product/upload/' . $name_gena);
         $image_url = 'frotend/img/product/upload/' . $name_gena;
 
         SliderModel::insert([
             'slider_title' => $request->slider_title,
             'slider_image' => $image_url,
+            'status' => 0,
             'created_at' => Carbon::now(),
         ]);
 
@@ -56,26 +57,23 @@ class SliderController extends Controller
     }
     public function s_deactive_prod($id)
     {
-        SliderModel::findOrfail($id)->update([
-            'status' => 0,
-            'updated_at' => Carbon::now(),
-        ]);
-        return back()->with('success_delete', 'Slider successfully deactived');
+        $slider = SliderModel::findOrFail($id);
+        $slider->status = 0;
+        $slider->save();
+        return back()->with('success_delete', 'Slider successfully deactivated');
     }
-
 
     public function s_active_prod($id)
     {
-        SliderModel::findOrfail($id)->update([
-            'status' => 1,
-            'updated_at' => Carbon::now()
-        ]);
+        $slider =  SliderModel::findOrfail($id);
+        $slider->status = 1;
+        $slider->save();
         return back()->with('success', 'Slider successfully actived');
     }
 
     public function s_product_delete($id)
     {
-        $pro_image =  SliderModel::where('id', $id)->get();
+        $pro_image = SliderModel::where('id', $id)->get();
         foreach ($pro_image as $pro_img) {
             unlink($pro_img->slider_image);
         }
@@ -87,18 +85,12 @@ class SliderController extends Controller
     {
         $categories = Category::latest()->get();
         $brands = Brand::latest()->get();
-        $product_edit = DB::table("slider_models")->select("slider_models.*")
-            ->join("brands", "brands.id", "=", "slider_models.brand_name")
-            ->join("categories", "categories.id", "=", "slider_models.category_name")->where('slider_models.id', $id)
-            ->get();
+        $product_edit = DB::table('slider_models')->select('slider_models.*')->join('brands', 'brands.id', '=', 'slider_models.brand_name')->join('categories', 'categories.id', '=', 'slider_models.category_name')->where('slider_models.id', $id)->get();
         return view('admin.slider.edit', compact('product_edit', 'categories', 'brands'));
     }
 
-
-
     public function s_productUpdate(Request $request, $id)
     {
-
         $request->validate([
             'product_name' => 'required|max:255',
             'product_code' => 'required|max:255',
@@ -110,7 +102,6 @@ class SliderController extends Controller
             'product_color' => 'required',
             'sort_description' => 'required',
             'long_description' => 'required',
-
         ]);
 
         SliderModel::find($id)->update([
@@ -137,12 +128,13 @@ class SliderController extends Controller
         $old_img3 = $request->image_three;
 
         if ($old_img1 != '') {
-
             if ($request->has('product_img_one')) {
                 unlink($old_img1);
                 $image_one = $request->file('product_img_one');
-                $name_gena = hexdec(uniqid()) . "." . $image_one->getClientOriginalExtension();
-                \Image::make($image_one)->resize(2070, 470)->save('frotend/img/product/upload/' . $name_gena);
+                $name_gena = hexdec(uniqid()) . '.' . $image_one->getClientOriginalExtension();
+                \Image::make($image_one)
+                    ->resize(2070, 470)
+                    ->save('frotend/img/product/upload/' . $name_gena);
                 $image_url = 'frotend/img/product/upload/' . $name_gena;
                 SliderModel::find($id)->update([
                     'product_img_one' => $image_url,
@@ -153,8 +145,10 @@ class SliderController extends Controller
             if ($request->has('product_img_two')) {
                 unlink($old_img2);
                 $image_two = $request->file('product_img_two');
-                $name_gena2 = hexdec(uniqid()) . "." . $image_two->getClientOriginalExtension();
-                \Image::make($image_two)->resize(470, 265)->save('frotend/img/product/upload/' . $name_gena2);
+                $name_gena2 = hexdec(uniqid()) . '.' . $image_two->getClientOriginalExtension();
+                \Image::make($image_two)
+                    ->resize(470, 265)
+                    ->save('frotend/img/product/upload/' . $name_gena2);
                 $image_url2 = 'frotend/img/product/upload/' . $name_gena2;
                 SliderModel::find($id)->update([
                     'product_img_two' => $image_url2,
@@ -165,8 +159,10 @@ class SliderController extends Controller
             if ($request->has('product_img_three')) {
                 unlink($old_img3);
                 $image_three = $request->file('product_img_three');
-                $name_gena3 = hexdec(uniqid()) . "." . $image_three->getClientOriginalExtension();
-                \Image::make($image_three)->resize(470, 470)->save('frotend/img/product/upload/' . $name_gena3);
+                $name_gena3 = hexdec(uniqid()) . '.' . $image_three->getClientOriginalExtension();
+                \Image::make($image_three)
+                    ->resize(470, 470)
+                    ->save('frotend/img/product/upload/' . $name_gena3);
                 $image_url3 = 'frotend/img/product/upload/' . $name_gena3;
                 SliderModel::find($id)->update([
                     'product_img_three' => $image_url3,
@@ -178,37 +174,41 @@ class SliderController extends Controller
         }
     }
 
-    function create_logo(){
-       
-       $logo = Websitelogo::find(1);
-        return view('admin.logo.index',compact('logo'));
+    function create_logo()
+    {
+        $logo = Websitelogo::find(1);
+        return view('admin.logo.index', compact('logo'));
     }
 
-    function logo_add(Request $request){
+    function logo_add(Request $request)
+    {
+        $id = 1;
+        if ($request->has('product_img_one')) {
+            $image_one = $request->file('product_img_one');
+            $name_gena = hexdec(uniqid()) . '.' . $image_one->getClientOriginalExtension();
+            \Image::make($image_one)
+                ->resize(250, 70)
+                ->save('frotend/img/product/upload/' . $name_gena);
+            $image_url = 'frotend/img/product/upload/' . $name_gena;
+            Websitelogo::find($id)->update([
+                'header_logo' => $image_url,
+                'updated_at' => Carbon::now(),
+            ]);
+        }
 
-            $id = 1;
-            if ($request->has('product_img_one')) {
-                $image_one = $request->file('product_img_one');
-                $name_gena = hexdec(uniqid()) . "." . $image_one->getClientOriginalExtension();
-                \Image::make($image_one)->resize(250, 70)->save('frotend/img/product/upload/' . $name_gena);
-                $image_url = 'frotend/img/product/upload/' . $name_gena;
-                Websitelogo::find($id)->update([
-                    'header_logo' => $image_url,
-                    'updated_at' => Carbon::now(),
-                ]);
-            }
+        if ($request->has('product_img_two')) {
+            $image_two = $request->file('product_img_two');
+            $name_gena2 = hexdec(uniqid()) . '.' . $image_two->getClientOriginalExtension();
+            \Image::make($image_two)
+                ->resize(300, 180)
+                ->save('frotend/img/product/upload/' . $name_gena2);
+            $image_url2 = 'frotend/img/product/upload/' . $name_gena2;
+            Websitelogo::find($id)->update([
+                'footer_logo' => $image_url2,
+                'updated_at' => Carbon::now(),
+            ]);
+        }
 
-            if ($request->has('product_img_two')) {
-                $image_two = $request->file('product_img_two');
-                $name_gena2 = hexdec(uniqid()) . "." . $image_two->getClientOriginalExtension();
-                \Image::make($image_two)->resize(300, 180)->save('frotend/img/product/upload/' . $name_gena2);
-                $image_url2 = 'frotend/img/product/upload/' . $name_gena2;
-                Websitelogo::find($id)->update([
-                    'footer_logo' => $image_url2,
-                    'updated_at' => Carbon::now(),
-                ]);
-            }
-
-            return redirect()->back()->with('success', 'Image Successfully upload.');
+        return redirect()->back()->with('success', 'Image Successfully upload.');
     }
 }

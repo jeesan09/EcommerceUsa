@@ -26,9 +26,11 @@ class UserController extends Controller
 
     public function changeStatus(Request $request, $id)
     {
+       
         //return $request;
         $user = User::find($id);
         $user->status = $request->status;
+        
         $user->save();
 
         // Send email to the user if their account is activated

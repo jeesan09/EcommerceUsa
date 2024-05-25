@@ -40,15 +40,19 @@
                                     @enderror
 
                                 </div><!-- End .form-group -->
-
+                               
                                 <div class="form-footer  d-flex justify-content-between">
-                                    <button type="submit" class="btn btn-outline-primary-2">
-                                        <span>LOG IN</span> <i class="icon-long-arrow-right"></i>
-                                    </button>
-
-                                    <div class="text-center ">
+                                    <div class="text-center">
                                         <a href="/register" style="text-decoration: none; color:white" class="btn btn-primary">Register</a>
-                                    </div>                                   
+                                    </div> 
+                                    <div>
+                                        <button type="submit" class="btn btn-outline-primary-2">
+                                            <span>LOG IN</span> <i class="icon-long-arrow-right"></i>
+                                        </button>
+                                    </div>
+                                    
+
+                                                                   
 
                                     {{-- <div class="custom-control custom-checkbox">
                                      
