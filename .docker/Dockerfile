@@ -28,7 +28,7 @@ RUN apt update && apt install -y \
     autoconf\
     libpng-dev\
     libjpeg62-turbo-dev\
-    libfreetype6-dev\
+    libfreetype6-dev
 # zlib1g-dev \
 # libmagick++-dev \
 # libmagickwand-dev \
@@ -36,12 +36,6 @@ RUN apt update && apt install -y \
 # libwebp-dev \ 
 # libxpm-dev\
 # libpq-dev 
-
-
-
-
-
-
 
 
 # Clear cache
