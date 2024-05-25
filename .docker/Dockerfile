@@ -26,10 +26,9 @@ RUN apt update && apt install -y \
     libzip-dev\
     libxml2-dev\
     autoconf\
-    libpng-dev
-# locales \
-libjpeg62-turbo-dev \
- libfreetype6-dev \
+    libpng-dev\
+    libjpeg62-turbo-dev\
+    libfreetype6-dev\
 # zlib1g-dev \
 # libmagick++-dev \
 # libmagickwand-dev \
