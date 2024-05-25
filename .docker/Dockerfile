@@ -28,22 +28,22 @@ RUN apt update && apt install -y \
     autoconf\
     libpng-dev
 # locales \
-# libjpeg62-turbo-dev \
-# libfreetype6-dev \
-# zlib1g-dev \
+ libjpeg62-turbo-dev \
+ libfreetype6-dev \
+ zlib1g-dev \
 # libmagick++-dev \
 # libmagickwand-dev \
 # libpq-dev \
 # libwebp-dev \ 
 # libxpm-dev\
 # libpq-dev 
-
+libpng-dev \
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install extensions
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp --with-xpm --with-avif \
+RUN docker-php-ext-install gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/lib/x86_64-linux-gnu/ --with-png-dir=/usr/include/
     && docker-php-ext-install -j$(nproc) gd \
 #docker-php-ext-configure gd \
     #&& docker-php-ext-install -j$(nproc) gd \
