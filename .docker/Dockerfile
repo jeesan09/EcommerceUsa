@@ -43,8 +43,10 @@ RUN apt update && apt install -y \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install extensions
-RUN docker-php-ext-configure gd \
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp --with-xpm --with-avif \
     && docker-php-ext-install -j$(nproc) gd \
+#docker-php-ext-configure gd \
+    #&& docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install pdo_mysql \
     && docker-php-ext-install mysqli \
     && docker-php-ext-install zip \
