@@ -165,12 +165,12 @@ $mail = new PHPMailer(true);
 try {
     $mail->SMTPDebug = 2;                                       
     $mail->isSMTP();                                            
-    $mail->Host       = 'sandbox.smtp.mailtrap.io';                    
+    $mail->Host       = 'smtp-relay.brevo.com';                    
     $mail->SMTPAuth   = true;                             
-    $mail->Username   = '4d94bda08e4688';                 
-    $mail->Password   = 'b1113788bb436e';                        
+    $mail->Username   = '75798b001@smtp-brevo.com';                 
+    $mail->Password   = 'x0Ur8YHAEPQFdC69';                        
     $mail->SMTPSecure = 'tls';                              
-    $mail->Port       = 2525;  
+    $mail->Port       = 587;  
  
     $mail->setFrom('from@gfg.com', 'Name');           
     $mail->addAddress('receiver1@gfg.com');
