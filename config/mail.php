@@ -36,11 +36,11 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => /* 'sandbox.smtp.mailtrap.io', */  env('MAIL_HOST', 'smtp.mailgun.org'),
+            'host' => 'smtp.gmail.com' /* 'sandbox.smtp.mailtrap.io', */ /*  env('MAIL_HOST', 'smtp.mailgun.org') */,
             'port' => /* 2525, */ env('MAIL_PORT', 587),
             'encryption' => /* 'tls', */ env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME_email'),
-            'password' => /* 'b1113788bb436e', */  env('MAIL_PASSWORD_pass'),
+            'username' => 'ariful0027@gmail.com'/* env('MAIL_USERNAME_email') */,
+            'password' => 'dwesshfndoudling', /*  env('MAIL_PASSWORD_pass') */,
             'timeout' => null,
         ],
 
