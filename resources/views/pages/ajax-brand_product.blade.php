@@ -24,7 +24,7 @@
                 <div class="product-body">
                     <h3 class="product-title"><a href="{{  route('product.details',$product->id)  }}">{{ $product->product_name }}</a></h3><!-- End .product-title -->
                     <div class="product-price">
-                        <span>&#2547; </span>&nbsp;  {{ number_format($product->product_price,2) }}
+                       ${{ number_format($product->product_price,2) }}
                     </div><!-- End .product-price -->
                     <div class="ratings-container">
                         <div class="ratings">

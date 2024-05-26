@@ -93,7 +93,7 @@
                                         <tr>
                                             <td><a >{{ $cart_product->product_name }} * {{ $cart_product->qty }}</a></td>
                                             <td>   
-                                                 <span>&#2547; </span>&nbsp; {{ number_format($cart_product->product_price * $cart_product->qty,2) }}</td>
+                                                ${{ number_format($cart_product->product_price * $cart_product->qty,2) }}</td>
                                         </tr>
                                         @endforeach
 
@@ -101,7 +101,7 @@
                                        
                                         <tr class="summary-total">
                                             <td>Sub Total:</td>
-                                            <td>     <span>&#2547; </span>&nbsp;  {{ number_format($sub_total,2) }}</td>
+                                            <td>    ${{ number_format($sub_total,2) }}</td>
                                         </tr><!-- End .summary-total -->
                                         <tr class="summary-total">
                                             <td>Discount:</td>
@@ -120,11 +120,11 @@
                                         <input type="hidden" name="total" value="{{ $sub_total }}">
                                         <tr class="summary-total">
                                             <td> Sub Total:</td>
-                                            <td>     <span>&#2547; </span>&nbsp; {{ number_format($sub_total,2) }}</td>
+                                            <td>    ${{ number_format($sub_total,2) }}</td>
                                         </tr><!-- End .summary-total -->
                                         <tr class="summary-total">
                                             <td>Total:</td>
-                                            <td>    <span>&#2547; </span>&nbsp;  {{ number_format($sub_total,2) }}</td>
+                                            <td>   ${{ number_format($sub_total,2) }}</td>
                                         </tr><!-- End .summary-total -->
                                         @endif
                                     </tbody>

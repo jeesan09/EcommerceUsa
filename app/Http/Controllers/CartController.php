@@ -73,7 +73,7 @@ class CartController extends Controller
             'storage' => 'required',
             'qty' => 'required',
         ]);
-        $price = explode('৳ ', $request->product_price);
+        $price = explode('$', $request->product_price);
         $product_price = preg_replace('/[^0-9.]/', '', $price[1]);
         $product_price = floatval($product_price);
         $values = explode(',', $request->storage);

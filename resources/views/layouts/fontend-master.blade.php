@@ -248,8 +248,8 @@
                     <p class="footer-copyright">Copyright © @php
                         echo date('Y');
                     @endphp <a class="text-light fs-4"
-                            href="https://www.facebook.com/profile.php?id=100008056331714" target="_blank"> Developed
-                            by : Ariful Islam</a></p><!-- End .footer-copyright -->
+                            href="{{ url('/') }}"> Developed
+                            by : MPW-Wholesale</a></p><!-- End .footer-copyright -->
                     <figure class="footer-payments">
                         <img src="{{ asset('frotend') }}/assets/images/payments.png" alt="Payment methods"
                             width="272" height="20">

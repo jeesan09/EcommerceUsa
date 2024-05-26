@@ -73,7 +73,7 @@
                 <div class= "mg-b-10 text-center">
                   <h4 class="tx-16 tx-uppercase mg-b-0 tx-spacing-1 tx-white">Total Product Sells</h4>
                 </div>
-                  <h3 class="mg-b-0 tx-white  text-center tx-lato tx-bold">Tk. {{ $product_sells }}</h3>
+                  <h3 class="mg-b-0 tx-white  text-center tx-lato tx-bold">${{ $product_sells }}</h3>
               </div>
             </div>
         </div><!-- row -->

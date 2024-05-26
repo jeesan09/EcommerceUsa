@@ -99,7 +99,7 @@
                                                     href="{{ route('product.details', $product->id) }}">{{ $product->product_name }}
                                                 </a></h3><!-- End .product-title -->
                                             <div class="product-price">
-                                                <span>&#2547; </span>&nbsp; {{ number_format($price, 2) }}
+                                               ${{ number_format($price, 2) }}
                                             </div>
                                         </div>
                                       <!--   <div class="product-action">
@@ -156,7 +156,7 @@
                                                         href="{{ route('product.details', $product->id) }}">{{ $products_t->product_name }}</a>
                                                 </h3><!-- End .product-title -->
                                                 <div class="product-price">
-                                                    <span>&#2547; </span>&nbsp; {{ number_format($price, 2) }}
+                                                   ${{ number_format($price, 2) }}
                                                 </div><!-- End .product-price -->
                                             </div><!-- End .product-body -->
                                           <!--   <div class="product-action">
@@ -250,7 +250,7 @@
                                             href="{{ route('product.details', $product->id) }}">{{ $product->product_name }}</a>
                                     </h3><!-- End .product-title -->
                                     <div class="product-price">
-                                    <span>&#2547; </span>&nbsp; {{ number_format($price, 2) }}
+                                   ${{ number_format($price, 2) }}
                                     </div>
                                 </div>
                                <!--  <div class="product-action">
@@ -332,7 +332,7 @@
                                                 href="{{ route('product.details', $products_t->id) }}">{{ $products_t->product_name }}</a>
                                         </h3><!-- End .product-title -->
                                         <div class="product-price">
-                                        <span>&#2547; </span>&nbsp; {{ number_format($price, 2) }}
+                                       ${{ number_format($price, 2) }}
                                         </div><!-- End .product-price -->
                                     </div><!-- End .product-body -->
                                   <!--   <div class="product-action">
