@@ -163,6 +163,8 @@ function SendByMail(){
    
 $mail = new PHPMailer(true);
  
+dd( env('MAIL_HOST'),env('MAIL_USERNAME'), env('MAIL_ENCRYPTION'), env('MAIL_MAILER'), env('MAIL_PASSWORD'), env('MAIL_PORT') );
+
 try {
     $mail->SMTPDebug = 2;                                       
     $mail->isSMTP();                                            
