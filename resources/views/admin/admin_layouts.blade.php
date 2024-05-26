@@ -45,10 +45,20 @@
         </span><!-- input-group-btn -->
       </div><!-- input-group -->
 
+      <div class="sl-sideleft-menu">
+        <a href="{{ url('admin/home') }}" class="sl-menu-link">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon fa fa-home tx-18"></i>
+            <span class="menu-item-label">Dashboard </span>
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+      </div> 
+
+
       <div class="sl-sideleft-menu ">
         <a href="{{url('admin/home')}}" class="sl-menu-link   @yield('categorys')">
           <div class="sl-menu-item ">
-            <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+            <i class="menu-item-icon  fa fa-list-ul tx-18"></i>
             <span class="menu-item-label">Manage Category</span>
           </div>
         </a>
@@ -58,8 +68,8 @@
       </div>
       <div class="sl-sideleft-menu">
         <a href="" class="sl-menu-link @yield('brands')">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+          <div class="sl-menu-item"> <i class="fa-solid fa-chart-simple"></i>
+            <i class="fa fa-th-list menu-item-icon  tx-18" aria-hidden="true"></i>
             <span class="menu-item-label">Manage Brand</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
@@ -71,7 +81,7 @@
       <div class="sl-sideleft-menu">
         <a href="" class="sl-menu-link @yield('products')">
           <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+            <i class="fa fa-product-hunt menu-item-icon  tx-18" aria-hidden="true"></i>
             <span class="menu-item-label">Manage Product</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
@@ -83,7 +93,7 @@
       <div class="sl-sideleft-menu">
         <a href="" class="sl-menu-link @yield('copon')">
           <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+            <i class="menu-item-icon icon fa fa-codiepie tx-18"></i>
             <span class="menu-item-label">Manage Cuopon</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
@@ -95,7 +105,7 @@
       <div class="sl-sideleft-menu">
         <a href="" class="sl-menu-link @yield('user')">
           <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+            <i class="menu-item-icon fa fa-users tx-18"></i>
             <span class="menu-item-label">Manage User</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
@@ -108,7 +118,7 @@
       <div class="sl-sideleft-menu">
         <a href="" class="sl-menu-link @yield('order')">
           <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+            <i class="menu-item-icon fa fa-cart-plus tx-18" aria-hidden="true"></i>
             <span class="menu-item-label">Manage Order</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
@@ -121,7 +131,7 @@
       <div class="sl-sideleft-menu">
         <a href="" class="sl-menu-link @yield('slider')">
           <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+            <i class="menu-item-icon icon fa fa-picture-o tx-18"></i>
             <span class="menu-item-label">Manage Slider</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
@@ -132,7 +142,7 @@
       <div class="sl-sideleft-menu">
         <a href="" class="sl-menu-link @yield('about')">
           <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+            <i class="menu-item-icon fa fa-cog tx-18"></i>
             <span class="menu-item-label">Manage About page</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
@@ -144,7 +154,7 @@
       <div class="sl-sideleft-menu">
         <a href="" class="sl-menu-link">
           <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+            <i class="menu-item-icon fa fa-file-image-o tx-18"></i>
             <span class="menu-item-label">Manage Logo</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
@@ -154,10 +164,10 @@
       </div>
 
 
-      <div class="sl-sideleft-menu">
+     {{--  <div class="sl-sideleft-menu">
         <a href="" class="sl-menu-link">
           <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+            <i class="menu-item-icon icon ion-ios-home-outline tx-18"></i>
             <span class="menu-item-label">Dashboard 2</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
@@ -165,7 +175,7 @@
           <li class="nav-item"><a href="blank.html" class="nav-link">Blank Page</a></li>
           <li class="nav-item"><a href="page-signin.html" class="nav-link">Signin Page</a></li>
         </ul>
-      </div>
+      </div> --}}
 
       <br>
     </div><!-- sl-sideleft -->
@@ -174,10 +184,16 @@
         <!-- ########## START: HEAD PANEL ########## -->
     <div class="sl-header">
 
-      <div class="sl-header-left">
+      <div class="sl-header-left d-flex align-items-center">
 
         <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
-
+        <div class="tx-15 pl-4">
+          <button class="btn btn-sm text-dark btn-warning">
+            <i class="icon fa fa-globe " ></i></a>
+            <a target="_blank" class="text-white" href="{{url('/')}}">Go to Frontend</a>
+          </button>
+          
+        </div>
       </div><!-- sl-header-left -->
       <div class="sl-header-right">
         <div class=""><a  href="{{route('order.list')}}">Order List</a></div>
