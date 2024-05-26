@@ -171,7 +171,7 @@ class AllproductController extends Controller
       $mail->Host       = 'sandbox.smtp.mailtrap.io';
       $mail->SMTPAuth   = true;
       $mail->Username   = '4d94bda08e4688';
-      $mail->Password   =env('MAIL_PASSWORD');
+      $mail->Password   = 'b1113788bb436e';
       $mail->SMTPSecure = 'tls';
       $mail->Port       = 2525;
       
