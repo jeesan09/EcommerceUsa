@@ -165,16 +165,16 @@ $mail = new PHPMailer(true);
 try {
     $mail->SMTPDebug = 2;                                       
     $mail->isSMTP();                                            
-    $mail->Host       = 'smtp-relay.brevo.com';                    
+    $mail->Host       = 'smtp.gmail.com';                    
     $mail->SMTPAuth   = true;                             
-    $mail->Username   = '75798b001@smtp-brevo.com';                 
-    $mail->Password   = 'x0Ur8YHAEPQFdC69';                        
+    $mail->Username   = 'ariful0027@gmail.com';                 
+    $mail->Password   = 'qpjpvukmemcdlqmd';                        
     $mail->SMTPSecure = 'tls';                              
     $mail->Port       = 587;  
  
     $mail->setFrom('from@gfg.com', 'Name');           
-    $mail->addAddress('receiver1@gfg.com');
-    $mail->addAddress('receiver2@gfg.com', 'Name');
+    $mail->addAddress('ariful0027@gmail.com');
+    $mail->addAddress('ariful0027@gmail.com', 'Name');
       
     $mail->isHTML(true);                                  
     $mail->Subject = 'Subject';
