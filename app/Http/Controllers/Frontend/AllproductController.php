@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Product;
 use App\SliderModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Env;
 use Illuminate\Support\Facades\DB;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -165,16 +166,16 @@ $mail = new PHPMailer(true);
 try {
     $mail->SMTPDebug = 2;                                       
     $mail->isSMTP();                                            
-    $mail->Host       = 'smtp.gmail.com';                    
+    $mail->Host       =env('MAIL_HOST');                    
     $mail->SMTPAuth   = true;                             
-    $mail->Username   = 'ariful0027@gmail.com';                 
-    $mail->Password   = 'qpjpvukmemcdlqmd';                        
-    $mail->SMTPSecure = 'tls';                              
-    $mail->Port       = 587;  
+    $mail->Username   = env('MAIL_USERNAME');                 
+    $mail->Password   = env('MAIL_PASSWORD');                        
+    $mail->SMTPSecure = env('MAIL_ENCRYPTION');                              
+    $mail->Port       = env('MAIL_PORT'); 
  
     $mail->setFrom('from@gfg.com', 'Name');           
     $mail->addAddress('ariful0027@gmail.com');
-    $mail->addAddress('ariful0027@gmail.com', 'Name');
+    $mail->addAddress('ariful0027@gmail.com', 'MPW-Wholsale');
       
     $mail->isHTML(true);                                  
     $mail->Subject = 'Subject';
