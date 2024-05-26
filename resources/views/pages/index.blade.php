@@ -263,13 +263,13 @@
 
                     </div><!-- End .owl-carousel -->
                 </div><!-- .End .tab-pane -->
+               
                 @foreach ($brands as $brand)
                     @php
                         $products_cat = App\Product::where('brand_name', $brand->id)
                             ->latest()
                             ->get();
                     @endphp
-
                     <div class="tab-pane p-0 fade" id="brand-tab{{ $brand->id }}" role="tabpanel"
                         aria-labelledby="">
                         <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl"
@@ -298,17 +298,17 @@
                             }
                         }
                     }'>
-                            @foreach ($products_cat as $products_t)
+                            @foreach ($products_cat as $product_cat)
                                 <div class="product product-11 text-center product_data">
                                     <figure class="product-media">
                                         <span class="product-label label-new">NEW</span>
-                                        <a href="{{ route('product.details', $products_t->id) }}">
+                                        <a href="{{ route('product.details', $product_cat->id) }}">
                                           
                                         @php $ImageBrand = true; @endphp
-                                                @foreach ($product->product_varient as $product_varient_brand)
+                                                @foreach ($product_cat->product_varient as $product_varient_brand)
                                                     @if ($ImageBrand)
                                                         <img src="{{ asset($product_varient_brand->image) }}"
-                                                            alt="{{ $product->product_name }}" class="product-image">
+                                                            alt="{{ $product_cat->product_name }}" class="product-image">
                                                         @php
                                                             $ImageBrand = false;
                                                             $price = $product_varient_brand->price;
@@ -329,18 +329,13 @@
 
                                     <div class="product-body">
                                         <h3 class="product-title"><a
-                                                href="{{ route('product.details', $products_t->id) }}">{{ $products_t->product_name }}</a>
+                                                href="{{ route('product.details', $product_cat->id) }}">{{ $product_cat->product_name }}</a>
                                         </h3><!-- End .product-title -->
                                         <div class="product-price">
-                                       ${{ number_format($price, 2) }}
+                                           ${{ number_format($price, 2) }}
                                         </div><!-- End .product-price -->
                                     </div><!-- End .product-body -->
-                                  <!--   <div class="product-action">
-                                        <button class="btn-product btn-cart cart_btn_click" href="#product_details"
-                                            data-toggle="modal"><span>BUY NOW</span></button>
-                                        <input type="hidden" class="product_input_id" value="{{ $products_t->id }}">
-                                    </div> -->
-                                    <!-- End .product-action -->
+                                 
                                 </div><!-- End .product -->
                             @endforeach
                         </div><!-- End .owl-carousel -->
