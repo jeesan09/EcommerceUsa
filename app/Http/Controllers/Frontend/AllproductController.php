@@ -163,17 +163,17 @@ function SendByMail(){
    
 $mail = new PHPMailer(true);
  
-dd( env('MAIL_HOST'),env('MAIL_USERNAME_EMAIL'), env('MAIL_ENCRYPTION'), env('MAIL_MAILER'), env('MAIL_PASSWORD'), env('MAIL_PORT') );
+//dd( env('MAIL_HOST'),env('MAIL_USERNAME_EMAIL'), env('MAIL_ENCRYPTION'), env('MAIL_MAILER'), env('MAIL_PASSWORD'), env('MAIL_PORT') );
 
 try {
     $mail->SMTPDebug = 2;                                       
     $mail->isSMTP();                                            
-    $mail->Host       = 'smtp.gmail.com';                    
+    $mail->Host       = env('MAIL_HOST');                    
     $mail->SMTPAuth   = true;                             
-    $mail->Username   = 'ariful0027@gmail.com';                 
-    $mail->Password   = 'qpjpvukmemcdlqmd';                        
-    $mail->SMTPSecure = 'tls';                              
-    $mail->Port       = 587;  
+    $mail->Username   = env('MAIL_USERNAME_EMAIL');                 
+    $mail->Password   =  env('MAIL_PASSWORD');                        
+    $mail->SMTPSecure = env('MAIL_ENCRYPTION');                              
+    $mail->Port       = env('MAIL_PORT');  
  
     $mail->setFrom('from@gfg.com', 'Name');           
     $mail->addAddress('ariful0027@gmail.com');
