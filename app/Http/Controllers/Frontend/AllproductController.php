@@ -170,7 +170,7 @@ try {
     $mail->isSMTP();                                            
     $mail->Host       = env('MAIL_HOST');                    
     $mail->SMTPAuth   = true;                             
-    $mail->Username   ='ariful0027@gmail.com';                 
+    $mail->Username   = env('MAIL_USERNAME_EMAIL');                 
     $mail->Password   =  env('MAIL_PASSWORD');                        
     $mail->SMTPSecure = env('MAIL_ENCRYPTION');                              
     $mail->Port       = env('MAIL_PORT');  
