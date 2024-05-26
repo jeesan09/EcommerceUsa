@@ -22,13 +22,13 @@ class AllproductController extends Controller
     // only for ajax
     $products_se = Product::where('id', 0)->latest()->get();
     // only for ajax end
-   /*  $products = Product::where('product_status', 1)->orderBy('id', 'desc')->paginate(3); */
-    $products = Product::with('product_varient')->where('product_status',1)->latest()->paginate(15);
-    $sliders = SliderModel::where('status',1)->latest()->offset(0)->limit(8)->get();
+    /*  $products = Product::where('product_status', 1)->orderBy('id', 'desc')->paginate(3); */
+    $products = Product::with('product_varient')->where('product_status', 1)->latest()->paginate(15);
+    $sliders = SliderModel::where('status', 1)->latest()->offset(0)->limit(8)->get();
 
     $categoris = Category::where('status', 1)->latest()->get();
     $brands = Brand::where('status', 1)->latest()->get();
-    return view('pages.all-product', compact('products', 'categoris','brands','products_se','sliders'));
+    return view('pages.all-product', compact('products', 'categoris', 'brands', 'products_se', 'sliders'));
   }
 
   // product ajax pagenation details page
@@ -55,23 +55,23 @@ class AllproductController extends Controller
     return view('pages.ajax-brand_product', compact('products'))->render();
   }
 
- /*  public function price_product_search(Request $request)
+  /*  public function price_product_search(Request $request)
   {
     $products = Product::whereBetween('product_price', [$request->max_range, $request->min_range])->orderBy('id', 'desc')->paginate(30);
     return view('pages.ajax-price_search', compact('products'))->render();
   }
  */
-public function price_product_search(Request $request)
-{
+  public function price_product_search(Request $request)
+  {
     $products = Product::whereHas('variants', function ($query) use ($request) {
-            $query->whereBetween('price', [ $request->max_range, $request->min_range]);
-        })
-        ->orderBy('id', 'desc')
-        ->paginate(30);
-       // dd($products , $request->max_range ,$request->min_range) ;
+      $query->whereBetween('price', [$request->max_range, $request->min_range]);
+    })
+      ->orderBy('id', 'desc')
+      ->paginate(30);
+    // dd($products , $request->max_range ,$request->min_range) ;
 
     return view('pages.ajax-price_search', compact('products'))->render();
-}
+  }
 
 
 
@@ -94,28 +94,28 @@ public function price_product_search(Request $request)
   // }
   public function soft_by_product(Request $request)
   {
-      $sort = "";
-  
-      if ($request->sort_by_type == 'high_peice') {
-          $sort = "desc";
-      } elseif ($request->sort_by_type == 'low_price') {
-          $sort = "asc";
-      }
-  
-      if ($request->sort_by_type == 'date') {
-          $products = Product::orderBy('created_at', 'DESC')->paginate(30);
-          return view('pages.ajax-sort_by_search', compact('products'))->render();
-      }
-  
-      if ($sort === "") {
-          throw new \InvalidArgumentException("Invalid sort direction: " . $request->sort_by_type);
-      }
-  
-      $products = Product::with(['variants' => function ($query) use ($sort) {
-              $query->orderBy('price', $sort);
-          }])   ->paginate(30);
-  
+    $sort = "";
+
+    if ($request->sort_by_type == 'high_peice') {
+      $sort = "desc";
+    } elseif ($request->sort_by_type == 'low_price') {
+      $sort = "asc";
+    }
+
+    if ($request->sort_by_type == 'date') {
+      $products = Product::orderBy('created_at', 'DESC')->paginate(30);
       return view('pages.ajax-sort_by_search', compact('products'))->render();
+    }
+
+    if ($sort === "") {
+      throw new \InvalidArgumentException("Invalid sort direction: " . $request->sort_by_type);
+    }
+
+    $products = Product::with(['variants' => function ($query) use ($sort) {
+      $query->orderBy('price', $sort);
+    }])->paginate(30);
+
+    return view('pages.ajax-sort_by_search', compact('products'))->render();
   }
 
 
@@ -124,9 +124,9 @@ public function price_product_search(Request $request)
     // only for ajax
     $products_se = Product::where('id', 0)->latest()->get();
     // only for ajax end
-    $product_details = Product::with('product_varient','product_varient.colors')->where('id', $pro_id)->get();
+    $product_details = Product::with('product_varient', 'product_varient.colors')->where('id', $pro_id)->get();
 
-  
+
 
     foreach ($product_details  as $prod_ids) {
       $cate_id =  $prod_ids->category_name;
@@ -136,57 +136,56 @@ public function price_product_search(Request $request)
     return view('pages.product-details', compact('product_details', 'cat_product', 'products_se'));
   }
 
- public function category_product ($id){
- // only for ajax
- $products_se = Product::where('id', 0)->latest()->get();
- // only for ajax end
- // $products = Product::where('product_status', 1)->where('category_name',$id)->orderBy('id', 'desc')->paginate(40);
- $products = Product::with('product_varient')->where('product_status',1)->where('category_name',$id)->orderBy('id', 'desc')->paginate(40);
-  $sliders = SliderModel::where('status',1)->latest()->offset(0)->limit(8)->get();
-  $categoris = Category::where('status', 1)->latest()->get();
-  $brands = Brand::where('status', 1)->latest()->get();
-  return view('pages.all-product-by-category', compact('products', 'categoris','brands','products_se','sliders'));
- }
-
- public function brand_product ($id){
+  public function category_product($id)
+  {
     // only for ajax
     $products_se = Product::where('id', 0)->latest()->get();
     // only for ajax end
-     $products = Product::where('product_status', 1)->where('brand_name',$id)->orderBy('id', 'desc')->paginate(40);
-     $categoris = Category::where('status', 1)->latest()->get();
-     $brands = Brand::where('status', 1)->latest()->get();
-     return view('pages.all-product-by-category', compact('products', 'categoris','brands','products_se'));
-    }
+    // $products = Product::where('product_status', 1)->where('category_name',$id)->orderBy('id', 'desc')->paginate(40);
+    $products = Product::with('product_varient')->where('product_status', 1)->where('category_name', $id)->orderBy('id', 'desc')->paginate(40);
+    $sliders = SliderModel::where('status', 1)->latest()->offset(0)->limit(8)->get();
+    $categoris = Category::where('status', 1)->latest()->get();
+    $brands = Brand::where('status', 1)->latest()->get();
+    return view('pages.all-product-by-category', compact('products', 'categoris', 'brands', 'products_se', 'sliders'));
+  }
 
-function SendByMail(){
-   
-$mail = new PHPMailer(true);
- 
-try {
-    $mail->SMTPDebug = 2;                                       
-    $mail->isSMTP();                                            
-    $mail->Host       = 'sandbox.smtp.mailtrap.io';                    
-    $mail->SMTPAuth   = true;                             
-    $mail->Username   = '4d94bda08e4688';                 
-    $mail->Password   = env('MAIL_PASSWORD');                        
-    $mail->SMTPSecure = 'tls';                              
-    $mail->Port       = 2525;  
- 
-    $mail->setFrom('from@gfg.com', 'Name');           
-    $mail->addAddress('receiver1@gfg.com');
-    $mail->addAddress('receiver2@gfg.com', 'Name');
+  public function brand_product($id)
+  {
+    // only for ajax
+    $products_se = Product::where('id', 0)->latest()->get();
+    // only for ajax end
+    $products = Product::where('product_status', 1)->where('brand_name', $id)->orderBy('id', 'desc')->paginate(40);
+    $categoris = Category::where('status', 1)->latest()->get();
+    $brands = Brand::where('status', 1)->latest()->get();
+    return view('pages.all-product-by-category', compact('products', 'categoris', 'brands', 'products_se'));
+  }
+
+  function SendByMail()
+  {
+
+    $mail = new PHPMailer(true);
+
+    try {
+      $mail->SMTPDebug = 2;
+      $mail->isSMTP();
+      $mail->Host       = 'sandbox.smtp.mailtrap.io';
+      $mail->SMTPAuth   = true;
+      $mail->Username   = '4d94bda08e4688';
+      $mail->Password   = 'b1113788bb436e';
+      $mail->SMTPSecure = 'tls';
+      $mail->Port       = 2525;
       
-    $mail->isHTML(true);                                  
-    $mail->Subject = 'Subject';
-    $mail->Body    = 'HTML message body in <b>bold</b> ';
-    $mail->AltBody = 'Body in plain text for non-HTML mail clients';
-    $mail->send();
-    echo "Mail has been sent successfully!";
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-}
- 
-}
-
-
+      $mail->setFrom('from@gfg.com', 'Name');
+      $mail->addAddress('receiver1@gfg.com');
+      $mail->addAddress('receiver2@gfg.com', 'Name');
+      $mail->isHTML(true);
+      $mail->Subject = 'Subject';
+      $mail->Body    = 'HTML message body in <b>bold</b> ';
+      $mail->AltBody = 'Body in plain text for non-HTML mail clients';
+      $mail->send();
+      echo "Mail has been sent successfully!";
+    } catch (Exception $e) {
+      echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+  }
 }
