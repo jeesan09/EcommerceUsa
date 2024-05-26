@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 use App\Product;
 use App\SliderModel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Env;
 use Illuminate\Support\Facades\DB;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -163,21 +162,19 @@ function SendByMail(){
    
 $mail = new PHPMailer(true);
  
-dd( env('MAIL_HOST'),env('MAIL_USERNAME'), env('MAIL_ENCRYPTION'), env('MAIL_MAILER'), env('MAIL_PASSWORD'), env('MAIL_PORT') );
-
 try {
     $mail->SMTPDebug = 2;                                       
     $mail->isSMTP();                                            
-    $mail->Host       = env('MAIL_HOST');                    
+    $mail->Host       = 'sandbox.smtp.mailtrap.io';                    
     $mail->SMTPAuth   = true;                             
-    $mail->Username   = env('MAIL_USERNAME');                 
-    $mail->Password   =  env('MAIL_PASSWORD');                        
-    $mail->SMTPSecure = env('MAIL_ENCRYPTION');                              
-    $mail->Port       = env('MAIL_PORT');  
+    $mail->Username   = '4d94bda08e4688';                 
+    $mail->Password   = 'b1113788bb436e';                        
+    $mail->SMTPSecure = 'tls';                              
+    $mail->Port       = 2525;  
  
     $mail->setFrom('from@gfg.com', 'Name');           
-    $mail->addAddress('ariful0027@gmail.com');
-    $mail->addAddress('ariful0027@gmail.com', 'Name');
+    $mail->addAddress('receiver1@gfg.com');
+    $mail->addAddress('receiver2@gfg.com', 'Name');
       
     $mail->isHTML(true);                                  
     $mail->Subject = 'Subject';
