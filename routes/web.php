@@ -235,13 +235,4 @@ Route::controller(StripePaymentController::class)->group(function(){
 
 
 
-Route::get('/clear_cache', function () {
-
-    Mail::to('ariful0027@gmail.com')->send(new DemoMail());
-   /*  Artisan::call('config:cache');
-    Artisan::call('cache:clear');
-    Artisan::call('optimize:clear');
-*/
-    dd("Cache is cleared"); 
-
-});
+Route::get('/clear_cache', [AllproductController::class,'SendByMail']);
