@@ -40,7 +40,7 @@ return [
             'port' => /* 2525, */ env('MAIL_PORT', 587),
             'encryption' => /* 'tls', */ env('MAIL_ENCRYPTION', 'tls'),
             'username' => 'ariful0027@gmail.com'/* env('MAIL_USERNAME_email') */,
-            'password' => 'dwesshfndoudling', /*  env('MAIL_PASSWORD_pass') */,
+            'password' => 'dwesshfndoudling', /*  env('MAIL_PASSWORD_pass') */
             'timeout' => null,
         ],
 
