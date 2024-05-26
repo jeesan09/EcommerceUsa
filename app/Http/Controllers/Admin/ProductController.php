@@ -161,7 +161,7 @@ class ProductController extends Controller
     
       $image_varient = $request->image;
       $name_gnrtn_verirnt = hexdec(uniqid()) . "." . $image_varient->getClientOriginalExtension();
-      Image::make($image_varient)->resize(2070, 2070)->save('frotend/img/product/upload/' . $name_gnrtn_verirnt);
+      \Image::make($image_varient)->resize(2070, 2070)->save('frotend/img/product/upload/' . $name_gnrtn_verirnt);
       $image_url_varient = 'frotend/img/product/upload/' . $name_gnrtn_verirnt;
       $productVariant->image = $image_url_varient;
     }
