@@ -1,7 +1,9 @@
 <?php
 
+use App\Mail\DemoMail;
 use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\CartController;
@@ -235,10 +237,11 @@ Route::controller(StripePaymentController::class)->group(function(){
 
 Route::get('/clear_cache', function () {
 
-    Artisan::call('config:cache');
+    Mail::to('ariful0027@gmail.com')->send(new DemoMail());
+   /*  Artisan::call('config:cache');
     Artisan::call('cache:clear');
     Artisan::call('optimize:clear');
-
-    dd("Cache is cleared");
+*/
+    dd("Cache is cleared"); 
 
 });
