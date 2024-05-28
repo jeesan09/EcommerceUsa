@@ -82,7 +82,7 @@ class ProductController extends Controller
 
   public function productList()
   {
-    $products = Product::with('product_varient')->where('product_status', 1)->latest()->offset(0)->limit(16)->get();
+    $products = Product::with('product_varient')->latest()->offset(0)->limit(16)->get();
     //$products = Product::latest()->get();
 
     return view('admin.product.product-list', compact('products'));

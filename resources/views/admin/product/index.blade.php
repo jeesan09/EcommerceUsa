@@ -95,7 +95,7 @@
                                             <label for="condition">Condition</label>
                                             <input type="text" class="form-control" name="condition[]">
                                         </div>
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-3">
                                             <label for="color">Colors</label>
                                             <select name="color[]" class="form-control">
                                                 <option value="" selected hidden>Select color</option>
@@ -112,11 +112,11 @@
                                             <label for="price">Price</label>
                                             <input type="number"  min="1" class="form-control" name="price[]">
                                         </div>
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-2 d-none">
                                             <label for="qty">Quantity</label>
-                                            <input type="number"  min="1" class="form-control" name="qty[]">
+                                            <input type="number"  min="1" value="1000" class="form-control" name="qty[]">
                                         </div>
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-3">
                                             <label for="image">Image</label>
                                             <input type="file" class="form-control" name="image[]">
                                         </div>
@@ -170,7 +170,7 @@
                                     <label for="condition " class="d-sm-none ">Condition</label>
                                     <input type="text" class="form-control" name="condition[]">
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-3">
                                     <label class="d-sm-block"> </label>
                                     <label for="color " class="d-sm-none">Color</label>
                                     <select name="color[]" class="form-control">
@@ -186,10 +186,10 @@
                                     <input type="text" class="form-control" name="storage[]">
                                 </div>
 
-                                <div class="col-sm-2">
+                                <div class="col-sm-2 d-none">
                                         <label class="d-sm-block"> </label>
                                             <label for="price"  class="d-sm-none">Price</label>
-                                            <input type="number" min="1" class="form-control" name="price[]">
+                                            <input type="number" min="1" value="2000" class="form-control" name="price[]">
                                  </div>
 
                                  <div class="col-sm-2">
@@ -197,7 +197,7 @@
                                             <label for="qty" class="d-sm-none">Quantity</label>
                                             <input type="number" min="1" class="form-control" name="qty[]">
                                         </div>
-                                <div class="col-sm-2 d-flex align-items-end">
+                                <div class="col-sm-3 d-flex align-items-end">
                                     <div>
                                         <label class="d-sm-block"> </label>
                                         <label for="image " class="d-sm-none">Image</label>

@@ -20,6 +20,13 @@
   
     margin-top: 15px !important;
 }
+
+.productNotFound{
+    font-size: 15px;
+    color: #fb1313;
+    font-weight: 500;
+    padding-bottom: 44px;
+}
 </style>
 @section('content')
     <main class="main">
@@ -68,7 +75,8 @@
                 <div class="tab-pane p-0 fade show active" id="top-all-tab" role="tabpanel" aria-labelledby="top-all-link">
                     <div class="products">
                         <div class="row justify-content-center">
-                            @foreach ($products as $product)
+                         
+                            @forelse ($products as $product)
                                 <div class="col-6 col-md-4 col-lg-3 mb-4">
                                     <div class="product product-11 mt-v3 text-center product_data">
                                         <figure class="product-media">
@@ -109,7 +117,11 @@
                                         </div> -->
                                     </div>
                                 </div>
-                            @endforeach
+                                @empty
+                                <div class="text-center productNotFound">
+                                    <span>Product Not Found !</span>
+                                </div>
+                          @endforelse
                         </div>
                     </div>
                 </div>
@@ -124,7 +136,7 @@
                         aria-labelledby="top-fur-link">
                         <div class="products">
                             <div class="row justify-content-center">
-                                @foreach ($products_category as $products_t)
+                                @forelse ($products_category as $products_t)
                                     <div class="col-6 col-md-4 col-lg-3 mb-4">
                                         <div class="product product-11 mt-v3 text-center product_data">
                                             <figure class="product-media">
@@ -168,14 +180,21 @@
                                             <!-- End .product-action -->
                                         </div><!-- End .product -->
                                     </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
-                                @endforeach
+                                    @empty
+                                    <div class="text-center productNotFound">
+                                        <span>Product Not Found !</span>
+                                    </div>
+                              @endforelse
                             </div><!-- End .row -->
                         </div><!-- End .products -->
                     </div><!-- .End .tab-pane -->
                 @endforeach
             </div><!-- End .tab-content -->
+            <div class="text-center">
+                <a href="{{ url('/all-product') }}" class="btn btn-primary">More Product <i class="icon-long-arrow-right"></i> </a>
+            </div>
         </div><!-- End .container -->
-        <div class="container mt-3">
+        <div class="container mt-5">
             <div class="heading heading-center mb-3">
                 <h2 class="title-lg">Trendy Products</h2><!-- End .title -->
 
@@ -298,7 +317,7 @@
                             }
                         }
                     }'>
-                            @foreach ($products_cat as $product_cat)
+                            @forelse ($products_cat as $product_cat)
                                 <div class="product product-11 text-center product_data">
                                     <figure class="product-media">
                                         <span class="product-label label-new">NEW</span>
@@ -337,7 +356,13 @@
                                     </div><!-- End .product-body -->
                                  
                                 </div><!-- End .product -->
-                            @endforeach
+                                @empty
+                                <div class="row d-flex justify-content-center text-center w-100 productNotFound">
+                                    <div class="col-12 w-100">
+                                        <span class="text-center">Product Not Found !</span>
+                                    </div>
+                                </div>
+                          @endforelse
                         </div><!-- End .owl-carousel -->
                     </div><!-- .End .tab-pane -->
                 @endforeach

@@ -13,18 +13,17 @@
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        use App\Product;
-        $products_list_meta = Product::get()->all();
+       
     @endphp
 
-    <meta name="keywords" content=" @foreach ($products_list_meta as $item) {{ $item->product_slug }}, @endforeach">
-    <meta name="description" content=" @foreach ($products_list_meta as $item) {{ $item->product_slug }}, @endforeach">
-    <meta name="author" content="sellspoints.com">
+    <meta name="keywords" content="mpwrenewed.com" >
+    <meta name="description" content="mpwrenewed.com">
+    <meta name="author" content="mpwrenewed.com">
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32"
         href="{{ asset('frotend') }}/assets/images/icons/favicon-32x32.png">
-    <meta name="apple-mobile-web-app-title" content="sellspoints.com">
-    <meta name="application-name" content="sellspoints.com">
+    <meta name="apple-mobile-web-app-title" content="mpwrenewed.com">
+    <meta name="application-name" content="mpwrenewed.com">
     <!-- Plugins CSS File -->
     <link rel="stylesheet" href="{{ asset('frotend') }}/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('frotend') }}/assets/css/plugins/owl-carousel/owl.carousel.css">
@@ -91,9 +90,11 @@
                             .name_logo {
                                 font-size: 34px;
                                 font-weight: 700;
+                                width: 170px;
                             }
+                          
                         </style>
-                        <a href="{{url('/')}}" class=" name_logo">
+                        <a href="{{url('/')}}" class="name_logo  d-none d-md-block">
                             @if ($logo->header_logo != '')
                             <img src="{{ asset($logo->header_logo) }}" height="auto" alt="" >
                             @else
@@ -106,7 +107,7 @@
                                     <a href="{{ url('/') }}" class="">Home</a>
                                 </li>
                                 <li class=" @yield('product')">
-                                    <a href="{{ route('all.product') }}" class="sf-with-ul">Product</a>
+                                    <a href="{{ route('all.product') }}" >Product</a>
                                 </li>
                                 <li class=" @yield('about')">
                                     <a href="{{ route('about.page') }}">About</a>
@@ -118,19 +119,21 @@
                         </nav><!-- End .main-nav -->
                     </div><!-- End .header-left -->
 
-
+                  
                     <div class="header-right">
-                        <div class="header-search1">
-                            <form action="{{ route('search.product') }}" method="get">
-                                @csrf
-                                <div class="header-search-wrapper1 show">
+                        <form action="{{ route('search.product') }}" method="get">
+                            @csrf
+                        <div class="header-search ">
+                                <div class="header-search-wrapper show">
                                     <label for="q" class="sr-only">Search</label>
                                     <input type="search" class="form-control" name="search_product" id="q"
                                         placeholder="Search in..." required>
                                 </div><!-- End .header-search-wrapper -->
-                                <button class="search-toggle1"><i class="icon-search"></i></button>
-                            </form>
-                        </div><!-- End .header-search -->
+                                <div >
+                                    <button class="search-toggle1"><i class="icon-search"></i></button>
+                                </div>
+                            </div><!-- End .header-search -->
+                        </form>
                         <style>
                             @media screen and (max-width: 768px) {
 
@@ -258,7 +261,7 @@
             </div><!-- End .footer-bottom -->
         </footer><!-- End .footer -->
     </div><!-- End .page-wrapper -->
-    <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+    <button id="scroll-top" title="Back to Top" style="background: #c96"><i class="icon-arrow-up"></i></button>
 
     <!-- Mobile Menu -->
     <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
@@ -402,7 +405,7 @@
 @include('layouts.sidebar-right.index')
 <script>
     function openNav() {
-        document.getElementById("mySidenav").style.width = "410px";
+        document.getElementById("mySidenav").style.width = "380px";
         document.getElementById("overlay").style.display = "block";
         document.body.style.overflow = "hidden";
         $.ajax({

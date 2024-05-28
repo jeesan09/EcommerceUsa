@@ -206,7 +206,7 @@
                                                             To Cart</span></button>
                                                     <input type="hidden" id="product_id" value="{{ $product->id }}">
                                                 </div>
-                                                <div class="details-action-wrapper addToCartButtonHide">
+                                                <div class="details-action-wrapper addToCartButtonHide ">
                                                     <button type="button"
                                                         class="btn-product CartButtonHide btn-cart disabled"
                                                         style="  background: #999797c7;  color: white;border-color: #999797c7;"><span>Out
@@ -214,7 +214,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="w-100">
+                                            <div class="w-100 d-none">
                                              
                                                 <input type="hidden" class="input_current_stock" value="{{ $product_quantity }}">
                                                 <p class="left_stock">

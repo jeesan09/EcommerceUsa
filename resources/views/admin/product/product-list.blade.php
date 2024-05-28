@@ -27,7 +27,7 @@
                                 <th class="">Sl.</th>
                                 <th class="">Product</th>
                                 <th class="">img</th>
-                                {{-- <th class="">Product code</th> --}}
+                                <th class="">code</th>
                                 <th class="">Category</th>
                                 <th class="">Brand</th>
                                 {{-- <th class="">Quantity</th> --}}
@@ -52,7 +52,7 @@
                                  @break
                                 @endforeach
                               </td>
-                                {{-- <td>{{ $product->product_code }}</td> --}}
+                                <td>{{ $product->product_code }}</td>
                                 <td>{{ $product->category->category_name }}</td>
                                 <td>{{ $product->brand->brand_name }}</td>
                                 {{-- <td>{{ $product->product_quantity }}</td> --}}

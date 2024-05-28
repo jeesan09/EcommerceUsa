@@ -1,5 +1,11 @@
 @extends('layouts.fontend-master')
 {{-- @section('product_list')Login-page @endsection --}}
+<style>
+ .search-toggle1 {
+    padding: 0.3rem 11.8rem !important;
+    margin-top: 16px !important;
+}
+</style>
 @section('content')
 <main class="main">
 <div class="container"  style=" background: #f6f6f6;">

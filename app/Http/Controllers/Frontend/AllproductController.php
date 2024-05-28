@@ -23,7 +23,7 @@ class AllproductController extends Controller
     $products_se = Product::where('id', 0)->latest()->get();
     // only for ajax end
     /*  $products = Product::where('product_status', 1)->orderBy('id', 'desc')->paginate(3); */
-    $products = Product::with('product_varient')->where('product_status', 1)->latest()->paginate(15);
+    $products = Product::with('product_varient')->where('product_status', 1)->latest()->paginate(20);
     $sliders = SliderModel::where('status', 1)->latest()->offset(0)->limit(8)->get();
 
     $categoris = Category::where('status', 1)->latest()->get();
@@ -103,7 +103,7 @@ class AllproductController extends Controller
     }
 
     if ($request->sort_by_type == 'date') {
-      $products = Product::orderBy('created_at', 'DESC')->paginate(30);
+      $products = Product::orderBy('created_at', 'DESC')->paginate(20);
       return view('pages.ajax-sort_by_search', compact('products'))->render();
     }
 
