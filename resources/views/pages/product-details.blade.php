@@ -61,6 +61,32 @@
     background-color: #dadde1 !important;
     border-color: #d5d5d5 !important;
 }
+
+.overflow-css::-webkit-scrollbar {
+  width: 1px;
+  height: 3px;
+}
+
+/* Track */
+.overflow-css::-webkit-scrollbar-track {
+  background: rgb(180, 178, 178); 
+}
+ 
+/* Handle */
+.overflow-css::-webkit-scrollbar-thumb {
+  background: #c96; 
+}
+
+/* Handle on hover */
+.overflow-css::-webkit-scrollbar-thumb:hover {
+  background: #c96; 
+}
+
+
+.overflow-css{
+    width: 100%;
+    overflow-x: scroll;
+}
 </style>
 @section('content')
     <main class="main">
@@ -230,50 +256,57 @@
                                     </div>
                                 </div>
                             </form>
-
-
-                            <div class="widget widget-collapsible">
-                                <h3 class="widget-title">
-                                    <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true"
-                                        aria-controls="widget-1">
-                                        Product Detail
-                                    </a>
-                                </h3>
-                                <div class="collapse show" id="widget-1">
-                                    <div class="widget-body">
-                                        <div class="pl-4 actionReadMore addHeight">
-                                            <div class=" product_data d-flex justify-content-between">
-                                                <div class="category_pro">
-                                                    {!! $productOnly->sort_description !!}
+                        </div>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-xl-6">
+                                    <div class="widget widget-collapsible">
+                                        <h3 class="widget-title">
+                                            <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true"
+                                                aria-controls="widget-1">
+                                                Product Detail
+                                            </a>
+                                        </h3>
+                                        <div class="collapse show  overflow-css pr-5" id="widget-1">
+                                            <div class="widget-body">
+                                                <div class="pl-4 actionReadMore ">
+                                                    <div class=" product_data d-flex justify-content-between">
+                                                        <div class="category_pro">
+                                                            {!! $productOnly->sort_description !!}
+                                                        </div>
+                                                    </div>
                                                 </div>
+                                              {{--   <a href="javascript:void(0)" class="readMore">Read More</a>
+                                                <a href="javascript:void(0)" class="readless d-none">Read Less</a> --}}
                                             </div>
                                         </div>
-                                        <a href="javascript:void(0)" class="readMore">Read More</a>
-                                        <a href="javascript:void(0)" class="readless d-none">Read Less</a>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <div class="widget widget-collapsible ">
+                                        <h3 class="widget-title">
+                                            <a data-toggle="collapse" href="#widget-2" role="button" aria-expanded="true"
+                                                aria-controls="widget-2">
+                                                Specifications
+                                            </a>
+                                        </h3>
+                                        <div class="collapse show overflow-css" id="widget-2">
+                                            <div class="widget-body">
+                                                <div class="pl-4 actionReadMore2 ">
+                                                    <div class=" product_data d-flex justify-content-between">
+                                                        <div class="category_pro">
+                                                            {!! $productOnly->long_description !!}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                             {{--    <a href="javascript:void(0)" class="readMore2">Read More</a>
+                                                <a href="javascript:void(0)" class="readless2 d-none">Read Less</a> --}}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="widget widget-collapsible">
-                                <h3 class="widget-title">
-                                    <a data-toggle="collapse" href="#widget-2" role="button" aria-expanded="true"
-                                        aria-controls="widget-2">
-                                        Specifications
-                                    </a>
-                                </h3>
-                                <div class="collapse show" id="widget-2">
-                                    <div class="widget-body">
-                                        <div class="pl-4 actionReadMore2 addHeight2">
-                                            <div class=" product_data d-flex justify-content-between">
-                                                <div class="category_pro">
-                                                    {!! $productOnly->long_description !!}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <a href="javascript:void(0)" class="readMore2">Read More</a>
-                                        <a href="javascript:void(0)" class="readless2 d-none">Read Less</a>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

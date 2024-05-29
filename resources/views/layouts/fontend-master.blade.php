@@ -403,9 +403,10 @@
 </body>
 @include('layouts.ajax.ajax')
 @include('layouts.sidebar-right.index')
+
 <script>
     function openNav() {
-        document.getElementById("mySidenav").style.width = "380px";
+        $('#mySidenav').addClass('card-width');
         document.getElementById("overlay").style.display = "block";
         document.body.style.overflow = "hidden";
         $.ajax({
@@ -421,10 +422,16 @@
     }
 
     function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
+        $('#mySidenav').removeClass('card-width');
         document.getElementById("overlay").style.display = "none";
         document.body.style.overflow = "";
     }
 </script>
-
+<script>
+    $('.filterBtn').on("click", function(){
+             $('.filterOpen').removeClass('d-none');
+             $('.filterBtn').addClass('d-none');
+         });
+       
+ </script>
 </html>
