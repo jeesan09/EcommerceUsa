@@ -250,7 +250,7 @@
                                  <div class="col-sm-2 d-none">
                                     <label class="d-sm-block"> </label>
                                             <label for="qty" class="d-sm-none">Quantity</label>
-                                            <input type="number" min="1" class="form-control" name="qtyNew[]">
+                                            <input type="number" value="2000" min="1" class="form-control" name="qtyNew[]">
                                         </div>
                                 <div class="col-sm-4 d-flex align-items-end">
                                     <div>

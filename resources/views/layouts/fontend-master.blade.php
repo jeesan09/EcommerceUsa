@@ -124,7 +124,7 @@
                         <form action="{{ route('search.product') }}" method="get">
                             @csrf
                         <div class="header-search ">
-                                <div class="header-search-wrapper show">
+                                <div class="header-search-wrapper d-flex show">
                                     <label for="q" class="sr-only">Search</label>
                                     <input type="search" class="form-control" name="search_product" id="q"
                                         placeholder="Search in..." required>

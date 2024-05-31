@@ -26,7 +26,7 @@
         <div class="dashboard">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 m-0 p-0">
                       <div class="card border">
                         <div class="card-header  text-center mt-2">
                           <h5>Order Products List</h5>
@@ -71,7 +71,7 @@
                         </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 m-0 p-0">
                       <div class="card border">
                         <div class="card-header  text-center">
                           <h5 class="pt-2">Shipping Address</h5>
