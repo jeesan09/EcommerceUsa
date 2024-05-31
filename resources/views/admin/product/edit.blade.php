@@ -99,11 +99,11 @@
                                         <label for="price">Price</label>
                                         <input type="number" min="1" value="{{ $varient->price}}" class="form-control price" name="price[]">
                                     </div>
-                                    <div class="col-sm-1">
+                                    <div class="col-sm-1 d-none">
                                         <label for="qty">Quantity</label>
-                                        <input type="number" value="{{ $varient->quantity}}" min="1" class="form-control qty" name="qty[]">
+                                        <input type="number" value="2000" min="1" class="form-control qty" name="qty[]">
                                     </div>
-                                    <div class="col-sm-3 d-flex align-items-end">
+                                    <div class="col-sm-4 d-flex align-items-end">
                                         <div>
                                             <label class="d-sm-block"> </label>
                                             <label for="image " class="d-sm-none">Image</label>
@@ -247,12 +247,12 @@
                                             <input type="number" min="1" class="form-control" name="priceNew[]">
                                  </div>
 
-                                 <div class="col-sm-2">
+                                 <div class="col-sm-2 d-none">
                                     <label class="d-sm-block"> </label>
                                             <label for="qty" class="d-sm-none">Quantity</label>
                                             <input type="number" min="1" class="form-control" name="qtyNew[]">
                                         </div>
-                                <div class="col-sm-2 d-flex align-items-end">
+                                <div class="col-sm-4 d-flex align-items-end">
                                     <div>
                                         <label class="d-sm-block"> </label>
                                         <label for="image " class="d-sm-none">Image</label>
