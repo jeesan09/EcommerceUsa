@@ -67,7 +67,7 @@
                     <div class="col-sm-10 col-lg-10">
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel" aria-labelledby="tab-dashboard-link">
-                                <table class="table table-bordered" id="myorder">
+                                <table class="table table-bordered" id="myorder" >
                                     <thead class="thead-dark text-center">
                                       <tr>
                                         <th style="width:5%;">Sl.No</th>

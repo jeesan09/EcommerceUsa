@@ -12,7 +12,7 @@
                                         style="height: 300px">
                                 </div>
                                 <div class="text-center mt-3">
-                                    <h5 class="text-danger">{{ $statusCode }} - Page Expired </h5>
+                                    <h5 class="text-danger">{{ @$statusCode }} - Page Expired </h5>
                                     <p class="text-dark">Sorry, something went wrong. Please try again.</p>
                                 </div>
                                <div class="text-center pt-1">

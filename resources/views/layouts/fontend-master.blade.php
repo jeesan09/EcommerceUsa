@@ -171,12 +171,7 @@
                                     <span class="cart-count"> {{ $qty }}</span>
                                 </a>
                             @else
-                                <style>
-                                    .search-toggle1 {
-                                        margin-top: 15px !important;
-                                        margin-right: 46px !important;
-                                    }
-                                </style>
+                               
                             @endif
                         </div><!-- End .header-right -->
                         @endif

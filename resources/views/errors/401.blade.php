@@ -12,7 +12,7 @@
                                         style="height: 300px">
                                 </div>
                                 <div class="text-center mt-3">
-                                    <h5 class="text-danger">{{ $statusCode }} - Unauthorized Error</h5>
+                                    <h5 class="text-danger">{{ @$statusCode }} - Unauthorized Error</h5>
                                     <p class="text-dark">Sorry, You cannot access the page.</p>
                                 </div>
                                <div class="text-center pt-1">
