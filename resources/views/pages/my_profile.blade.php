@@ -250,7 +250,7 @@
                                     @foreach ($users as $user)
                                         <div class="row">
                                             <input type="hidden" name="user_id" value="{{ $user->id }}">
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label> Name *</label>
                                                 <input type="text"
                                                     class="form-control  @error('name') is-invalid @enderror"
@@ -261,7 +261,7 @@
                                             </div>
 
 
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label>Reseller ID *</label>
                                                 <input type="text"
                                                     class="form-control  @error('reseller_ID') is-invalid @enderror"
@@ -273,7 +273,7 @@
 
 
 
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label>Company Name *</label>
                                                 <input type="text"
                                                     class="form-control  @error('company_name') is-invalid @enderror"
@@ -285,7 +285,7 @@
 
 
 
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label>Phone No *</label>
                                                 <input type="text"
                                                     class="form-control  @error('phone') is-invalid @enderror"
@@ -296,7 +296,7 @@
                                             </div>
 
 
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label>Shipping Address *</label>
                                                 <textarea id="shipping_address" class="form-control @error('shipping_address') is-invalid @enderror"
                                                     name="shipping_address">{{ $user->shipping_address }}</textarea>
@@ -308,7 +308,7 @@
 
 
 
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label>Billing Address *</label>
                                                 <textarea id="billing_address" class="form-control @error('billing_address') is-invalid @enderror"
                                                     name="billing_address">{{ $user->billing_address }}</textarea>
@@ -318,7 +318,7 @@
                                                 @enderror
                                             </div>
 
-                                            <div class="col-6">
+                                            <div class="col-md-6">
                                                 <label>E-mail Address *</label>
                                                 <input type="text"
                                                     class="form-control  @error('email') is-invalid @enderror"
