@@ -32,7 +32,7 @@
             .tableFontCss table td {
                 font-size: 10px !important;
             }
-            .btn{
+           #myorder .btn{
                 width: 23px !important;
                 height: 18px !important;
                 margin-top: 2px;
