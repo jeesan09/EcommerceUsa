@@ -99,11 +99,13 @@ class OrderController extends Controller
       return redirect()->route('login');
     }
   }
-  public function my_order_details($oder_id)
+  public function my_order_details(Request $request)
   {
-    $shippings = Shipping::where('order_id', $oder_id)->orderBy('id', 'desc')->get();
-    $order_items = OrderItem::where('order_id', $oder_id)->get();
-    return view('pages.order-details', compact('shippings', 'order_items'));
+   $payment_type = $request->payment_type;
+   $invoiceNo=  $request->invoiceNo;
+    $shippings = Shipping::where('order_id', $request->id)->orderBy('id', 'desc')->get();
+    $order_items = OrderItem::where('order_id', $request->id)->get();
+    return view('pages.order-details', compact('shippings', 'order_items','payment_type','invoiceNo'));
   }
 
 

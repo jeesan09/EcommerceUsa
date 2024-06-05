@@ -33,7 +33,7 @@
         <div class="container">
             <div class="card">
                 <div class="card-body">
-                    <h3 style="text-align: center; margin-bottom:30px;padding-top:20px; ">Cash on delevery</h3>
+                    <h3 style="text-align: center; margin-bottom:30px;padding-top:20px; ">Wire Transfer</h3>
                     <div class="row">
                         <div class="col-md-7">
                             <div class="card">

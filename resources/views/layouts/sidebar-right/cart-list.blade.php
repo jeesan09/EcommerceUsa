@@ -121,7 +121,7 @@
       <div class="form-check labelCSS">
             <input class="form-check-input checkbox" type="radio" name="payment_option" value="cash_on_delivery">
             <label class="form-check-label">
-                  Cash on Delivery
+                  Wire Transfer
             </label>
       </div>
      </div>

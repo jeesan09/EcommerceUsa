@@ -157,7 +157,7 @@
                                                     </td>
                                                     <td class="text-center">
                                                         @if ($order->payment_inside == 'COD')
-                                                            <p class="badge badge-warning text-white resFontSize">COD
+                                                            <p class="badge badge-warning text-white resFontSize">Wire Transfer
                                                             </p>
                                                         @else
                                                             <p class="badge badge-success text-white resFontSize">Online
@@ -175,9 +175,10 @@
                                                     </td>
 
                                                     <td style="padding-left: 10px;">
-                                                        <a href="{{ route('my.order.details', $order->id) }}"
+                                                        <a href="{{ route('my.order.details',  ['id' => $order->id, 'payment_type' =>$order->payment_inside,'invoiceNo' =>$order->invoice ]) }}"
                                                             class="btn btn-outline-success btn-sm"
-                                                            title="Order Details"> <i class="icon-eye"></i></a>
+                                                            title="Order Details"> <i class="icon-eye"></i>
+                                                        </a>
                                                         @if ($order->order_status == '1' or $order->order_status == '2' or $order->order_status == '5')
                                                             <a onclick="return confirm('Are you sure you want to cancel this order ?')"
                                                                 href="{{ route('my.order.cancel', $order->id) }}"

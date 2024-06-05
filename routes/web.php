@@ -151,7 +151,7 @@ Route::get('check/out',[ChekoutController::class,'index']);
 Route::post('/procces/order/',[OrderController::class,'proccessTo_check'])->name('procces.order');
 Route::get('my-profile/',[OrderController::class,'my_profile']);
 Route::get('my-profile/ajax',[OrderController::class,'my_profile_ajax']);
-Route::get('my-oder-details/{order_id}',[OrderController::class,'my_order_details'])->name('my.order.details');
+Route::get('my-oder-details/',[OrderController::class,'my_order_details'])->name('my.order.details');
 Route::get('my-oder-cancel/{orde_id}',[OrderController::class,'my_order_cancel'])->name('my.order.cancel');
 Route::post('my/password/change',[OrderController::class,'my_password_change'])->name('password.change');
 Route::post('update/user', [OrderController::class,'user_update'])->name('update.user.account');

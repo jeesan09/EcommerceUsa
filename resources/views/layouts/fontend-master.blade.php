@@ -422,11 +422,22 @@
         document.body.style.overflow = "";
     }
 </script>
+
 <script>
     $('.filterBtn').on("click", function(){
              $('.filterOpen').removeClass('d-none');
              $('.filterBtn').addClass('d-none');
          });
+
+  $('#viewInvoice').on("click", function() {
+    var printContents = document.querySelector('.invoicePrint').innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+    window.print();
+    document.body.innerHTML = originalContents;
+    location.reload(); 
+});
        
  </script>
 </html>
