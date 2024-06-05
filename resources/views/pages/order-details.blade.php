@@ -76,7 +76,7 @@ $subtotal = 0;
                                         <p>S12379</p>
                                     </div> --}}
                                 </div>
-                                <div class="invice-date-table" style=" width: 100%; margin-top:2px; height:700px;">
+                                <div class="invice-date-table" style=" width: 100%; margin-top:2px; height:800px;">
                                     <table
                                         style="width: 100%; border-top: 3px solid black; border-bottom: 3px solid black; border-collapse: collapse;">
                                         <tr>
@@ -106,42 +106,9 @@ $subtotal = 0;
                                             @endphp
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td style="padding: 10px; border-bottom: 1px solid #ddd; text-align:left;">{{ $order_item->product->product_name }} </td>
-                                            <td style="padding: 10px; border-bottom: 1px solid #ddd;text-align:right;">{{ $order_item->product_qty }}</td>
-                                            <td style="padding: 10px; border-bottom: 1px solid #ddd; text-align: right;">${{number_format( $order_item->product_varient->price,2 )}}</td>
-                                            <td style=" padding: 10px; border-bottom: 1px solid #ddd; text-align: right;">${{ number_format($order_item->product_qty * $order_item->product_varient->price,2) }}
-                                             @php
-                                                $subtotalInvoice +=
-                                                    $order_item->product_qty *
-                                                    $order_item->product_varient->price;
-                                            @endphp
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 10px; border-bottom: 1px solid #ddd; text-align:left;">{{ $order_item->product->product_name }} </td>
-                                            <td style="padding: 10px; border-bottom: 1px solid #ddd;text-align:right;">{{ $order_item->product_qty }}</td>
-                                            <td style="padding: 10px; border-bottom: 1px solid #ddd; text-align: right;">${{number_format( $order_item->product_varient->price,2 )}}</td>
-                                            <td style=" padding: 10px; border-bottom: 1px solid #ddd; text-align: right;">${{ number_format($order_item->product_qty * $order_item->product_varient->price,2) }}
-                                             @php
-                                                $subtotalInvoice +=
-                                                    $order_item->product_qty *
-                                                    $order_item->product_varient->price;
-                                            @endphp
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 10px; border-bottom: 1px solid #ddd; text-align:left;">{{ $order_item->product->product_name }} </td>
-                                            <td style="padding: 10px; border-bottom: 1px solid #ddd;text-align:right;">{{ $order_item->product_qty }}</td>
-                                            <td style="padding: 10px; border-bottom: 1px solid #ddd; text-align: right;">${{number_format( $order_item->product_varient->price,2 )}}</td>
-                                            <td style=" padding: 10px; border-bottom: 1px solid #ddd; text-align: right;">${{ number_format($order_item->product_qty * $order_item->product_varient->price,2) }}
-                                             @php
-                                                $subtotalInvoice +=
-                                                    $order_item->product_qty *
-                                                    $order_item->product_varient->price;
-                                            @endphp
-                                            </td>
-                                        </tr>
+                                     
+                                      
+                                      
                                      @endforeach
                                     </table>
                                     <table style="width:100%; border-collapse: collapse;">
