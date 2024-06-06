@@ -113,7 +113,7 @@ class AllproductController extends Controller
 
     $products = Product::with(['variants' => function ($query) use ($sort) {
       $query->orderBy('price', $sort);
-    }])->paginate(30);
+    }])->paginate(16);
 
     return view('pages.ajax-sort_by_search', compact('products'))->render();
   }

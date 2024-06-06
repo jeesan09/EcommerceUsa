@@ -19,9 +19,9 @@
                         @endif
                         @endforeach
                     </a>
-                    <div class="product-action-vertical">
+                    {{-- <div class="product-action-vertical">
                         <a href="{{ url('add/wishlist/' . $product->id) }}" class="btn-product-icon btn-wishlist "><span>add to wishlist</span></a>
-                    </div>
+                    </div> --}}
                     <div class="product-action">
                         <!--  <a class="btn-product btn-cart cart_btn_click" href="#product_details"
                                                         data-toggle="modal"><span>BUY NOW</span></a> -->

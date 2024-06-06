@@ -88,17 +88,17 @@
                         </button>
                         <style>
                             .name_logo {
-                                font-size: 34px;
+                                font-size: 20px;
                                 font-weight: 700;
                                 width: 170px;
                             }
                           
                         </style>
                         <a href="{{url('/')}}" class="name_logo  d-none d-md-block">
-                            @if ($logo->header_logo != '')
+                            @if (isset($logo->header_logo))
                             <img src="{{ asset($logo->header_logo) }}" height="auto" alt="" >
                             @else
-                            MPW WHOLESALE
+                            MPW RENEWED
                        @endif
                         </a>
                         <nav class="main-nav">
@@ -190,11 +190,11 @@
                     <div class="row">
                         <div class="col-sm-4 col-lg-4">
                             <div class="widget widget-about">
-                                {{-- @if ($logo->footer_logo != '')
-                                <img src="{{ asset($logo->footer_logo) }}" alt="" class="footer-logo" alt="Footer Logo" width="135" height="25">
+                             @if (isset($logo->footer_logo))
+                                <img src="{{ asset($logo->footer_logo) }}" alt="" class="name_logo" alt="Footer Logo">
                                 @else
-                                <h2 class="text-white"> SellsPoints</h2>
-                           @endif --}}
+                                <h2 class="text-white name_logo"> MPW Renewed</h2>
+                            @endif
                                 <p>Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, eu vulputate
                                     magna eros eu erat. </p>
 
@@ -231,8 +231,8 @@
                                 <h4 class="widget-title">My Account</h4><!-- End .widget-title -->
                                 <ul class="widget-list">
                                     <li><a href="{{ url('/login') }}">Sign In</a></li>
-                                    <li><a href="{{ url('/shopping/cart/list') }}">View Cart</a></li>
-                                    <li><a href="{{ url('/wishlist/page') }}">My Wishlist</a></li>
+                                   {{--  <li><a href="{{ url('/shopping/cart/list') }}">View Cart</a></li> --}}
+                                {{--     <li><a href="{{ url('/wishlist/page') }}">My Wishlist</a></li> --}}
                                     <li><a href="{{ url('/my-profile') }}">Track My Order</a></li>
                                 </ul><!-- End .widget-list -->
                             </div><!-- End .widget -->
@@ -247,7 +247,7 @@
                         echo date('Y');
                     @endphp <a class="text-light fs-4"
                             href="{{ url('/') }}"> Developed
-                            by : MPW-Wholesale</a></p><!-- End .footer-copyright -->
+                            by : MPW-Renewed</a></p><!-- End .footer-copyright -->
                     <figure class="footer-payments">
                         <img src="{{ asset('frotend') }}/assets/images/payments.png" alt="Payment methods"
                             width="272" height="20">
@@ -256,7 +256,7 @@
             </div><!-- End .footer-bottom -->
         </footer><!-- End .footer -->
     </div><!-- End .page-wrapper -->
-    <button id="scroll-top" title="Back to Top" style="background: #c96"><i class="icon-arrow-up"></i></button>
+    <button id="scroll-top" title="Back to Top" ><i class="icon-arrow-up"></i></button>
 
     <!-- Mobile Menu -->
     <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->

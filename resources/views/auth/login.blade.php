@@ -52,7 +52,7 @@
                                         <a href="/register" style="text-decoration: none; color:white" class="btn btn-primary">Register</a>
                                     </div> 
                                     <div>
-                                        <button type="submit" class="btn btn-outline-primary-2">
+                                        <button type="submit" class="btn btn-outline-primary-2 py-3">
                                             <span>LOG IN</span> <i class="icon-long-arrow-right"></i>
                                         </button>
                                     </div>

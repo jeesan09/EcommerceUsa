@@ -27,18 +27,18 @@ class SliderController extends Controller
     }
 
     public function s_productAdded(Request $request)
-    {
-        $request->validate([
-            'slider_title' => 'required|max:255',
-            'slider_image' => 'required|mimes:jpg,jpeg,gif,png,webp',
-        ]);
+{
+    $request->validate([
+        'slider_title' => 'required|max:255',
+        'slider_image' => 'required|mimes:jpg,jpeg,gif,png,webp',
+    ]);
 
-        $image_one = $request->file('slider_image');
-        $name_gena = hexdec(uniqid()) . '.' . $image_one->getClientOriginalExtension();
-        \Image::make($image_one)
-            ->resize(1600, 600)
-            ->save('frotend/img/product/upload/' . $name_gena);
-        $image_url = 'frotend/img/product/upload/' . $name_gena;
+    // Handle the file upload
+    if ($request->hasFile('slider_image')) {
+        $image = $request->file('slider_image');
+        $name_gena = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('frontend/img/product/upload'), $name_gena);
+        $image_url = 'frontend/img/product/upload/' . $name_gena;
 
         SliderModel::insert([
             'slider_title' => $request->slider_title,
@@ -47,9 +47,11 @@ class SliderController extends Controller
             'created_at' => Carbon::now(),
         ]);
 
-        return redirect()->back()->with('success', 'Slider Successfuly Added.');
+        return redirect()->back()->with('success', 'Slider Successfully Added.');
     }
 
+    return redirect()->back()->with('error', 'Failed to upload image.');
+}
     public function s_productList()
     {
         $products = SliderModel::latest()->get();

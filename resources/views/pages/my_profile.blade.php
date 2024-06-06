@@ -8,7 +8,7 @@
 
     .table .thead-dark th {
         color: #fff;
-        background-color: #c96 !important;
+        background-color: #000 !important;
         border-color: #f7f7f7 !important;
     }
     .resFontSize {
@@ -230,7 +230,7 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
-                                                    <button type="submit" class="btn btn-primary p-2">
+                                                    <button type="submit" class="btn btn-outline-primary-2 p-3">
                                                         <span>SAVE CHANGES</span>
                                                         <i class="icon-long-arrow-right"></i>
                                                     </button>
@@ -333,7 +333,7 @@
                                         </div>
                                     @endforeach
 
-                                    <button type="submit" class="btn btn-outline-primary-2 p-2">
+                                    <button type="submit" class="btn btn-outline-primary-2 p-3">
                                         <span>SAVE CHANGES</span>
                                         <i class="icon-long-arrow-right"></i>
                                     </button>

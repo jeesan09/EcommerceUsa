@@ -157,10 +157,10 @@ Route::post('my/password/change',[OrderController::class,'my_password_change'])-
 Route::post('update/user', [OrderController::class,'user_update'])->name('update.user.account');
 
 //Whishlist Controller
-Route::get('wishlist/page',[WishListController::class,'index']);
+/* Route::get('wishlist/page',[WishListController::class,'index']);
 Route::get('add/wishlist/',[WishListController::class,'add_wisshlist']);
 Route::get('wishlist/remove/{prod_id}',[WishListController::class,'product_remove']);
-
+ */
 
  // CMS Frontend page
 
@@ -172,7 +172,7 @@ Route::get('wishlist/remove/{prod_id}',[WishListController::class,'product_remov
     // all product show
     Route::get('all-product/', [AllproductController::class,'product_show'])->name('all.product');
     Route::get('product/details/{prod_id}', [AllproductController::class,'product_detail'])->name('product.details');
-    Route::get('shopping/cart/list',[CartController::class,'cart_list_page']);
+   /*  Route::get('shopping/cart/list',[CartController::class,'cart_list_page']); */
     Route::get('about/page', [FrontendController::class,'about_page'])->name('about.page');
     Route::get('contact/page', [FrontendController::class,'contact_page'])->name('contact.page');
     Route::get('all-product/search', [FrontendController::class,'search_all_product'])->name('search.product');
@@ -181,7 +181,7 @@ Route::get('wishlist/remove/{prod_id}',[WishListController::class,'product_remov
 
     // fontend contorller
     Route::get('addToCart/{cart_id}',[CartController::class,'cartadd']);
-    Route::get('cart/',[CartController::class,'cart_page']);
+    /* Route::get('cart/',[CartController::class,'cart_page']); */
     Route::get('/product/cart-list/',[CartController::class,'cartListRender']);
     
    

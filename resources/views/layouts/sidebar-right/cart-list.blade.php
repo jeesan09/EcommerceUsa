@@ -194,6 +194,7 @@
                                     openNav();
                                     alertify.set("notifier", "position", "bottom-left");
                                     alertify.success("Cart item removed");
+                                    $("#cart_realaod").load(location.href + " #cart_realaod");
                               } else {
                                     alertify.set("notifier", "position", "top-right");
                                     alertify.warning("Something wrong");

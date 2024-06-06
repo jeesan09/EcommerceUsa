@@ -191,8 +191,12 @@ $subtotal = 0;
                                         <td class="  pl-2 w-50" style="letter-spacing: 2px;">053100300</td>
                                     </tr>
                                     <tr>
+                                        <td class=" pl-2 w-50">COMPANY NAME</td>
+                                        <td class="  pl-2 w-50" style="letter-spacing: 1px;">MPW NC INC</td>
+                                    </tr>
+                                    <tr>
                                         <td colspan="2" class=" p-2 text-center">
-                                            <a href="#" id="viewInvoice" class="btn btn-sm btn-secondary p-2 my-1">
+                                            <a href="#" id="viewInvoice" class="btn btn-outline-primary-2 p-2 my-1 text-end ">
                                                 <i class="icon-eye"></i>View Invoice
                                             </a>
                                         </td>
@@ -207,7 +211,7 @@ $subtotal = 0;
                     <div class="row">
                         @if($payment_type!="COD")
                         <div class="col-12  text-right ">
-                            <a href="#" id="viewInvoice" class="btn btn-sm btn-secondary p-2 my-1 text-end">
+                            <a href="#" id="viewInvoice" class="btn btn-outline-primary-2 p-2 my-1 text-end ">
                                 <i class="icon-eye"></i>View Invoice
                             </a>
                         </div>

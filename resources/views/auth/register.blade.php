@@ -161,8 +161,8 @@
                                     </div>
                                     <div class="form-footer d-flex justify-content-between mb-4">
                                         <!-- Back button -->
-                                        <a href="javascript:history.back()" style="color: black; text-decoration:none "
-                                            class="btn btn-outline-primary-2"><i class="icon-long-arrow-left"></i>Back</a>
+                                        <a href="javascript:history.back()" style=" text-decoration:none "
+                                            class="btn btn-primary text-white text-left"><i class="icon-long-arrow-left"></i>Back</a>
 
                                         <button type="submit" class="btn btn-outline-primary-2">
                                             <span>REGISTER</span>
