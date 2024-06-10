@@ -20025,7 +20025,7 @@ button:focus {
 }
 
 .section-height {
-    height: 60% !important;
+    height:50vh !important;
     overflow: hidden;
     overflow-y: scroll;
 }

@@ -4,26 +4,48 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  {{--   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> --}}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title> @yield('product_list')</title>
-    @php
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-       
-    @endphp
-
-    <meta name="keywords" content="mpwrenewed.com" >
-    <meta name="description" content="mpwrenewed.com">
-    <meta name="author" content="mpwrenewed.com">
+    @php if (session_status() == PHP_SESSION_NONE) {session_start();}@endphp
     <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32"
-        href="{{ asset('frotend') }}/assets/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="32x32"  href="{{ asset('frotend') }}/assets/images/icons/favicon-32x32.png">
     <meta name="apple-mobile-web-app-title" content="mpwrenewed.com">
     <meta name="application-name" content="mpwrenewed.com">
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="MPWholsale">
+    <meta name="keywords" content="website, mpwholesale, mpwrenewed">
+    <meta name="author" content="MPWholesale">
+
+    <!-- Open Graph Meta Tags for Social Media (Facebook, WhatsApp, Skype, LinkedIn, etc.) -->
+    <meta property="og:title" content="MPWholesale">
+    <meta property="og:description" content="Your brief description for social media.">
+    <meta property="og:image" content="{{ asset('frotend') }}/websiteLogo/meta.jpg }}">
+    <meta property="og:url" content="https://mpwrenewed.com">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="MPWholesale">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MPWholesale">
+    <meta name="twitter:description" content="Your brief description for Twitter.">
+    <meta name="twitter:image" content="{{ asset('frotend') }}/websiteLogo/meta.jpg }}">
+    <meta name="twitter:site" content="@mpwholesale">
+
+    <!-- LinkedIn Meta Tags (Open Graph tags are typically sufficient, but adding specific LinkedIn tags can help) -->
+    <meta property="linkedin:card" content="summary_large_image">
+    <meta property="linkedin:title" content="MPWholesale">
+    <meta property="linkedin:description" content="Your brief description for LinkedIn.">
+    <meta property="linkedin:image" content="{{ asset('frotend') }}/websiteLogo/meta.jpg }}">
+
+    <!-- Pinterest Meta Tags -->
+    <meta name="pinterest-rich-pin" content="false">
+    <meta name="pinterest:title" content="MPWholesale">
+    <meta name="pinterest:description" content="Your brief description for Pinterest.">
+    <meta name="pinterest:image" content="{{ asset('frotend') }}/websiteLogo/meta.jpg }}">
+
+
     <!-- Plugins CSS File -->
     <link rel="stylesheet" href="{{ asset('frotend') }}/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('frotend') }}/assets/css/plugins/owl-carousel/owl.carousel.css">
@@ -58,8 +80,6 @@
                                         @php
                                             $count = App\Wishlist::where('user_ip', Auth::user()->id)->count();
                                             /*   $count_order = App\Order::where('user_id', Auth::user()->id)->count(); */
-                                          
-
                                         @endphp
                                         {{--   @if ($count_order > 0)
                                         <li><a href="{{ url('/buynow/order-complate') }}"><i class="icon-heart-o"></i>My
@@ -92,14 +112,13 @@
                                 font-weight: 700;
                                 width: 170px;
                             }
-                          
                         </style>
-                        <a href="{{url('/')}}" class="name_logo  d-none d-md-block">
+                        <a href="{{ url('/') }}" class="name_logo  d-none d-md-block">
                             @if (isset($logo->header_logo))
-                            <img src="{{ asset($logo->header_logo) }}" height="auto" alt="" >
+                                <img src="{{ asset($logo->header_logo) }}" height="auto" alt="">
                             @else
-                            MPW RENEWED
-                       @endif
+                                MPW RENEWED
+                            @endif
                         </a>
                         <nav class="main-nav">
                             <ul class="menu sf-arrows">
@@ -107,7 +126,7 @@
                                     <a href="{{ url('/') }}" class="">Home</a>
                                 </li>
                                 <li class=" @yield('product')">
-                                    <a href="{{ route('all.product') }}" >Product</a>
+                                    <a href="{{ route('all.product') }}">Product</a>
                                 </li>
                                 <li class=" @yield('about')">
                                     <a href="{{ route('about.page') }}">About</a>
@@ -119,17 +138,17 @@
                         </nav><!-- End .main-nav -->
                     </div><!-- End .header-left -->
 
-                  
+
                     <div class="header-right">
                         <form action="{{ route('search.product') }}" method="get">
                             @csrf
-                        <div class="header-search ">
+                            <div class="header-search ">
                                 <div class="header-search-wrapper d-flex show">
                                     <label for="q" class="sr-only">Search</label>
                                     <input type="search" class="form-control" name="search_product" id="q"
                                         placeholder="Search in..." required>
                                 </div><!-- End .header-search-wrapper -->
-                                <div >
+                                <div>
                                     <button class="search-toggle1"><i class="icon-search"></i></button>
                                 </div>
                             </div><!-- End .header-search -->
@@ -152,28 +171,27 @@
                             }
                         </style>
 
-                        @if(Auth::check())
-                        @php
-                            $qty = App\Cart::all()
-                                ->where('user_ip', Auth::user()->id)
-                                ->count();
-                            $url = url()->current();
-                            $path = parse_url($url, PHP_URL_PATH);
-                            $trimmedPath = trim($path, '/');
-                        @endphp
-                     
-                        <div class="dropdown cart-dropdown" id="cart_realaod">
-                            @if ($trimmedPath != 'checkout')
-                                <a href="#" onclick="openNav()" class="dropdown-toggle" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                    data-display="static">
-                                    <i class="icon-shopping-cart"></i>
-                                    <span class="cart-count"> {{ $qty }}</span>
-                                </a>
-                            @else
-                               
-                            @endif
-                        </div><!-- End .header-right -->
+                        @if (Auth::check())
+                            @php
+                                $qty = App\Cart::all()
+                                    ->where('user_ip', Auth::user()->id)
+                                    ->count();
+                                $url = url()->current();
+                                $path = parse_url($url, PHP_URL_PATH);
+                                $trimmedPath = trim($path, '/');
+                            @endphp
+
+                            <div class="dropdown cart-dropdown" id="cart_realaod">
+                                @if ($trimmedPath != 'checkout')
+                                    <a href="#" onclick="openNav()" class="dropdown-toggle" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                        data-display="static">
+                                        <i class="icon-shopping-cart"></i>
+                                        <span class="cart-count"> {{ $qty }}</span>
+                                    </a>
+                                @else
+                                @endif
+                            </div><!-- End .header-right -->
                         @endif
                     </div><!-- End .container -->
                 </div><!-- End .header-middle -->
@@ -190,7 +208,7 @@
                     <div class="row">
                         <div class="col-sm-4 col-lg-4">
                             <div class="widget widget-about">
-                          {{--    @if (isset($logo->footer_logo))
+                                {{--    @if (isset($logo->footer_logo))
                                 <img src="{{ asset($logo->footer_logo) }}" alt="" class="name_logo" alt="Footer Logo">
                                 @else
                                 <h2 class="text-white name_logo"> MPW Renewed</h2>
@@ -231,8 +249,8 @@
                                 <h4 class="widget-title">My Account</h4><!-- End .widget-title -->
                                 <ul class="widget-list">
                                     <li><a href="{{ url('/login') }}">Sign In</a></li>
-                                   {{--  <li><a href="{{ url('/shopping/cart/list') }}">View Cart</a></li> --}}
-                                {{--     <li><a href="{{ url('/wishlist/page') }}">My Wishlist</a></li> --}}
+                                    {{--  <li><a href="{{ url('/shopping/cart/list') }}">View Cart</a></li> --}}
+                                    {{--     <li><a href="{{ url('/wishlist/page') }}">My Wishlist</a></li> --}}
                                     <li><a href="{{ url('/my-profile') }}">Track My Order</a></li>
                                 </ul><!-- End .widget-list -->
                             </div><!-- End .widget -->
@@ -256,7 +274,7 @@
             </div><!-- End .footer-bottom -->
         </footer><!-- End .footer -->
     </div><!-- End .page-wrapper -->
-    <button id="scroll-top" title="Back to Top" ><i class="icon-arrow-up"></i></button>
+    <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
 
     <!-- Mobile Menu -->
     <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
@@ -424,20 +442,20 @@
 </script>
 
 <script>
-    $('.filterBtn').on("click", function(){
-             $('.filterOpen').removeClass('d-none');
-             $('.filterBtn').addClass('d-none');
-         });
+    $('.filterBtn').on("click", function() {
+        $('.filterOpen').removeClass('d-none');
+        $('.filterBtn').addClass('d-none');
+    });
 
-  $('#viewInvoice').on("click", function() {
-    var printContents = document.querySelector('.invoicePrint').innerHTML;
-    var originalContents = document.body.innerHTML;
+    $('#viewInvoice').on("click", function() {
+        var printContents = document.querySelector('.invoicePrint').innerHTML;
+        var originalContents = document.body.innerHTML;
 
-    document.body.innerHTML = printContents;
-    window.print();
-    document.body.innerHTML = originalContents;
-    location.reload(); 
-});
-       
- </script>
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+        location.reload();
+    });
+</script>
+
 </html>
