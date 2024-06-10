@@ -23,8 +23,7 @@
                             <div class="row ">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label">Slider Title: <span
-                                                class="tx-danger">*</span></label>
+                                        <label class="form-control-label">Slider Title: </label>
                                         <input class="form-control" type="text" name="slider_title"
                                             value="{{ old('slider_title') }}" placeholder="Slider title">
                                         @error('slider_title')

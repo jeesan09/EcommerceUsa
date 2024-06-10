@@ -29,7 +29,6 @@ class SliderController extends Controller
     public function s_productAdded(Request $request)
 {
     $request->validate([
-        'slider_title' => 'required|max:255',
         'slider_image' => 'required|mimes:jpg,jpeg,gif,png,webp',
     ]);
 

@@ -36,15 +36,14 @@
                     <div class="col-lg-12">
                         <div class="slider-image">
                             @foreach ($sliders as $slider)
-                                <div class="intro-content">
+                               {{--  <div class="intro-content">
                                     <h1 class="intro-title">{{ $slider->slider_title }}</h1>
-                                    {{--   <form action="{{ route('search.product') }}" method="get"> --}}
                                     <button type="submit" class="btn btn-outline-white">
                                         <span>SHOP NOW</span>
                                         <i class="icon-long-arrow-right"></i>
                                     </button>
-                                    {{-- </form> --}}
-                                </div>
+                                 
+                                </div> --}}
                                 <img src="{{ asset($slider->slider_image) }}" alt="Image Desc">
                             @endforeach
                         </div>

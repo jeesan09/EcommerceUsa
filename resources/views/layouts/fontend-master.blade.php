@@ -190,11 +190,11 @@
                     <div class="row">
                         <div class="col-sm-4 col-lg-4">
                             <div class="widget widget-about">
-                             @if (isset($logo->footer_logo))
+                          {{--    @if (isset($logo->footer_logo))
                                 <img src="{{ asset($logo->footer_logo) }}" alt="" class="name_logo" alt="Footer Logo">
                                 @else
                                 <h2 class="text-white name_logo"> MPW Renewed</h2>
-                            @endif
+                            @endif --}}
                                 <p>Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, eu vulputate
                                     magna eros eu erat. </p>
 
