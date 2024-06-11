@@ -126,7 +126,7 @@ class RegisterController extends Controller
         $activationLink = route('admin.login');
     /*   dd($user->email); */
         // Send email notification to admin
-        Mail::to($user->email)->send(new NewUserNotification($user, $activationLink));
+        Mail::to("sales@megaphonewholesale.com")->send(new NewUserNotification($user, $activationLink));
 
         return redirect('/login');
     
