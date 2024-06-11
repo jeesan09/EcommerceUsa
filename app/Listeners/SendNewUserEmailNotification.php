@@ -18,6 +18,6 @@ class SendNewUserEmailNotification implements ShouldQueue
         $user = $event->user;
         /* dd($user->email); */
         // Send an email notification to the admin
-        Mail::to($user->email )->send(new NewUserNotification($user));
+        Mail::to('sales@megaphonewholesale.com')->send(new NewUserNotification($user));
     }
 }
