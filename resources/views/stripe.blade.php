@@ -221,20 +221,13 @@
                                                     </div>
                                                 @endif
 
-                                                <form role="form" action="{{ route('stripe.post') }}"
-                                                    method="post" class="require-validation" data-cc-on-file="false"
-                                                    data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"
-                                                    id="payment-form">
+                                                <form role="form" action="{{ route('stripe.post') }}"  method="post" class="require-validation" data-cc-on-file="false"  data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"    id="payment-form">
                                                     @csrf
-
-
                                                     <!-- Hidden input field for subtotal -->
-                                                    <input type="hidden" name="subtotal"
-                                                        value="{{ $subtotal }}">
+                                                    <input type="hidden" name="subtotal"  value="{{ $subtotal }}">
 
                                                     <!-- Hidden input field for CartData -->
-                                                    <input type="hidden" name="cartData"
-                                                        value="{{ json_encode($CartData) }}">
+                                                    <input type="hidden" name="cartData"    value="{{ json_encode($CartData) }}">
 
                                                     <div class='form-row row'>
                                                         <div class='col-xs-12 form-group required'>
@@ -245,28 +238,23 @@
 
                                                     <div class='form-row row'>
                                                         <div class='col-xs-12 form-group card required'>
-                                                            <label class='control-label'>Card Number</label> <input
-                                                                autocomplete='off' 
-                                                                class='form-control card-number' size='20'
-                                                                type='text'>
+                                                            <label class='control-label'>Card Number</label> 
+                                                            <input   autocomplete='off'  class='form-control card-number' size='20'   type='text'>
                                                         </div>
                                                     </div>
 
                                                     <div class='form-row row'>
                                                         <div class='col-xs-12 col-md-4 form-group cvc required'>
-                                                            <label class='control-label'>CVC</label> <input
-                                                                autocomplete='off' class='form-control card-cvc'
-                                                                placeholder='ex. 311' size='4' type='text'>
+                                                            <label class='control-label'>CVC</label> 
+                                                            <input  autocomplete='off' class='form-control card-cvc' placeholder='ex. 311' size='4' max="4" type='text'>
                                                         </div>
                                                         <div class='col-xs-12 col-md-4 form-group expiration required'>
                                                             <label class='control-label'>Expiration Month</label>
-                                                            <input class='form-control card-expiry-month'
-                                                                placeholder='MM' size='2' type='text'>
+                                                            <input class='form-control card-expiry-month' placeholder='MM' size='2' type='text'>
                                                         </div>
                                                         <div class='col-xs-12 col-md-4 form-group expiration required'>
-                                                            <label class='control-label'>Expiration Year</label> <input
-                                                                class='form-control card-expiry-year'
-                                                                placeholder='YYYY' size='4' type='text'>
+                                                            <label class='control-label'>Expiration Year</label> 
+                                                            <input  class='form-control card-expiry-year'   placeholder='YYYY' size='4' type='text'>
                                                         </div>
                                                     </div>
 
@@ -408,6 +396,63 @@
         }
 
     });
+
+    $(document).ready(function () {
+        $('.card-number').on('input', function (e) {
+            let value = $(this).val().replace(/\D/g, '');
+            value = value.substring(0, 20);
+
+            let formattedValue = '';
+            for (let i = 0; i < value.length; i += 4) {
+                if (i + 4 < value.length) {
+                    formattedValue += value.substring(i, i + 4) + ' ';
+                } else {
+                    formattedValue += value.substring(i, value.length);
+                }
+            }
+
+            $(this).val(formattedValue.trim());
+            if (value.length === 16) {
+                $('.card-cvc').focus();
+            } 
+        });
+
+        $('.card-cvc').on('input', function (e) {
+            let value = $(this).val().replace(/\D/g, ''); 
+            value = value.substring(0, 3); 
+            $(this).val(value);
+
+            if (value.length === 3) {
+                $('.card-expiry-month').focus();
+            }
+        });
+
+        $('.card-expiry-month').on('input', function (e) {
+            let value = $(this).val().replace(/\D/g, ''); 
+            if (value.length > 0) {
+                let month = parseInt(value);
+                if (month > 12) {
+                    value = '12';
+                }
+            }
+            value = value.substring(0, 2); 
+            $(this).val(value);
+
+            if (value.length === 2) {
+                $('.card-expiry-year').focus();
+            }
+        });
+
+        $('.card-expiry-year').on('input', function (e) {
+            let value = $(this).val().replace(/\D/g, ''); 
+            value = value.substring(0, 4); 
+            $(this).val(value); 
+        });
+
+
+    });
+
+
 </script>
 
 </html>
