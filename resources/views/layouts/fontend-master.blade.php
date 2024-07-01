@@ -13,37 +13,38 @@
     <link rel="icon" type="image/png" sizes="32x32"  href="{{ asset('frotend') }}/assets/images/icons/favicon-32x32.png">
     <meta name="apple-mobile-web-app-title" content="mpwrenewed.com">
     <meta name="application-name" content="mpwrenewed.com">
-    <!-- SEO Meta Tags -->
+   <!-- SEO Meta Tags -->
     <meta name="description" content="MPWholsale">
     <meta name="keywords" content="website, mpwholesale, mpwrenewed">
     <meta name="author" content="MPWholesale">
 
     <!-- Open Graph Meta Tags for Social Media (Facebook, WhatsApp, Skype, LinkedIn, etc.) -->
     <meta property="og:title" content="MPWholesale">
-    <meta property="og:description" content="Your brief description for social media.">
+    <meta property="og:description" content="Mpw wholesale 3141 amity ct suite 300 charlotte nc 28215 Office number 704-579-3971 ">
+
     <meta property="og:image" content="{{ asset('frotend') }}/websiteLogo/meta.jpg }}">
     <meta property="og:url" content="https://mpwrenewed.com">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="MPWholesale">
 
     <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
+    {{-- <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="MPWholesale">
     <meta name="twitter:description" content="Your brief description for Twitter.">
     <meta name="twitter:image" content="{{ asset('frotend') }}/websiteLogo/meta.jpg }}">
-    <meta name="twitter:site" content="@mpwholesale">
+    <meta name="twitter:site" content="@mpwholesale"> --}}
 
     <!-- LinkedIn Meta Tags (Open Graph tags are typically sufficient, but adding specific LinkedIn tags can help) -->
-    <meta property="linkedin:card" content="summary_large_image">
+    {{-- <meta property="linkedin:card" content="summary_large_image">
     <meta property="linkedin:title" content="MPWholesale">
     <meta property="linkedin:description" content="Your brief description for LinkedIn.">
-    <meta property="linkedin:image" content="{{ asset('frotend') }}/websiteLogo/meta.jpg }}">
+    <meta property="linkedin:image" content="{{ asset('frotend') }}/websiteLogo/meta.jpg }}"> --}}
 
     <!-- Pinterest Meta Tags -->
-    <meta name="pinterest-rich-pin" content="false">
+    {{-- <meta name="pinterest-rich-pin" content="false">
     <meta name="pinterest:title" content="MPWholesale">
     <meta name="pinterest:description" content="Your brief description for Pinterest.">
-    <meta name="pinterest:image" content="{{ asset('frotend') }}/websiteLogo/meta.jpg }}">
+    <meta name="pinterest:image" content="{{ asset('frotend') }}/websiteLogo/meta.jpg }}"> --}}
 
 
     <!-- Plugins CSS File -->
