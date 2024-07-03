@@ -17,7 +17,7 @@
    <!-- SEO Meta Tags -->
 
     <meta name="keywords" content="website,mpwrenewed , mobile wholesale,apple, samsung, Wholesale Mobile">
-    <meta name="author" content="MPWholesale">
+    <meta name="author" content="mpwrenewed">
     <meta name="title" content="mpwrenewed">
     <meta name="description" 
     content="Mpw wholesale 
@@ -30,7 +30,7 @@
             Sun: Closed
             "> 
     <!-- Open Graph Meta Tags for Social Media (Facebook, WhatsApp, Skype, LinkedIn, etc.) -->
-    <meta property="og:title" content="MPWholesale">
+    <meta property="og:title" content="mpwrenewed">
     <meta property="og:description"  content="Mpw wholesale 
              3141 amity ct suite 300 
              charlotte nc 28215 
@@ -44,7 +44,7 @@
     <meta property="og:image" content="{{ asset('frotend') }}/websiteLogo/meta.jpg }}">
     <meta property="og:url" content="https://mpwrenewed.com">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="MPWholesale">
+    <meta property="og:site_name" content="mpwrenewed">
 
     <!-- Twitter Card Meta Tags -->
     {{-- <meta name="twitter:card" content="summary_large_image">
