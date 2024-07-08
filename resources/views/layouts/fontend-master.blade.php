@@ -5,15 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="Dm5v2045IhsCrRknnn9GvOVnLan_y0hdqgOkgo9YOBM" />
-  {{--   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> --}}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title> @yield('product_list')</title>
     @php if (session_status() == PHP_SESSION_NONE) {session_start();}@endphp
     <!-- Favicon -->
+
     <link rel="icon" type="image/png" sizes="32x32"  href="{{ asset('frotend') }}/assets/images/icons/favicon-32x32.png">
     <meta name="apple-mobile-web-app-title" content="mpwrenewed.com">
     <meta name="application-name" content="mpwrenewed.com">
+    <link rel="canonical" href="{{ url()->current() }}">
    <!-- SEO Meta Tags -->
 
     <meta name="keywords" content="website,mpwrenewed , mobile wholesale,apple, samsung, Wholesale Mobile">
