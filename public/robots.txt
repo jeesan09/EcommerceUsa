@@ -6,5 +6,11 @@ Disallow: /password/reset/
 Disallow: /password/email/
 Disallow: /user/profile/
 Allow: /public/
+Allow: /products/
+Allow: /about/page/
+Allow: /contact/page/
+Allow: /products/search/
+Allow: /product/brand/search/
+Allow: /product/soft/by/
 
 Sitemap: https://mpwrenewed.com/sitemap.xml
