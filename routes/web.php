@@ -170,12 +170,12 @@ Route::get('wishlist/remove/{prod_id}',[WishListController::class,'product_remov
 
 
     // all product show
-    Route::get('all-product/', [AllproductController::class,'product_show'])->name('all.product');
+    Route::get('/products/', [AllproductController::class,'product_show'])->name('all.product');
     Route::get('product/details/{prod_id}', [AllproductController::class,'product_detail'])->name('product.details');
    /*  Route::get('shopping/cart/list',[CartController::class,'cart_list_page']); */
     Route::get('about/page', [FrontendController::class,'about_page'])->name('about.page');
     Route::get('contact/page', [FrontendController::class,'contact_page'])->name('contact.page');
-    Route::get('all-product/search', [FrontendController::class,'search_all_product'])->name('search.product');
+    Route::get('/products/search', [FrontendController::class,'search_all_product'])->name('search.product');
 
 
 

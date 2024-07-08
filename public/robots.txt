@@ -1,2 +1,10 @@
 User-agent: *
-Disallow:
+Disallow: /admin/
+Disallow: /login/
+Disallow: /register/
+Disallow: /password/reset/
+Disallow: /password/email/
+Disallow: /user/profile/
+Allow: /public/
+
+Sitemap: https://mpwrenewed.com/sitemap.xml
