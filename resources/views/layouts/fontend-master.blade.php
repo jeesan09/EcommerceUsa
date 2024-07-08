@@ -323,7 +323,7 @@
                         <a href="{{ url('/') }}">Home</a>
                     </li>
                     <li>
-                        <a href="{{ url('/all-product') }}"> Product</a>
+                        <a href="{{ route('all.product') }}"> Product</a>
                     </li>
                     {{--  @if ($count_order > 0)
                         <li><a href="{{ url('/buynow/order-complate') }}"><i class="icon-shopping-cart"></i>My Order

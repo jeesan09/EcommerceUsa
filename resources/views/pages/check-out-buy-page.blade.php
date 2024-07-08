@@ -107,7 +107,7 @@
                                         <span class="btn-hover-text ">Proceed to Checkout</span>
                                     </button>
                                   @else
-                                      <a href="{{ url('all-product/') }}" class="btn btn-outline-primary-2 btn-block"> Back to Shopping</a>
+                                      <a href="{{ route('all.product') }}" class="btn btn-outline-primary-2 btn-block"> Back to Shopping</a>
                               @endif
                                 </form>
                             </div><!-- End .summary -->

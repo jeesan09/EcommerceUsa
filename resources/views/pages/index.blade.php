@@ -190,7 +190,7 @@
                 @endforeach
             </div><!-- End .tab-content -->
             <div class="text-center">
-                <a href="{{ url('/all-product') }}" class="btn btn-primary">More Product <i class="icon-long-arrow-right"></i> </a>
+                <a href="{{ route('all.product') }}" class="btn btn-primary">More Product <i class="icon-long-arrow-right"></i> </a>
             </div>
         </div><!-- End .container -->
         <div class="container mt-5">
