@@ -1,16 +1,24 @@
-User-agent: *
+User-agent: Googlebot
+
 Disallow: /admin/
-Disallow: /login/
-Disallow: /register/
-Disallow: /password/reset/
-Disallow: /password/email/
-Disallow: /user/profile/
-Allow: /public/
-Allow: /products/
+Allow: /login
+Allow: /allowed-page/
+Allow: /another-allowed-page/
+Allow: /login
+Allow: /products
+Allow: /products/details/*
 Allow: /about/page/
 Allow: /contact/page/
 Allow: /products/search/
 Allow: /product/brand/search/
 Allow: /product/soft/by/
+Allow: /
+
+
+User-agent: *
+
+Disallow: /private/
+Allow:    /public/
+
 
 Sitemap: https://mpwrenewed.com/sitemap.xml
