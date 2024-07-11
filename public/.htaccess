@@ -2,6 +2,12 @@
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
     </IfModule>
+    <IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+    <IfModule mod_headers.c>
+        Header append Vary Accept-Encoding
+    </IfModule>
+    </IfModule>
 
     RewriteEngine On
 

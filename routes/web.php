@@ -23,26 +23,14 @@ use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Frontend\AllproductController;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Auth::routes();
 
-
-
 Route::post('/update-shipping-address', [UserController::class, 'updateShippingAddress'])->name('update.shipping.address');
-
-
-Route::get('/home',  [HomeController::class,'index'])->name('home');
 Route::get('/admin/home', [AdminController::class,'index']);
 Route::get('admin/login', [LoginController::class,'showLoginForm'])->name('admin.login');
 Route::post('admin/login',[LoginController::class,'loginAdmin']);
 
-// Route::get('admin/logout','AdminController@logut')->name('admin.logout');
 Route::get('admin/logout',[AdminController::class,'logut'])->name('admin.logout');
-
-
 
 // Backend Category page
 Route::get('category/',[CategoryController::class, 'index'])->name('addcatehory');
@@ -122,11 +110,7 @@ Route::get('delete/slider/{prod_id}',[SliderController::class,'s_product_delete'
 Route::get('create/logo/',[SliderController::class,'create_logo'])->name('create.logo');
 Route::post('/logo-add', [SliderController::class,'logo_add'])->name('add.logo');
 
-
-
 //admin backend end
-
-
 Route::delete('/admin/user/{id}', 'UserController@destroy')->name('user.delete');
 
 // User Control  page
@@ -156,65 +140,39 @@ Route::get('my-oder-cancel/{orde_id}',[OrderController::class,'my_order_cancel']
 Route::post('my/password/change',[OrderController::class,'my_password_change'])->name('password.change');
 Route::post('update/user', [OrderController::class,'user_update'])->name('update.user.account');
 
-//Whishlist Controller
-/* Route::get('wishlist/page',[WishListController::class,'index']);
-Route::get('add/wishlist/',[WishListController::class,'add_wisshlist']);
-Route::get('wishlist/remove/{prod_id}',[WishListController::class,'product_remove']);
- */
 
  // CMS Frontend page
-
  Route::middleware('auth.user_or_admin')->group(function () {
      // home page
     Route::get('/', 'FrontendController@index')->name('frontend.home');
 
-
     // all product show
-    Route::get('/products/', [AllproductController::class,'product_show'])->name('all.product');
-    Route::get('product/details/{prod_id}', [AllproductController::class,'product_detail'])->name('product.details');
-   /*  Route::get('shopping/cart/list',[CartController::class,'cart_list_page']); */
-    Route::get('/about/page', [FrontendController::class,'about_page'])->name('about.page');
-    Route::get('/contact/page', [FrontendController::class,'contact_page'])->name('contact.page');
-    Route::get('/products/search', [FrontendController::class,'search_all_product'])->name('search.product');
-
-
+    Route::get('/all-products', [AllproductController::class,'product_show'])->name('all.product');
+    Route::get('/product-details/{prod_id}', [AllproductController::class,'product_detail'])->name('product.details');
+    Route::get('/about-us', [FrontendController::class,'about_page'])->name('about.page');
+    Route::get('/contact-us', [FrontendController::class,'contact_page'])->name('contact.page');
+    Route::get('/products-search', [FrontendController::class,'search_all_product'])->name('search.product');
 
     // fontend contorller
-    Route::get('addToCart/{cart_id}',[CartController::class,'cartadd']);
-    /* Route::get('cart/',[CartController::class,'cart_page']); */
-    Route::get('/product/cart-list/',[CartController::class,'cartListRender']);
-    
-   
+   // Route::get('addToCart/{cart_id}',[CartController::class,'cartadd']);
+    Route::get('/product-cart-list',[CartController::class,'cartListRender']);
     Route::post('/cart-update-qty',[CartController::class,'cart_update_qty']);
     Route::post('/cart-item-removed',[CartController::class,'cart_item_removed']);
     Route::post('/cart-item-removed-all',[CartController::class,'cart_item_removed_all']);
+
     // buy now page
-    
     Route::get('/checkout',[CartController::class,'paymentCheckout']);
     Route::post('/checkout-order',[CartController::class,'orderCheckout'])->name('checkout.order');
-
-
     Route::post('/buy-now',[CartController::class,'buy_now_add'])->name('buynow.product');
 
-    Route::get('check/out/buy',[CartController::class,'checkout_buy_page']);
-    Route::post('/procces/order/buy',[OrderController::class,'proccessTo_check_buyNow'])->name('procces.order.buy');
-    Route::get('/buynow/order-complate', [FrontendController::class,'orderSuccesfullyCompalte']);
-
-
+    //Route::get('check/out/buy',[CartController::class,'checkout_buy_page']);
+   // Route::post('/procces/order/buy',[OrderController::class,'proccessTo_check_buyNow'])->name('procces.order.buy');
+   // Route::get('/buynow/order-complate', [FrontendController::class,'orderSuccesfullyCompalte']);
 
     //category wish product show
-    Route::get('/product/category/{cat_id}', [AllproductController::class,'category_product']);
-
+    Route::get('/category-products/{cat_id}', [AllproductController::class,'category_product'])->name('category.products');
     //brand wish product show
-    Route::get('/product/brand/{brand_id}', [AllproductController::class,'brand_product']);
-
-
-    // all product details ajax show
-    Route::get('/product/detail/ajax/',[FrontendController::class,'product_details']);
-    Route::get('/product/add-to-cart/{product_id}',[CartController::class,'add_to_cart']);
-
-    //pagenation for ajax
-    Route::get('/pagenation/paginate-data',[AllproductController::class,'pagenation']);
+    Route::get('/brand-products/{brand_id}', [AllproductController::class,'brand_product'])->name('brand.products');
 
     //category wise search product Ajax
     Route::get('/product/category/search',[AllproductController::class,'category_product_search']);
@@ -231,14 +189,10 @@ Route::controller(StripePaymentController::class)->group(function(){
     Route::post('stripe', 'stripePost')->name('stripe.post');
 });
 
-
-
 Route::get('/clear_cache', function () {
-
     Artisan::call('config:cache');
     Artisan::call('cache:clear');
     Artisan::call('optimize:clear');
-
     dd("Cache is cleared");
 
 });

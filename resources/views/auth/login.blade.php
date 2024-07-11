@@ -1,11 +1,5 @@
 @extends('layouts.fontend-master')
-{{-- @section('product_list')Login-page @endsection --}}
-<style>
- .search-toggle1 {
-  /*   padding: 0.3rem 11.8rem !important;
-    margin-top: 16px !important; */
-}
-</style>
+@section('product_list')Mpwrenewed Login-page @endsection
 @section('content')
 <main class="main">
 <div class="container"  style=" background: #f6f6f6;">
@@ -46,22 +40,22 @@
                                     @enderror
 
                                 </div><!-- End .form-group -->
-                               
+
                                 <div class="form-footer  d-flex justify-content-between">
                                     <div class="text-center">
                                         <a href="/register" style="text-decoration: none; color:white" class="btn btn-primary">Register</a>
-                                    </div> 
+                                    </div>
                                     <div>
                                         <button type="submit" class="btn btn-outline-primary-2 py-3">
                                             <span>LOG IN</span> <i class="icon-long-arrow-right"></i>
                                         </button>
                                     </div>
-                                    
 
-                                                                   
+
+
 
                                     {{-- <div class="custom-control custom-checkbox">
-                                     
+
                                         <input class="custom-control-input" type="checkbox" name="remember" id="signin-remember" {{ old('remember') ? 'checked' : '' }}>
 
                                         <label class="custom-control-label" for="signin-remember">
@@ -95,7 +89,7 @@
                                 <div class="alert alert-success" role="alert">
                                     {{ session('warning') }}
                                 </div>
-                            @endif                            
+                            @endif
 
                         </div><!-- .End .tab-pane -->
 <!-- .End .tab-pane -->
@@ -104,10 +98,6 @@
             </div>
         </div>
     </div>
-
-
-
-
 </div>
 </main>
 @endsection

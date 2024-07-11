@@ -1,12 +1,12 @@
 User-agent: Googlebot
 Allow: /login
-Allow: /products
-Allow: /products/details/
-Allow: /about/page/
-Allow: /contact/page/
-Allow: /products/search/
-Allow: /product/brand/search/
-Allow: /product/soft/by/
+Allow: /all-product/
+Allow: /product-details/
+Allow: /about-us/
+Allow: /contact-us/
+Allow: /products-search/
+Allow: /category-products/
+Allow: /brand-products/
 Allow: /
 
 User-agent: *

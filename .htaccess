@@ -14,4 +14,10 @@ RewriteRule ^(.*)$ public/$1 [L]
 <IfModule mime_module>
   AddHandler application/x-httpd-alt-php74 .php .php7 .phtml
 </IfModule>
+  <IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+    <IfModule mod_headers.c>
+        Header append Vary Accept-Encoding
+    </IfModule>
+    </IfModule>
 # php -- END cPanel-generated handler, do not edit

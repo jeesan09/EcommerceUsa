@@ -49,7 +49,6 @@ class LoginController extends Controller
             Auth::logout();
             return redirect()->route('login')->with('error', 'Your account is not active yet');
         }
-
         // If user status is 1, proceed with the default authenticated logic
         return redirect()->intended($this->redirectPath());
     }

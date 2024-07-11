@@ -23,17 +23,17 @@ class GenerateSitemap extends Command
 
         // Add URLs dynamically from your routes or database
         $sitemap->add(Url::create('/'));
-        $sitemap->add(Url::create('/products'));
-        $sitemap->add(Url::create('/about/page'));
-        $sitemap->add(Url::create('/contact/page'));
-        $sitemap->add(Url::create('/products/search'));
-        $sitemap->add(Url::create('/product/brand/search'));
-        $sitemap->add(Url::create('/product/soft/by'));
-
+        $sitemap->add(Url::create('/all-products'));
+        $sitemap->add(Url::create('/about-us'));
+        $sitemap->add(Url::create('/contact-us'));
+        $sitemap->add(Url::create('/brand-products'));
+        $sitemap->add(Url::create('/products-search'));
+        $sitemap->add(Url::create('/category-products'));
+        $sitemap->add(Url::create('/login'));
         // Assuming you have a Post model and you want to include each post in the sitemap
         $products = Product::all();
         foreach ($products as $product) {
-            $sitemap->add(Url::create("/product/details/{$product->id}"));
+            $sitemap->add(Url::create("/product-details/{$product->id}"));
         }
 
         $sitemap->writeToFile(public_path('sitemap.xml'));
