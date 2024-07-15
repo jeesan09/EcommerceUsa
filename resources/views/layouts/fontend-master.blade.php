@@ -49,11 +49,11 @@
     <!-- Plugins CSS File -->
     <link rel="stylesheet" href="{{ asset('frotend/assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frotend/assets/css/plugins/owl-carousel/owl.carousel.css') }}">
-    <link rel="stylesheet" href="{{ asset('frotend/assets/css/plugins/magnific-popup/magnific-popup.css') }}">
+  <!--   <link rel="stylesheet" href="{{ asset('frotend/assets/css/plugins/magnific-popup/magnific-popup.css') }}"> -->
     <!-- Main CSS File -->
     <link rel="stylesheet" href="{{ asset('frotend/assets/css/style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-        integrity="sha384-1ToqyuMm2I01yQNv5RKTg+ahAxkFESXr40mGgWAtN3rPBo+ZlsEVYVS0RN4AihB5" crossorigin="anonymous">
+   <!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha384-1ToqyuMm2I01yQNv5RKTg+ahAxkFESXr40mGgWAtN3rPBo+ZlsEVYVS0RN4AihB5" crossorigin="anonymous"> -->
     <!-- alertify alert er jonno  -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
@@ -242,8 +242,8 @@
                 <div class="container">
                     <p class="footer-copyright">Copyright © @php
                         echo date('Y');
-                    @endphp <a class="text-light fs-4"
-                            href="{{ url('/') }}"> Developed
+                    @endphp <a  href="{{ url('/') }}" class="text-light fs-4"
+                           > Developed
                             by : MPW-Renewed</a></p>
                     <figure class="footer-payments">
                         <img src="{{ asset('frotend/assets/images/payments.png') }}" alt="Payment methods"
@@ -328,15 +328,15 @@
     <!-- Plugins JS File -->
     <script src="{{ asset('frotend/assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('frotend/assets/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('frotend/assets/js/jquery.hoverIntent.min.js') }}"></script>
-    <script src="{{ asset('frotend/assets/js/superfish.min.js') }}"></script>
+<!--     <script src="{{ asset('frotend/assets/js/jquery.hoverIntent.min.js') }}"></script> -->
+    <!-- <script src="{{ asset('frotend/assets/js/superfish.min.js') }}"></script> -->
     <script src="{{ asset('frotend/assets/js/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('frotend/assets/js/jquery.magnific-popup.min.js')}}"></script>
-    <script src="{{ asset('frotend/assets/js/imagesloaded.pkgd.min.js')}}"></script>
-    <script src="{{ asset('frotend/assets/js/isotope.pkgd.min.js')}}"></script>
+   <!--  <script src="{{ asset('frotend/assets/js/jquery.magnific-popup.min.js')}}"></script> -->
+    <!-- <script src="{{ asset('frotend/assets/js/imagesloaded.pkgd.min.js')}}"></script> -->
+ <!--    <script src="{{ asset('frotend/assets/js/isotope.pkgd.min.js')}}"></script> -->
     <script src="{{ asset('frotend/assets/js/jquery.elevateZoom.min.js')}}"></script>
     <script src="{{ asset('frotend/assets/js/jquery.waypoints.min.js')}}"></script>
-    <script src="{{ asset('frotend/assets/js/bootstrap-input-spinner.js')}}"></script>
+<!--     <script src="{{ asset('frotend/assets/js/bootstrap-input-spinner.js')}}"></script> -->
     <script src="{{ asset('frotend/assets/js/main.js')}}"></script>
 
 </body>

@@ -33,7 +33,7 @@
                                         <div class="col-6 col-md-4 col-lg-4 col-xl-3 product_data">
                                             <div class="product product-7 text-center">
                                                 <figure class="product-media">
-                                                    <a href=" {{ route('product.details', $product->id) }}">
+                                                    <a href=" {{ route('product.details', $product->product_slug) }}">
                                                         @php $categoryProduct = true; @endphp
                                                         @foreach ($product->variants as $product_varient)
                                                             @if ($categoryProduct)
@@ -54,7 +54,7 @@
                                                 </figure><!-- End .product-media -->
                                                 <div class="product-body">
                                                     <h3 class="product-title"><a
-                                                            href="{{ route('product.details', $product->id) }}">{{ $product->product_name }}</a>
+                                                            href="{{ route('product.details', $product->product_slug) }}">{{ $product->product_name }}</a>
                                                     </h3><!-- End .product-title -->
                                                     <div class="product-price">
                                                         ${{ number_format($price, 2) }}

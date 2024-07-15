@@ -145,7 +145,7 @@
                                         <div class="product product-7 text-center">
                                             <figure class="product-media">
                                                 <span class="product-label label-new">New</span>
-                                                <a href="{{ route('product.details', $product->id) }}">
+                                                <a href="{{ route('product.details', $product->product_slug) }}">
                                                     @php $firstImage = true; @endphp
                                                     @foreach ($product->product_varient as $product_varient)
                                                         @if ($firstImage)
@@ -169,7 +169,7 @@
                                             </figure>
                                             <div class="product-body">
                                                 <h3 class="product-title">
-                                                    <a href="{{ route('product.details', $product->id) }}">{{ $product->product_name }}
+                                                    <a href="{{ route('product.details', $product->product_slug) }}">{{ $product->product_name }}
                                                     </a></h3>
                                                 <div class="product-price">
                                                     ${{ number_format($price, 2) }}

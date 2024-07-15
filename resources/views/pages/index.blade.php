@@ -62,7 +62,7 @@
                     </li>
                     @foreach ($categoris as $category)
                         <li class="nav-item">
-                            <a class="nav-link" id="top-fur-link" data-toggle="tab" href="#category-tab{{ $category->id }}"
+                            <a href="#category-tab{{ $category->id }}" class="nav-link" id="top-fur-link" data-toggle="tab" 
                                 role="tab" aria-controls="top-fur-tab"
                                 aria-selected="false">{{ $category->category_name }}</a>
                         </li>
@@ -79,7 +79,7 @@
                                 <div class="col-6 col-md-4 col-lg-3 mb-4">
                                     <div class="product product-11 mt-v3 text-center product_data">
                                         <figure class="product-media">
-                                            <a href="{{ route('product.details', $product->id) }}">
+                                            <a href="{{ route('product.details', $product->product_slug) }}">
                                                 @php $firstImage = true; @endphp
                                                 @foreach ($product->product_varient as $product_varient)
                                                     @if ($firstImage)
@@ -102,8 +102,8 @@
                                         </figure>
 
                                         <div class="product-body">
-                                            <h3 class="product-title"><a
-                                                    href="{{ route('product.details', $product->id) }}">{{ $product->product_name }}
+                                            <h3 class="product-title">
+                                            <a href="{{ route('product.details', $product->product_slug) }}">{{ $product->product_name }}
                                                 </a></h3><!-- End .product-title -->
                                             <div class="product-price">
                                                ${{ number_format($price, 2) }}
@@ -140,7 +140,7 @@
                                         <div class="product product-11 mt-v3 text-center product_data">
                                             <figure class="product-media">
                                                 <span class="product-label label-new">NEW</span>
-                                                <a href="{{ route('product.details', $products_t->id) }}">
+                                                <a href="{{ route('product.details', $products_t->product_slug) }}">
                                                     @php $categoryProduct = true; @endphp
                                                     @foreach ($products_t->product_varient as $product_varient)
                                                         @if ($categoryProduct)
@@ -163,8 +163,8 @@
                                             </figure><!-- End .product-media -->
 
                                             <div class="product-body">
-                                                <h3 class="product-title"><a
-                                                        href="{{ route('product.details', $product->id) }}">{{ $products_t->product_name }}</a>
+                                                <h3 class="product-title">
+                                                    <a href="{{ route('product.details', $product->product_slug) }}">{{ $products_t->product_name }}</a>
                                                 </h3><!-- End .product-title -->
                                                 <div class="product-price">
                                                    ${{ number_format($price, 2) }}
@@ -200,13 +200,13 @@
 
                 <ul class="nav nav-pills justify-content-center" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="trendy-all-link" data-toggle="tab" href="#trendy-all-tab"
+                        <a  href="#trendy-all-tab" class="nav-link active" id="trendy-all-link" data-toggle="tab"
                             role="tab" aria-controls="trendy-all-tab" aria-selected="true">All</a>
                     </li>
                     @foreach ($brands as $brand)
                         <li class="nav-item">
-                            <a class="nav-link" id="category_product" data-toggle="tab"
-                                href="#brand-tab{{ $brand->id }}" role="tab" aria-controls=""
+                            <a href="#brand-tab{{ $brand->id }}" class="nav-link" id="category_product" data-toggle="tab"
+                                role="tab" aria-controls=""
                                 aria-selected="false">{{ $brand->brand_name }}</a>
                         </li>
                     @endforeach
@@ -245,7 +245,7 @@
                         @foreach ($products_brand as $product)
                             <div class="product product-11 text-center product_data">
                                 <figure class="product-media">
-                                    <a href="{{ route('product.details', $product->id) }}">
+                                    <a href="{{ route('product.details', $product->product_slug) }}">
 
                                             @php $firstImageBrand = true; @endphp
                                                 @foreach ($product->product_varient as $product_varient_brand)
@@ -264,8 +264,8 @@
                                     </a>
                                 </figure>
                                 <div class="product-body">
-                                    <h3 class="product-title"><a
-                                            href="{{ route('product.details', $product->id) }}">{{ $product->product_name }}</a>
+                                    <h3 class="product-title">
+                                      <a href="{{ route('product.details', $product->product_slug) }}">{{ $product->product_name }}</a>
                                     </h3><!-- End .product-title -->
                                     <div class="product-price">
                                    ${{ number_format($price, 2) }}
@@ -320,7 +320,7 @@
                                 <div class="product product-11 text-center product_data">
                                     <figure class="product-media">
                                         <span class="product-label label-new">NEW</span>
-                                        <a href="{{ route('product.details', $product_cat->id) }}">
+                                        <a href="{{ route('product.details', $product_cat->product_slug) }}">
                                           
                                         @php $ImageBrand = true; @endphp
                                                 @foreach ($product_cat->product_varient as $product_varient_brand)
@@ -346,8 +346,8 @@
                                     </figure><!-- End .product-media -->
 
                                     <div class="product-body">
-                                        <h3 class="product-title"><a
-                                                href="{{ route('product.details', $product_cat->id) }}">{{ $product_cat->product_name }}</a>
+                                        <h3 class="product-title">
+                                            <a href="{{ route('product.details', $product_cat->product_slug) }}">{{ $product_cat->product_name }}</a>
                                         </h3><!-- End .product-title -->
                                         <div class="product-price">
                                            ${{ number_format($price, 2) }}
@@ -411,21 +411,7 @@
 
             <div class="mb-2"></div><!-- End .mb-2 -->
         </div><!-- End .container -->
-        <style>
-            .modal-dialog1 {
-                max-width: 1024px !important;
-                margin: 0 auto !important;
-            }
-        </style>
-        {{-- ============================== Product Details Modal Ajax start ============================================  --}}
-        <div class="modal  search-result add_to_cart_modal_close" id="product_details" tabindex="-1" role="dialog"
-            aria-hidden="true">
-            <div class="search-result">
-                @include('pages.search_result')
-            </div>
-        </div>
-        {{-- ============================== Product Details Modal Ajax END ============================================  --}}
-
+   
     </main>
 
 @endsection

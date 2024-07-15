@@ -48,6 +48,8 @@ class ProductController extends Controller
       'long_description' => $request->long_description,
       'created_at' => Carbon::now(),
     ]);
+  $slug = strtolower(str_replace(' ', '-', $request->product_name)) . '-' . $product_id;
+  Product::where('id', $product_id)->update(['product_slug' => $slug]);
 
     $conditions = $request->condition;
     $colors = $request->color;
@@ -112,7 +114,7 @@ class ProductController extends Controller
 
     $product = Product::findOrFail($id); 
     $product->product_name = $request->product_name;
-    $product->product_slug = strtolower(str_replace(' ', '-', $request->product_name));
+  /*   $product->product_slug = strtolower(str_replace(' ', '-', $request->product_name)); */
     $product->product_code = $request->product_code;
     $product->brand_name = $request->brand_name;
     $product->category_name = $request->category_name;
@@ -120,7 +122,8 @@ class ProductController extends Controller
     $product->long_description = $request->long_description;
     $product->updated_at = Carbon::now();
     $product->save();
-
+    $slug = strtolower(str_replace(' ', '-', $request->product_name)) . '-' . $id;
+    Product::where('id', $id)->update(['product_slug' => $slug]);
     $conditions = $request->conditionNew;
     $colors = $request->colorNew;
     $storages = $request->storageNew;

@@ -33,7 +33,7 @@ class GenerateSitemap extends Command
         // Assuming you have a Post model and you want to include each post in the sitemap
         $products = Product::all();
         foreach ($products as $product) {
-            $sitemap->add(Url::create("/product-details/{$product->id}"));
+            $sitemap->add(Url::create("/product-details/{$product->product_slug}"));
         }
 
         $sitemap->writeToFile(public_path('sitemap.xml'));
