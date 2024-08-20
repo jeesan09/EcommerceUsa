@@ -141,17 +141,20 @@ Route::post('/my/password/change',[OrderController::class,'my_password_change'])
 Route::post('/update/user', [OrderController::class,'user_update'])->name('update.user.account');
 
 
+Route::get('/', 'FrontendController@index')->name('frontend.home');
+Route::get('/all-products', [AllproductController::class,'product_show'])->name('all.product');
+Route::get('/product-details/{prod_id}', [AllproductController::class,'product_detail'])->name('product.details');
+Route::get('/about-us', [FrontendController::class,'about_page'])->name('about.page');
+Route::get('/contact-us', [FrontendController::class,'contact_page'])->name('contact.page');
+Route::get('/products-search', [FrontendController::class,'search_all_product'])->name('search.product');
+
  // CMS Frontend page
  Route::middleware('auth.user_or_admin')->group(function () {
      // home page
-    Route::get('/', 'FrontendController@index')->name('frontend.home');
+
 
     // all product show
-    Route::get('/all-products', [AllproductController::class,'product_show'])->name('all.product');
-    Route::get('/product-details/{prod_id}', [AllproductController::class,'product_detail'])->name('product.details');
-    Route::get('/about-us', [FrontendController::class,'about_page'])->name('about.page');
-    Route::get('/contact-us', [FrontendController::class,'contact_page'])->name('contact.page');
-    Route::get('/products-search', [FrontendController::class,'search_all_product'])->name('search.product');
+
 
     // fontend contorller
    // Route::get('addToCart/{cart_id}',[CartController::class,'cartadd']);

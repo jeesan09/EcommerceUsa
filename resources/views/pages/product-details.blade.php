@@ -69,17 +69,17 @@
 
 /* Track */
 .overflow-css::-webkit-scrollbar-track {
-  background: rgb(180, 178, 178); 
+  background: rgb(180, 178, 178);
 }
- 
+
 /* Handle */
 .overflow-css::-webkit-scrollbar-thumb {
-  background: #c96; 
+  background: #c96;
 }
 
 /* Handle on hover */
 .overflow-css::-webkit-scrollbar-thumb:hover {
-  background: #c96; 
+  background: #c96;
 }
 
 
@@ -141,12 +141,23 @@
                                 <div class="product-details">
                                     <h1 class="product-title">{{ $productOnly->product_name }}</h1>
                                     <input type="hidden" name="product_id" value="{{ $productOnly->id }}">
-                                    @foreach ($products->product_varient as $product)
-                                        <div class="product-price initial_d_none product_id_{{ $product->id }}">
-                                            ${{ number_format($product->price, 2) }}
-                                            <input type="hidden" class="price" name="product_price">
+                                    @auth
+                                        @foreach ($products->product_varient as $product)
+                                            <div class="product-price initial_d_none product_id_{{ $product->id }}">
+                                                ${{ number_format($product->price, 2) }}
+                                                <input type="hidden" class="price" name="product_price">
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        <div class="product-price">
+                                            Please login to see the price </br>
+                                            <div class="mt-2 ml-2">
+                                                <a href="{{ route('login') }}" class="btn btn-primary">
+                                                    Login
+                                                </a>
+                                            </div>
                                         </div>
-                                    @endforeach
+                                    @endauth
                                     <div class="product-content">
                                         <label for="condition">Condition:</label>
                                         <div class="section over-hide z-bigger">
@@ -241,12 +252,12 @@
                                             </div>
 
                                             <div class="w-100 d-none">
-                                             
+
                                                 <input type="hidden" class="input_current_stock" value="{{ $product_quantity }}">
                                                 <p class="left_stock">
                                                     @if ($product_quantity > 0)
                                                         {{ $product_quantity }} left in stock
-                                                      
+
                                                     @endif
 
                                                 </p>
@@ -306,7 +317,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -323,7 +334,7 @@
 
     buttonPlus.click(function() {
         if ($(this).hasClass('disabled')) {
-                    return; 
+                    return;
                 }
                 var $n = $(this)
                     .parent(".qty-container")
@@ -402,7 +413,7 @@
             $('.input_current_stock').val(productQuantity);
         });
 
-       
+
         var storage = $('input[type=radio][name=storage]').val();
         var values = storage.split(',');
         var productQuantityCheck = values[1];
