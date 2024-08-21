@@ -21,7 +21,7 @@
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="singin-email">User Phone / E-mail *</label>
+                                    <label for="singin-email">E-mail *</label>
                                     <input id="singin-email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -41,41 +41,28 @@
 
                                 </div><!-- End .form-group -->
 
-                                <div class="form-footer  d-flex justify-content-between">
-                                    <div class="text-center">
-                                        <a href="/register" style="text-decoration: none; color:white" class="btn btn-primary">Register</a>
-                                    </div>
+                                <div class="form-footer">
                                     <div>
-                                        <button type="submit" class="btn btn-outline-primary-2 py-3">
-                                            <span>LOG IN</span> <i class="icon-long-arrow-right"></i>
+                                        <button type="submit" class="btn btn-primary btn-block py-3">
+                                            <span> &nbsp; &nbsp; &nbsp; &nbsp; LOG IN</span> <i class="icon-long-arrow-right"></i> &nbsp; &nbsp; &nbsp; &nbsp;
                                         </button>
                                     </div>
 
-
-
-
-                                    {{-- <div class="custom-control custom-checkbox">
-
-                                        <input class="custom-control-input" type="checkbox" name="remember" id="signin-remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                        <label class="custom-control-label" for="signin-remember">
-                                            {{ __('Remember Me') }}
-                                        </label>
-                                    </div> --}}
-
-                                    {{-- @if (Route::has('password.request'))
-                                    <a class="forgot-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                    @endif --}}
-                                </div><!-- End .form-footer -->
+                                </div>
 
                                  <div class="row">
-                                    @if (Route::has('password.request'))
-                                    <a class="forgot-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                    @endif
+                                    <div class="col-12 membercss">
+                                        <div class="text-center " style="font-size: 18px;">
+                                            <span>New member? <a href="/register" > Register</a>  here. </span>
+                                        </div>
+                                        <div class="text-center " >
+                                            @if (Route::has('password.request'))
+                                            <a class="forgot-link text-danger" href="{{ route('password.request') }}">
+                                                {{ __('Forgot Your Password?') }}
+                                            </a>
+                                            @endif
+                                        </div>
+                                    </div>
                                  </div>
                             </form>
 
@@ -100,4 +87,12 @@
     </div>
 </div>
 </main>
+<style>
+.membercss a:hover{
+        text-decoration: underline !important;
+    }
+.form-tab .form-footer {
+    margin-bottom: 1rem !important;
+}
+</style>
 @endsection
