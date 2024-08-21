@@ -17,7 +17,7 @@
     <meta name="application-name" content="mpwrenewed.com">
     <link rel="canonical" href="{{ url()->current() }}">
     <!-- SEO Meta Tags -->
-    <meta name="google-site-verification" content="Dm5v2045IhsCrRknnn9GvOVnLan_y0hdqgOkgo9YOBM" />
+
     <meta name="keywords" content="website,mpwrenewed , mobile wholesale,apple, samsung, Wholesale Mobile">
     <meta name="author" content="mpwrenewed">
     <meta name="title" content="mpwrenewed">
@@ -80,6 +80,7 @@
             }
         }
     </style>
+    <meta name="google-site-verification" content="Dm5v2045IhsCrRknnn9GvOVnLan_y0hdqgOkgo9YOBM" />
 </head>
 
 <body id="overlay_body">
