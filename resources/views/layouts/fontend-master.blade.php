@@ -18,6 +18,7 @@
     <meta name="application-name" content="mpwrenewed.com">
     <link rel="canonical" href="{{ url()->current() }}">
     <!-- SEO Meta Tags -->
+    <meta name="google-site-verification" content="Dm5v2045IhsCrRknnn9GvOVnLan_y0hdqgOkgo9YOBM" />
     <meta name="keywords" content="website,mpwrenewed , mobile wholesale,apple, samsung, Wholesale Mobile">
     <meta name="author" content="mpwrenewed">
     <meta name="title" content="mpwrenewed">
@@ -57,6 +58,7 @@
     <!-- alertify alert er jonno  -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
+
     <!-- alertify alert er jonno  -->
     <style>
         .name_logo {
