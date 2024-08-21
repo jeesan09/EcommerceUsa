@@ -148,6 +148,22 @@ Route::get('/about-us', [FrontendController::class,'about_page'])->name('about.p
 Route::get('/contact-us', [FrontendController::class,'contact_page'])->name('contact.page');
 Route::get('/products-search', [FrontendController::class,'search_all_product'])->name('search.product');
 
+
+
+    //category wish product show
+    Route::get('/category-products/{cat_id}', [AllproductController::class,'category_product'])->name('category.products');
+    //brand wish product show
+    Route::get('/brand-products/{brand_id}', [AllproductController::class,'brand_product'])->name('brand.products');
+
+    //category wise search product Ajax
+    Route::get('/product/category/search',[AllproductController::class,'category_product_search']);
+    Route::get('/product/brand/search',[AllproductController::class,'brand_product_search']);
+    Route::get('/product/price/search',[AllproductController::class,'price_product_search']);
+    Route::get('/product/soft/by',[AllproductController::class,'soft_by_product']);
+
+
+
+
  // CMS Frontend page
  Route::middleware('auth.user_or_admin')->group(function () {
      // home page
@@ -172,16 +188,7 @@ Route::get('/products-search', [FrontendController::class,'search_all_product'])
    // Route::post('/procces/order/buy',[OrderController::class,'proccessTo_check_buyNow'])->name('procces.order.buy');
    // Route::get('/buynow/order-complate', [FrontendController::class,'orderSuccesfullyCompalte']);
 
-    //category wish product show
-    Route::get('/category-products/{cat_id}', [AllproductController::class,'category_product'])->name('category.products');
-    //brand wish product show
-    Route::get('/brand-products/{brand_id}', [AllproductController::class,'brand_product'])->name('brand.products');
 
-    //category wise search product Ajax
-    Route::get('/product/category/search',[AllproductController::class,'category_product_search']);
-    Route::get('/product/brand/search',[AllproductController::class,'brand_product_search']);
-    Route::get('/product/price/search',[AllproductController::class,'price_product_search']);
-    Route::get('/product/soft/by',[AllproductController::class,'soft_by_product']);
 
 });
 
