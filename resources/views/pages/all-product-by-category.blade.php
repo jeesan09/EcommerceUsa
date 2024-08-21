@@ -168,7 +168,9 @@
                                                             href="{{ route('product.details', $product->product_slug) }}">{{ $product->product_name }}
                                                         </a></h3><!-- End .product-title -->
                                                     <div class="product-price">
+                                                        @if(Auth::check())
                                                         ${{ number_format($price, 2) }}
+                                                    @endif
                                                     </div>
                                                 </div><!-- End .product-body -->
                                             </div><!-- End .product -->
