@@ -17,7 +17,7 @@
 }
 
 .search-toggle1 {
-  
+
     margin-top: 15px !important;
 }
 
@@ -42,7 +42,7 @@
                                         <span>SHOP NOW</span>
                                         <i class="icon-long-arrow-right"></i>
                                     </button>
-                                 
+
                                 </div> --}}
                                 <img src="{{ asset($slider->slider_image) }}" alt="Image Desc">
                             @endforeach
@@ -62,7 +62,7 @@
                     </li>
                     @foreach ($categoris as $category)
                         <li class="nav-item">
-                            <a href="#category-tab{{ $category->id }}" class="nav-link" id="top-fur-link" data-toggle="tab" 
+                            <a href="#category-tab{{ $category->id }}" class="nav-link" id="top-fur-link" data-toggle="tab"
                                 role="tab" aria-controls="top-fur-tab"
                                 aria-selected="false">{{ $category->category_name }}</a>
                         </li>
@@ -74,7 +74,7 @@
                 <div class="tab-pane p-0 fade show active" id="top-all-tab" role="tabpanel" aria-labelledby="top-all-link">
                     <div class="products">
                         <div class="row justify-content-center">
-                         
+
                             @forelse ($products as $product)
                                 <div class="col-6 col-md-4 col-lg-3 mb-4">
                                     <div class="product product-11 mt-v3 text-center product_data">
@@ -106,7 +106,9 @@
                                             <a href="{{ route('product.details', $product->product_slug) }}">{{ $product->product_name }}
                                                 </a></h3><!-- End .product-title -->
                                             <div class="product-price">
-                                               ${{ number_format($price, 2) }}
+                                               @if(Auth::check())
+                                                   ${{ number_format($price, 2) }}
+                                               @endif
                                             </div>
                                         </div>
                                       <!--   <div class="product-action">
@@ -167,7 +169,9 @@
                                                     <a href="{{ route('product.details', $product->product_slug) }}">{{ $products_t->product_name }}</a>
                                                 </h3><!-- End .product-title -->
                                                 <div class="product-price">
-                                                   ${{ number_format($price, 2) }}
+                                                    @if(Auth::check())
+                                                    ${{ number_format($price, 2) }}
+                                                   @endif
                                                 </div><!-- End .product-price -->
                                             </div><!-- End .product-body -->
                                           <!--   <div class="product-action">
@@ -268,7 +272,9 @@
                                       <a href="{{ route('product.details', $product->product_slug) }}">{{ $product->product_name }}</a>
                                     </h3><!-- End .product-title -->
                                     <div class="product-price">
-                                   ${{ number_format($price, 2) }}
+                                        @if(Auth::check())
+                                        ${{ number_format($price, 2) }}
+                                    @endif
                                     </div>
                                 </div>
                                <!--  <div class="product-action">
@@ -281,7 +287,7 @@
 
                     </div><!-- End .owl-carousel -->
                 </div><!-- .End .tab-pane -->
-               
+
                 @foreach ($brands as $brand)
                     @php
                         $products_cat = App\Product::where('brand_name', $brand->id)
@@ -321,7 +327,7 @@
                                     <figure class="product-media">
                                         <span class="product-label label-new">NEW</span>
                                         <a href="{{ route('product.details', $product_cat->product_slug) }}">
-                                          
+
                                         @php $ImageBrand = true; @endphp
                                                 @foreach ($product_cat->product_varient as $product_varient_brand)
                                                     @if ($ImageBrand)
@@ -350,10 +356,12 @@
                                             <a href="{{ route('product.details', $product_cat->product_slug) }}">{{ $product_cat->product_name }}</a>
                                         </h3><!-- End .product-title -->
                                         <div class="product-price">
-                                           ${{ number_format($price, 2) }}
+                                            @if(Auth::check())
+                                                   ${{ number_format($price, 2) }}
+                                               @endif
                                         </div><!-- End .product-price -->
                                     </div><!-- End .product-body -->
-                                 
+
                                 </div><!-- End .product -->
                                 @empty
                                 <div class="row d-flex justify-content-center text-center w-100 productNotFound">
@@ -411,7 +419,7 @@
 
             <div class="mb-2"></div><!-- End .mb-2 -->
         </div><!-- End .container -->
-   
+
     </main>
 
 @endsection
