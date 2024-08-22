@@ -9,29 +9,32 @@
         </nav>
         <div class="sl-pagebody">
             <div class="row">
-                <div class="col-md-8 mx-auto">
+                <div class="col-md-12 mx-auto">
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title mt-4">User Details</h5>
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <p><strong>Name:</strong> {{ $user->name }}</p>
                                     <p><strong>Email:</strong> {{ $user->email }}</p>
                                     <p><strong>Phone:</strong> {{ $user->phone }}</p>
-                                    <p><strong>Reseller ID:</strong> {{ $user->reseller_ID }}</p>
-                                    <p><strong>Company Name:</strong> {{ $user->company_name }}</p>
                                     <p><strong>Shipping Address:</strong> {{ $user->shipping_address }}</p>
                                     <p><strong>Billing Address:</strong> {{ $user->billing_address }}</p>
+                                    <p><strong>Reseller ID:</strong> {{ $user->reseller_ID }}</p>
+                                    <p><strong>Company Name:</strong> {{ $user->company_name }}</p>
+                                    <p><strong>City:</strong> {{ $user->city }}</p>
+                                    <p><strong>Region:</strong> {{ $user->united_region }}</p>
                                 </div>
                                 <div class="col-md-6">
-                                    <!-- Add additional user details here -->
-                                    <!-- For example: -->
-                                    <!-- <p><strong>Country:</strong> {{ $user->country }}</p> -->
-                                    <!-- <p><strong>Division:</strong> {{ $user->division }}</p> -->
-                                    <!-- <p><strong>District:</strong> {{ $user->district }}</p> -->
-                                    <!-- <p><strong>Thana:</strong> {{ $user->thana }}</p> -->
+                                    <h5>Tax-Image/PDF</h5>
+                                    @if(pathinfo($user->tax_image, PATHINFO_EXTENSION) === 'pdf')
+                                        <embed src="{{ asset($user->tax_image) }}" type="application/pdf" width="100%" height="500px" />
+                                    @else
+                                        <!-- Display Image -->
+                                        <img src="{{ asset($user->tax_image) }}" style="width:100%" alt="Tax Image">
+                                    @endif
                                 </div>
                             </div>
                         </div>

@@ -21,7 +21,7 @@ class RegistrationRequest extends FormRequest
             'reseller_ID' => ['required', 'string', 'max:50'],
             'tax_image' => ['required', 'mimes:jpeg,png,jpg,pdf', 'max:1024'],
             'city' => ['required', 'string', 'max:255'],
-            'united_region' => ['required', 'string', 'max:2'],
+            'united_region' => ['required', 'string'],
             'shipping_address' => ['required', 'string', 'max:500'],
             'billing_address' => ['required', 'string', 'max:500'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
