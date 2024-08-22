@@ -43,7 +43,7 @@
                                 </li>
                             </ul>
                             <div class="card-body mt-2">
-                                <form method="POST" action="{{ route('register') }}">
+                                <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-12">
@@ -113,7 +113,7 @@
                                             <input id="tax_image" type="file"
                                                    class="form-control @error('tax_image') is-invalid @enderror"
                                                    name="tax_image" value="{{ old('tax_image') }}" required
-                                                   autocomplete="tax_image" accept="image/*">
+                                                   autocomplete="tax_image">
                                             @error('tax_image')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -256,16 +256,17 @@
                                                 name="password_confirmation" required autocomplete="new-password">
                                         </div>
                                     </div>
-                                    <div class="form-footer d-flex justify-content-between mb-4">
-                                        <!-- Back button -->
-                                        <a href="javascript:history.back()" style=" text-decoration:none "
-                                            class="btn btn-primary text-white text-left"><i class="icon-long-arrow-left"></i>Back</a>
-
-                                        <button type="submit" class="btn btn-outline-primary-2">
-                                            <span>REGISTER</span>
-                                            <i class="icon-long-arrow-right"></i>
+                                    <div class="form-footer d-flex justify-content-between">
+                                        <button type="submit" class="btn btn-outline-primary-2 px-4">
+                                            &nbsp; &nbsp; <span>REGISTER</span>
+                                            <i class="icon-long-arrow-right"></i> &nbsp; &nbsp;
                                         </button>
 
+                                    </div>
+                                    <div class="text-center">
+                                      <span class="" style="font-size: 18px;">Have Account?
+                                          <a href="{{ route('login') }}">Login</a>
+                                        </span>
                                     </div><!-- End .form-footer -->
                                 </form>
                             </div>
@@ -274,8 +275,9 @@
                 </div>
             </div>
         </div>
-
+        <script src="{{ asset('frotend/assets/js/jquery.min.js') }}"></script>
         <script>
+
             $(document).ready(function() {
         $('#tax_image').on('change', function() {
             let fileInput = $(this)[0];

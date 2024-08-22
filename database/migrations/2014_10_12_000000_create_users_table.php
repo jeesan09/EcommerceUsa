@@ -20,9 +20,9 @@ class CreateUsersTable extends Migration
             $table->string('phone')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('last_name')->nullable();
-            $table->string('country')->nullable();
-            $table->string('division')->nullable();
+            $table->string('city')->nullable();
+            $table->string('tax_image')->nullable();
+            $table->string('united_region')->nullable();
             $table->string('district')->nullable();
             $table->string('thana')->nullable();
             $table->text('address_holdding')->nullable();

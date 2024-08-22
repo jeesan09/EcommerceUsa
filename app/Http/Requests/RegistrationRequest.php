@@ -15,11 +15,16 @@ class RegistrationRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'reseller_ID' => ['required', 'string', 'max:255'],
-            'company_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'max:20', 'unique:users'],
+            'company_name' => ['required', 'string', 'max:255'],
+            'reseller_ID' => ['required', 'string', 'max:50'],
+            'tax_image' => ['required', 'mimes:jpeg,png,jpg,pdf', 'max:1024'],
+            'city' => ['required', 'string', 'max:255'],
+            'united_region' => ['required', 'string', 'max:2'],
+            'shipping_address' => ['required', 'string', 'max:500'],
+            'billing_address' => ['required', 'string', 'max:500'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ];
     }
 }

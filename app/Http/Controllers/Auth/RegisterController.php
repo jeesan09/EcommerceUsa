@@ -88,9 +88,9 @@ class RegisterController extends Controller
         $user->phone = $data['phone'];
         $user->password = Hash::make($data['password']);
         $user->save();
-        
+
         // Send email notification to admin
-        $this->sendAdminNotification($user);   
+        $this->sendAdminNotification($user);
 
         return $user;
 
@@ -108,17 +108,28 @@ class RegisterController extends Controller
         $user->email = $request->email;
         $user->shipping_address = $request->shipping_address;
         $user->billing_address = $request->billing_address;
+        $user->city = $request->city;
+        $user->united_region = $request->united_region;
         $user->phone = $request->phone;
         $user->password = Hash::make($request->password);
+
+        if ($request->hasFile('tax_image')) {
+            $image = $request->file('tax_image');
+            $filename = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('frontend/img/user/'), $filename);
+            $user->tax_image = 'frontend/img/user/' . $filename;
+        }
+
+        $user->status = 1;
         $user->save();
 
-
-        $this->sendAdminNotification($user); 
+        Auth::login($user);
+        $this->sendAdminNotification($user);
 
         return redirect('/login')->with('warning', 'Your account will be activated by the admin soon.');
 
-    }    
-   
+    }
+
 
     protected function sendAdminNotification(User $user)
     {
@@ -126,10 +137,10 @@ class RegisterController extends Controller
         $activationLink = route('admin.login');
     /*   dd($user->email); */
         // Send email notification to admin
-        Mail::to("sales@megaphonewholesale.com")->send(new NewUserNotification($user, $activationLink));
+       // Mail::to("sales@megaphonewholesale.com")->send(new NewUserNotification($user, $activationLink));
 
         return redirect('/login');
-    
+
     }
 
 
