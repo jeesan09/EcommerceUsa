@@ -116,8 +116,8 @@ class RegisterController extends Controller
         if ($request->hasFile('tax_image')) {
             $image = $request->file('tax_image');
             $filename = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('frontend/img/user/'), $filename);
-            $user->tax_image = 'frontend/img/user/' . $filename;
+            $image->move(public_path('frotend/img/product/upload/'), $filename);
+            $user->tax_image = 'frotend/img/product/upload/' . $filename;
         }
 
         $user->status = 1;
