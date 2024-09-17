@@ -1,7 +1,7 @@
 User-agent: Googlebot
 Allow: /login
 Allow: /all-products/
-Allow: /product-details/
+Allow: /product-details/*
 Allow: /about-us/
 Allow: /contact-us/
 Allow: /products-search/
