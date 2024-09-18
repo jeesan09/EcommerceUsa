@@ -46,7 +46,7 @@ class LoginController extends Controller
         // Check if the user status is 1 (active)
         if ($user->status !== 1) {
             // If user status is not 1, log out the user and redirect back to the login page
-            Auth::logout();
+            //Auth::logout();
             return redirect()->route('login')->with('error', 'Your account is not active yet');
         }
         // If user status is 1, proceed with the default authenticated logic

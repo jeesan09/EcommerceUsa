@@ -141,23 +141,34 @@
                                 <div class="product-details">
                                     <h1 class="product-title">{{ $productOnly->product_name }}</h1>
                                     <input type="hidden" name="product_id" value="{{ $productOnly->id }}">
-                                    @auth
-                                        @foreach ($products->product_varient as $product)
-                                            <div class="product-price initial_d_none product_id_{{ $product->id }}">
-                                                ${{ number_format($product->price, 2) }}
-                                                <input type="hidden" class="price" name="product_price">
-                                            </div>
-                                        @endforeach
-                                    @else
-                                        <div class="product-price">
-                                            Please login to see the price </br>
-                                            <div class="mt-2 ml-2">
-                                                <a href="{{ route('login') }}" class="btn btn-primary">
-                                                    Login
-                                                </a>
-                                            </div>
+
+                                    @if(Auth::check() && Auth::user()->status == 1)
+                                    @foreach ($products->product_varient as $product)
+                                    <div class="product-price initial_d_none product_id_{{ $product->id }}">
+                                        ${{ number_format($product->price, 2) }}
+                                        <input type="hidden" class="price" name="product_price">
+                                    </div>
+                                     @endforeach
+                                    @elseif(Auth::check() && Auth::user()->status == 0)
+                                        <div class="product-notice border py-3 px-3 " style="width: 400px;">
+                                            <span style="color: #000000; font-weight: 400;"> <span style="font-size: 16px;color: #ff0202; font-weight: 600;">Notice:</span>
+                                            Your account under processing. Admin will give access to see the price soon ...
+                                         </span>
+
                                         </div>
-                                    @endauth
+                                    @else
+                                    <div class="product-notice border py-3 px-3 " style="width: 300px;">
+
+                                       <span style="color: #000000; font-weight: 400;"> <span style="font-size: 16px;color: #ff0202; font-weight: 600;">Notice:</span>
+                                           Please login to see the price.
+                                        </span>
+                                        <div class=" text-center ">
+                                            <a href="{{ route('login') }}" style="min-width: 64px;" class="btn btn-sm p-0 m-0 btn-outline-primary ">
+                                                Login
+                                            </a>
+                                        </div>
+                                    </div>
+                                    @endif
                                     <div class="product-content">
                                         <label for="condition">Condition:</label>
                                         <div class="section over-hide z-bigger">

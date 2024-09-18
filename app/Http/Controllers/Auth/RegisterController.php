@@ -120,7 +120,7 @@ class RegisterController extends Controller
             $user->tax_image = 'frotend/img/product/upload/' . $filename;
         }
 
-        $user->status = 1;
+        $user->status = 0;
         $user->save();
 
         Auth::login($user);
@@ -135,9 +135,10 @@ class RegisterController extends Controller
     {
         // Generate activation link
         $activationLink = route('admin.login');
+         Mail::to("sales@megaphonewholesale.com")->send(new NewUserNotification($user, $activationLink));
+
     /*   dd($user->email); */
         // Send email notification to admin
-       // Mail::to("sales@megaphonewholesale.com")->send(new NewUserNotification($user, $activationLink));
 
         return redirect('/login');
 
