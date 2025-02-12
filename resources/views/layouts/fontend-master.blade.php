@@ -197,8 +197,8 @@
                                 <h2 class="text-white name_logo"> MPW Renewed</h2>
                             @endif --}}
                                 <p class="text-light">Mpw renewed inc 3141 amity ct suite 300 charlotte nc 28215 </p>
-                                <p class="text-light">Office Number: 704-579-3971</p>
-                                <p class="text-light">Email: sales@mpwrenewed.com</p>
+                                <p class="text-light">Office Number : 704-579-3971</p>
+                                <p class="text-light">Email : sales@mpwrenewed.com</p>
                                 <p class="text-light">M-F: 9AM - 6PM (EST)</p>
                                 <p class="text-light">Sat: closed </p>
                                 <p class="text-light">Sun: Closed </p>
