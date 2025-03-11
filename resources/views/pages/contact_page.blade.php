@@ -25,7 +25,13 @@
                 	<div class="row">
                 		<div class="col-lg-6 mb-2 mb-lg-0">
                 			<h2 class="title mb-1">Contact Information</h2><!-- End .title mb-2 -->
-                			<p class="mb-3">Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien ornare nisl. Phasellus pede arcu, dapibus eu, fermentum et, dapibus sed, urna.</p>
+                			<p class="mb-3 text-justify">
+								Have questions or need assistance? MPW is your trusted source for
+								 wholesale mobile phones in the USA. We offer a wide range of high-quality 
+								 mobile devices at competitive prices. Whether you're looking for bulk orders,
+								  product inquiries, or support, our team is here to help.
+								 Contact us today to get the best deals on wholesale mobiles!
+								</p>
                 			<div class="row">
                 				<div class="col-sm-7">
                 					<div class="contact-info">
@@ -34,16 +40,16 @@
                 						<ul class="contact-list">
                 							<li>
                 								<i class="icon-map-marker"></i>
-	                							House -10,  Road-3, Block-F, <br> Mirpur -1, Dhaka
+	                							3141 amity ct suite 300 charlotte nc 28215<br> Mirpur -1, Dhaka
 
 	                						</li>
                 							<li>
                 								<i class="icon-phone"></i>
-                								<a href="tel:#">01303-655252</a>
+                								<a href="tel:#"> 704-579-3971</a>
                 							</li>
                 							<li>
                 								<i class="icon-envelope"></i>
-                								<a href="mailto:#">info@gmail.com</a>
+                								<a href="mailto:#">sales@mpwrenewed.com</a>
                 							</li>
                 						</ul><!-- End .contact-list -->
                 					</div><!-- End .contact-info -->
@@ -51,16 +57,17 @@
 
                 				<div class="col-sm-5">
                 					<div class="contact-info">
-                						<h3>The Office</h3>
+                						<h3>Office Hours</h3>
 
                 						<ul class="contact-list">
                 							<li>
                 								<i class="icon-clock-o"></i>
-	                							<span class="text-dark">Monday-Saturday</span> <br>11am-7pm ET
+	                							<span class="text-dark">Monday-Friday</span> <br>9AM - 6PM (EST)
 	                						</li>
                 							<li>
                 								<i class="icon-calendar"></i>
-                								<span class="text-dark">Sunday</span> <br>11am-6pm ET
+                								<span class="text-dark">Closed Days</span> 
+												<br>Saturday-Sunday
                 							</li>
                 						</ul><!-- End .contact-list -->
                 					</div><!-- End .contact-info -->
