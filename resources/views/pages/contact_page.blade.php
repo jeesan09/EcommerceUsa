@@ -40,7 +40,7 @@
                 						<ul class="contact-list">
                 							<li>
                 								<i class="icon-map-marker"></i>
-	                							3141 amity ct suite 300 charlotte nc 28215<br> Mirpur -1, Dhaka
+	                							3141 amity ct suite 300 charlotte nc 28215
 
 	                						</li>
                 							<li>
